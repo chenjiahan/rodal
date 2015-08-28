@@ -49,7 +49,54 @@
 	var React = __webpack_require__(1);
 	var Dialog = __webpack_require__(157);
 
-	React.render(React.createElement(Dialog, null), document.getElementById('example'));
+	__webpack_require__(158);
+
+	var Example = React.createClass({
+	    displayName: 'Example',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            visible: false
+	        };
+	    },
+
+	    showDialog: function showDialog() {
+	        this.setState({ visible: true });
+	    },
+
+	    hideDialog: function hideDialog() {
+	        this.setState({ visible: false });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'button',
+	                { onClick: this.showDialog },
+	                'show'
+	            ),
+	            React.createElement(
+	                Dialog,
+	                { visible: this.state.visible,
+	                    onClose: this.hideDialog },
+	                React.createElement(
+	                    'h1',
+	                    null,
+	                    'Dialog'
+	                ),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    'some words bala bala'
+	                )
+	            )
+	        );
+	    }
+	});
+
+	React.render(React.createElement(Example, null), document.getElementById('example'));
 
 /***/ },
 /* 1 */
@@ -20433,16 +20480,33 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	__webpack_require__(158);
 
 	var Dialog = React.createClass({
 	    displayName: 'Dialog',
 
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            visible: false,
+	            onClose: function onClose() {}
+	        };
+	    },
+
 	    render: function render() {
+
+	        var style = {
+	            display: this.props.visible ? 'block' : 'none'
+	        };
+
 	        return React.createElement(
 	            'div',
-	            { className: 'react-dialog' },
-	            'dialog'
+	            { className: 'react-dialog', style: style },
+	            React.createElement('div', { className: 'react-dialog-mask',
+	                onClick: this.props.onClose }),
+	            React.createElement(
+	                'div',
+	                { className: 'react-dialog-box' },
+	                this.props.children
+	            )
 	        );
 	    }
 	});
@@ -20484,7 +20548,7 @@
 
 
 	// module
-	exports.push([module.id, ".react-dialog {\n  -webkit-transition: all 0.2s ease-in-out;\n          transition: all 0.2s ease-in-out; }\n", ""]);
+	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.3); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 300px;\n  height: 200px;\n  margin-top: -100px;\n  margin-left: -150px;\n  background: #fff; }\n", ""]);
 
 	// exports
 
