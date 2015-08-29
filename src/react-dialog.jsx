@@ -1,23 +1,21 @@
-var React = require('react');
+import React, {Component, PropTypes} from 'react';
 
+const propTypes = {
+    visible: PropTypes.bool,
+    onClose: PropTypes.func
+}
 
-var Dialog = React.createClass({
+const defaultProps = {
+    visible: false,
+    onClose: function () {}
+}
 
-    getDefaultProps: function() {
-        return {
-            visible: false,
-            onClose: function() {}
-        }
-    },
+class Dialog extends Component {
 
-    render: function() {
-
-        var style = {
-            display:  this.props.visible ? 'block' : 'none'
-        };
-
+    render () {
+        let visible = this.props.visible ? 'block' : 'none';
         return (
-            <div className="react-dialog" style={style}>
+            <div className="react-dialog" style={{display: visible}}>
                 <div className="react-dialog-mask"
                      onClick={this.props.onClose}>
                 </div>
@@ -27,6 +25,9 @@ var Dialog = React.createClass({
             </div>
         )
     }
-});
+}
 
-module.exports = Dialog;
+Dialog.propTypes = propTypes;
+Dialog.defaultProps = defaultProps;
+
+export default Dialog;

@@ -20479,39 +20479,69 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-
-	var Dialog = React.createClass({
-	    displayName: 'Dialog',
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            visible: false,
-	            onClose: function onClose() {}
-	        };
-	    },
-
-	    render: function render() {
-
-	        var style = {
-	            display: this.props.visible ? 'block' : 'none'
-	        };
-
-	        return React.createElement(
-	            'div',
-	            { className: 'react-dialog', style: style },
-	            React.createElement('div', { className: 'react-dialog-mask',
-	                onClick: this.props.onClose }),
-	            React.createElement(
-	                'div',
-	                { className: 'react-dialog-box' },
-	                this.props.children
-	            )
-	        );
-	    }
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
 	});
 
-	module.exports = Dialog;
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var propTypes = {
+	    visible: _react.PropTypes.bool,
+	    onClose: _react.PropTypes.func
+	};
+
+	var defaultProps = {
+	    visible: false,
+	    onClose: function onClose() {}
+	};
+
+	var Dialog = (function (_Component) {
+	    _inherits(Dialog, _Component);
+
+	    function Dialog() {
+	        _classCallCheck(this, Dialog);
+
+	        _get(Object.getPrototypeOf(Dialog.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(Dialog, [{
+	        key: 'render',
+	        value: function render() {
+	            var visible = this.props.visible ? 'block' : 'none';
+	            return _react2['default'].createElement(
+	                'div',
+	                { className: 'react-dialog', style: { display: visible } },
+	                _react2['default'].createElement('div', { className: 'react-dialog-mask',
+	                    onClick: this.props.onClose }),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'react-dialog-box' },
+	                    this.props.children
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Dialog;
+	})(_react.Component);
+
+	Dialog.propTypes = propTypes;
+	Dialog.defaultProps = defaultProps;
+
+	exports['default'] = Dialog;
+	module.exports = exports['default'];
 
 /***/ },
 /* 158 */
@@ -20548,7 +20578,7 @@
 
 
 	// module
-	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.3); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 300px;\n  height: 200px;\n  margin-top: -100px;\n  margin-left: -150px;\n  background: #fff; }\n", ""]);
+	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.3); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 300px;\n  height: 200px;\n  margin-top: -100px;\n  margin-left: -150px;\n  background: #fff; }\n\n@-webkit-keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n.fadeIn {\n  -webkit-animation: fadeIn 0.2s both;\n          animation: fadeIn 0.2s both; }\n\n@-webkit-keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n.fadeOut {\n  -webkit-animation: fadeOut 0.2s both;\n          animation: fadeOut 0.2s both; }\n", ""]);
 
 	// exports
 

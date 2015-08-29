@@ -36,4 +36,4 @@ var Example = React.createClass({
 React.render(
     <Example />,
     document.getElementById('example')
-)
+);
