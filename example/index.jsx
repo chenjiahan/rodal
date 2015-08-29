@@ -24,7 +24,7 @@ var Example = React.createClass({
             <div>
                 <button onClick={this.showDialog}>show</button>
                 <Dialog visible={this.state.visible}
-                        onClose={this.hideDialog}>
+                        >
                     <h1>Dialog</h1>
                     <p>some words bala bala</p>
                 </Dialog>

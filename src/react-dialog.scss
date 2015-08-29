@@ -1,11 +1,9 @@
-
 .react-dialog {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
 }
 
 .react-dialog-mask {
@@ -26,29 +24,4 @@
   margin-top: -100px;
   margin-left: -150px;
   background: #fff;
-}
-
-//animation
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.fadeIn {
-  animation: fadeIn .2s both;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.fadeOut {
-  animation: fadeOut .2s both;
 }

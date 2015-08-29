@@ -1,1 +1,3 @@
 # react-dialog
+
+### API
