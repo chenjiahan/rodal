@@ -12,16 +12,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,.2);
 }
 
 .react-dialog-box {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 300px;
-  height: 200px;
-  margin-top: -100px;
-  margin-left: -150px;
+  width: 500px;
+  height: 280px;
+  margin-top: -140px;
+  margin-left: -210px;
   background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }

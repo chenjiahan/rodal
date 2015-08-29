@@ -1,17 +1,19 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import DialogBox from './react-dialog-box.jsx';
 import DialogMask from './react-dialog-mask.jsx';
 
 const propTypes = {
     visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
+    animation: PropTypes.string
 };
 
 const defaultProps = {
-    visible: false
+    visible: false,
+    animation: 'popup'
 };
 
-class Dialog {
+class Dialog extends Component {
 
     constructor (props) {
         super(props);
@@ -31,22 +33,34 @@ class Dialog {
     }
 
     fadeIn () {
-        this.setState ({
-            opacity: 1,
-            isShow: 'block'
-        });
+        let opacity = 0;
+        this.setState({ isShow: 'block' });
+
+        var interval = setInterval(function() {
+            this.setState({ opacity: opacity / 100 });
+            if ( opacity >= 100 ) {
+                clearInterval(interval);
+            }
+            opacity += 5;
+        }.bind(this),10);
     }
 
     fadeOut () {
-        this.setState ({
-            opacity: 0,
-            isShow: 'none'
-        });
+        let opacity = 100;
+
+        var interval = setInterval(function() {
+            this.setState({ opacity: opacity });
+            if (opacity <= 0) {
+                clearInterval(interval);
+                this.setState({ isShow: 'none' });
+            }
+            opacity -= 5;
+        }.bind(this),10);
     }
 
     render () {
         return (
-            <div className="react-dialog" style={{display: this.state.isShow}}>
+            <div className="react-dialog" style={{display: this.state.isShow, opacity: this.state.opacity}}>
                 <DialogMask
                     onClose={this.props.onClose}
                     opacity={this.state.opacity}

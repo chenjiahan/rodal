@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Dialog from '../src/react-dialog.jsx';
 import '../src/react-dialog.scss';
 
-class App {
+class App extends Component {
 
     constructor (props) {
         super(props);
@@ -23,11 +23,13 @@ class App {
     render () {
         return (
             <div>
-                <button onClick={this.showDialog}>show</button>
-                <Dialog visible={this.state.visible}
-                        onClose={this.hideDialog}>
+                <button onClick={this.showDialog.bind(this)}>show</button>
+
+                <Dialog
+                    visible={this.state.visible}
+                    onClose={this.hideDialog.bind(this)}
+                >
                     <h1>Dialog</h1>
-                    <button onClick={this.hideDialog}>cancel</button>
                 </Dialog>
             </div>
         )
