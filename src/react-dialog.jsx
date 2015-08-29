@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import DialogBox from './react-dialog-box.jsx';
 import DialogMask from './react-dialog-mask.jsx';
 
@@ -11,7 +11,7 @@ const defaultProps = {
     visible: false
 };
 
-class Dialog extends Component {
+class Dialog {
 
     constructor (props) {
         super(props);

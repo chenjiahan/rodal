@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DialogBox extends Component {
+class DialogBox {
     render () {
         return (
             <div className="react-dialog-box">

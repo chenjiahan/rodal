@@ -1,39 +1,40 @@
-var React = require('react');
-var Dialog = require('../src/react-dialog.jsx');
+import React from 'react';
+import Dialog from '../src/react-dialog.jsx';
+import '../src/react-dialog.scss';
 
-require('../src/react-dialog.scss');
+class App {
 
-var Example = React.createClass({
+    constructor (props) {
+        super(props);
 
-    getInitialState: function () {
-        return {
+        this.state = {
             visible: false
         }
-    },
+    }
 
-    showDialog: function () {
+    showDialog () {
         this.setState({ visible: true });
-    },
+    }
 
-    hideDialog: function () {
+    hideDialog () {
         this.setState({ visible: false });
-    },
+    }
 
-    render: function () {
+    render () {
         return (
             <div>
                 <button onClick={this.showDialog}>show</button>
                 <Dialog visible={this.state.visible}
-                        >
+                        onClose={this.hideDialog}>
                     <h1>Dialog</h1>
-                    <p>some words bala bala</p>
+                    <button onClick={this.hideDialog}>cancel</button>
                 </Dialog>
             </div>
         )
     }
-});
+}
 
 React.render(
-    <Example />,
+    <App />,
     document.getElementById('example')
 );

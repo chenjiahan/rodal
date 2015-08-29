@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DialogMask extends Component {
+class DialogMask {
     render () {
         return (
             <div
