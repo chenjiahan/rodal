@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import 'rodal.scss';
+import './rodal.scss';
 
 class RodalBox extends Component {
     render () {
@@ -61,7 +61,7 @@ class Rodal extends Component {
         let opacity = 0;
         let last = this.now();
         let duration = this.props.duration;
-        let interval = duration / 10;
+        let interval = duration / 20;
         let tick = function () {
             opacity = opacity + (this.now() - last) / duration;
             last = this.now();
@@ -77,7 +77,7 @@ class Rodal extends Component {
         let opacity = 1;
         let last = this.now();
         let duration = this.props.duration;
-        let interval = duration / 10;
+        let interval = duration / 20;
         let tick = function () {
             opacity = opacity - (this.now() - last) / duration;
             last = this.now();

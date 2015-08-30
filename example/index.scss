@@ -1,0 +1,293 @@
+$baseColor: #03A9F4;
+
+/*--normalize--*/
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  overflow-y: hidden;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  background: $baseColor;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+[hidden],
+template {
+  display: none;
+}
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+a:active {
+  outline: 0;
+}
+p {
+  margin: 0 0 10px 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+dfn {
+  font-style: italic;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-weight: normal;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+mark {
+  background: #ff0;
+  color: #000;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  border: 0;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 1em 40px;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+pre {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+}
+button:focus {
+  outline: none!important;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="submit"] {
+  border: none;
+}
+input[type="submit"]:focus {
+  outline: none;
+}
+input {
+  line-height: normal;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+legend {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+}
+optgroup {
+  font-weight: bold;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+
+/*--some common class--*/
+.clearfix:before,
+.clearfix:after {
+  content:" ";
+  display:table;
+}
+.clearfix:after {
+  clear:both;
+}
+.form-control {
+  display:block;
+  color:#666;
+  width:100%;
+  height:34px;
+  font-size:14px;
+  padding:6px 12px;
+  border-radius: 2px;
+  background-color:#fff;
+  border:1px solid #ccc;
+  transition: all .2s ease-in-out;
+  &:focus {
+    outline:0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 5px rgba(59,180,242,.3);
+  }
+}
+.nowrap {
+  overflow:hidden;
+  white-space:nowrap;
+  -o-text-overflow:ellipsis;
+  text-overflow:ellipsis;
+}
+.container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.wrap {
+  overflow: hidden;
+  padding-top: 200px;
+}
+.title,
+.intro {
+  color: #fff;
+  text-align: center;
+}
+.title {
+  font-size: 60px;
+  margin: 0;
+}
+.intro {
+  font-size: 26px;
+}
+.show-btn {
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  width: 140px;
+  margin: 40px auto;
+  line-height: 40px;
+  text-align: center;
+  background: $baseColor;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+.content-title {
+  font-size: 36px;
+  margin-top: 110px;
+  color: $baseColor;
+  text-align: center;
+}

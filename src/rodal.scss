@@ -88,10 +88,11 @@ $closeButtonSize: 16px;
     transform: scale(1);
   }
   100% {
-    transform: scale(.5);
+    transform: scale(.2);
   }
 }
 .rodal-alert-leave {
   animation: rodal-alert-leave both;
 }
+
 
