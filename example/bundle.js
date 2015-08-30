@@ -64,8 +64,6 @@
 
 	var _srcReactDialogJsx2 = _interopRequireDefault(_srcReactDialogJsx);
 
-	__webpack_require__(160);
-
 	var App = (function (_Component) {
 	    _inherits(App, _Component);
 
@@ -73,10 +71,7 @@
 	        _classCallCheck(this, App);
 
 	        _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
-
-	        this.state = {
-	            visible: false
-	        };
+	        this.state = { visible: false };
 	    }
 
 	    _createClass(App, [{
@@ -20527,6 +20522,8 @@
 	var _reactDialogMaskJsx = __webpack_require__(159);
 
 	var _reactDialogMaskJsx2 = _interopRequireDefault(_reactDialogMaskJsx);
+
+	__webpack_require__(160);
 
 	var propTypes = {
 	    visible: _react.PropTypes.bool,

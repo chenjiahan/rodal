@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DialogBox from './react-dialog-box.jsx';
 import DialogMask from './react-dialog-mask.jsx';
+import '../src/react-dialog.scss';
 
 const propTypes = {
     visible: PropTypes.bool,

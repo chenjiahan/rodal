@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import Dialog from '../src/react-dialog.jsx';
-import '../src/react-dialog.scss';
 
 class App extends Component {
 
     constructor (props) {
         super(props);
-
-        this.state = {
-            visible: false
-        }
+        this.state = { visible: false }
     }
 
     showDialog () {
