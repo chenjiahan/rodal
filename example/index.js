@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dialog from '../src/react-dialog.jsx';
+import Dialog from '../src/react-dialog';
 
 class App extends Component {
 
@@ -24,6 +24,7 @@ class App extends Component {
                 <Dialog
                     visible={this.state.visible}
                     onClose={this.hideDialog.bind(this)}
+                    duration={200}
                 >
                     <h1>Dialog</h1>
                 </Dialog>

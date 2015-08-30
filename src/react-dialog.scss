@@ -1,17 +1,19 @@
-.react-dialog {
-  position: fixed;
+$closeButtonSize: 16px;
+
+.react-dialog,
+.react-dialog-mask {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
 
+.react-dialog {
+  position: fixed;
+}
+
 .react-dialog-mask {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: rgba(0,0,0,.2);
 }
 
@@ -31,10 +33,10 @@
 .react-dialog-close {
   position: absolute;
   cursor: pointer;
-  top: 16px;
-  right: 16px;
-  width: 16px;
-  height: 16px;
+  top: $closeButtonSize;
+  right: $closeButtonSize;
+  width: $closeButtonSize;
+  height: $closeButtonSize;
   &:before,
   &:after {
     position: absolute;
@@ -68,22 +70,17 @@
   }
 }
 
+//animation
 @keyframes react-dialog-alert-enter {
   0% {
-    transform: scale(0.7);
-  }
-  45% {
-    transform: scale(1.03);
-  }
-  80% {
-    transform: scale(0.97);
+    transform: scale(.2);
   }
   100% {
     transform: scale(1);
   }
 }
 .react-dialog-alert-enter {
-  animation: react-dialog-alert-enter .4s both;
+  animation: react-dialog-alert-enter both;
 }
 
 @keyframes react-dialog-alert-leave {
@@ -91,9 +88,10 @@
     transform: scale(1);
   }
   100% {
-    transform: scale(0.7);
+    transform: scale(.5);
   }
 }
 .react-dialog-alert-leave {
-  animation: react-dialog-alert-leave .4s both;
+  animation: react-dialog-alert-leave both;
 }
+

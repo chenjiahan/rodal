@@ -1,22 +1,37 @@
 import React, { Component, PropTypes } from 'react';
-import DialogBox from './react-dialog-box.jsx';
-import DialogMask from './react-dialog-mask.jsx';
 import '../src/react-dialog.scss';
 
-const propTypes = {
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
-    showCloseButton: PropTypes.bool,
-    animation: PropTypes.string,
-    duration: PropTypes.number
-};
+class DialogBox extends Component {
+    render () {
 
-const defaultProps = {
-    visible: false,
-    showCloseButton: true,
-    animation: 'alert',
-    duration: 200
-};
+        let style = {
+            animationDuration: this.props.duration + 'ms',
+            WebkitAnimationDuration: this.props.duration + 'ms'
+        };
+
+        return (
+            <div className={"react-dialog-box " + this.props.animation} style={style}>
+                <span
+                    className="react-dialog-close"
+                    onClick={this.props.onClose}
+                    style={{ display: this.props.showCloseButton ? 'block' : 'none' }}
+                />
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
+class DialogMask extends Component {
+    render () {
+        return (
+            <div
+                className="react-dialog-mask"
+                onClick={this.props.onClose}
+            />
+        )
+    }
+}
 
 class Dialog extends Component {
 
@@ -93,6 +108,21 @@ class Dialog extends Component {
         )
     }
 }
+
+const propTypes = {
+    visible: PropTypes.bool,
+    onClose: PropTypes.func.isRequired,
+    showCloseButton: PropTypes.bool,
+    animation: PropTypes.string,
+    duration: PropTypes.number
+};
+
+const defaultProps = {
+    visible: false,
+    showCloseButton: true,
+    animation: 'alert',
+    duration: 200
+};
 
 Dialog.propTypes = propTypes;
 Dialog.defaultProps = defaultProps;

@@ -4,7 +4,7 @@ A simple dialog for React.
 ## Usage
 
     import React, { Component } from 'react';
-    import Dialog from '../src/react-dialog.jsx';
+    import Dialog from '../src/react-dialog';
     
     class App extends Component {
     
@@ -29,6 +29,7 @@ A simple dialog for React.
                     <Dialog
                         visible={this.state.visible}
                         onClose={this.hideDialog.bind(this)}
+                        duration={200}
                     >
                         <h1>Dialog</h1>
                     </Dialog>
@@ -44,5 +45,5 @@ Property|Type|Default|Description
 onClose|func|required|hide the dialog
 visible|bool|false|visible
 showCloseButton|bool|true|whether to show close button
-animation|string|"zoomIn"|animation types
+animation|string|alert|animation types
 duration|number|200|animation duration
