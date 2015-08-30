@@ -64,7 +64,7 @@
 
 	var _srcReactDialogJsx2 = _interopRequireDefault(_srcReactDialogJsx);
 
-	__webpack_require__(160);
+	__webpack_require__(158);
 
 	var App = (function (_Component) {
 	    _inherits(App, _Component);
@@ -20520,23 +20520,25 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDialogBoxJsx = __webpack_require__(158);
+	var _reactDialogBoxJsx = __webpack_require__(162);
 
 	var _reactDialogBoxJsx2 = _interopRequireDefault(_reactDialogBoxJsx);
 
-	var _reactDialogMaskJsx = __webpack_require__(159);
+	var _reactDialogMaskJsx = __webpack_require__(163);
 
 	var _reactDialogMaskJsx2 = _interopRequireDefault(_reactDialogMaskJsx);
 
 	var propTypes = {
 	    visible: _react.PropTypes.bool,
 	    onClose: _react.PropTypes.func.isRequired,
-	    animation: _react.PropTypes.string
+	    animation: _react.PropTypes.string,
+	    showCloseButton: _react.PropTypes.bool
 	};
 
 	var defaultProps = {
 	    visible: false,
-	    animation: 'popup'
+	    animation: 'popup',
+	    showCloseButton: true
 	};
 
 	var Dialog = (function (_Component) {
@@ -20582,7 +20584,7 @@
 	            var opacity = 100;
 
 	            var interval = setInterval((function () {
-	                this.setState({ opacity: opacity });
+	                this.setState({ opacity: opacity / 100 });
 	                if (opacity <= 0) {
 	                    clearInterval(interval);
 	                    this.setState({ isShow: 'none' });
@@ -20596,13 +20598,10 @@
 	            return _react2['default'].createElement(
 	                'div',
 	                { className: 'react-dialog', style: { display: this.state.isShow, opacity: this.state.opacity } },
-	                _react2['default'].createElement(_reactDialogMaskJsx2['default'], {
-	                    onClose: this.props.onClose,
-	                    opacity: this.state.opacity
-	                }),
+	                _react2['default'].createElement(_reactDialogMaskJsx2['default'], { onClose: this.props.onClose }),
 	                _react2['default'].createElement(
 	                    _reactDialogBoxJsx2['default'],
-	                    { opacity: this.state.opacity },
+	                    this.props,
 	                    this.props.children
 	                )
 	            );
@@ -20622,96 +20621,13 @@
 /* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var DialogBox = (function () {
-	    function DialogBox() {
-	        _classCallCheck(this, DialogBox);
-	    }
-
-	    _createClass(DialogBox, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2["default"].createElement(
-	                "div",
-	                { className: "react-dialog-box" },
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return DialogBox;
-	})();
-
-	exports["default"] = DialogBox;
-	module.exports = exports["default"];
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var DialogMask = (function () {
-	    function DialogMask() {
-	        _classCallCheck(this, DialogMask);
-	    }
-
-	    _createClass(DialogMask, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2["default"].createElement("div", {
-	                className: "react-dialog-mask",
-	                onClick: this.props.onClose
-	            });
-	        }
-	    }]);
-
-	    return DialogMask;
-	})();
-
-	exports["default"] = DialogMask;
-	module.exports = exports["default"];
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(161);
+	var content = __webpack_require__(159);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(163)(content, {});
+	var update = __webpack_require__(161)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20728,21 +20644,21 @@
 	}
 
 /***/ },
-/* 161 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(162)();
+	exports = module.exports = __webpack_require__(160)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -140px;\n  margin-left: -210px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n", ""]);
+	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -140px;\n  margin-left: -210px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.react-dialog-close {\n  position: absolute;\n  cursor: pointer;\n  top: 15px;\n  right: 15px;\n  width: 15px;\n  height: 15px; }\n  .react-dialog-close:before,\n  .react-dialog-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .react-dialog-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .react-dialog-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .react-dialog-close:hover:before,\n  .react-dialog-close:hover:after {\n    background: #333; }\n  .react-dialog-close:hover:before {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .react-dialog-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 162 */
+/* 160 */
 /***/ function(module, exports) {
 
 	/*
@@ -20798,7 +20714,7 @@
 
 
 /***/ },
-/* 163 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -21021,6 +20937,94 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var DialogBox = (function () {
+	    function DialogBox() {
+	        _classCallCheck(this, DialogBox);
+	    }
+
+	    _createClass(DialogBox, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "react-dialog-box" },
+	                _react2["default"].createElement("div", {
+	                    className: "react-dialog-close",
+	                    onClick: this.props.onClose,
+	                    style: { display: this.props.showCloseButton ? 'block' : 'none' }
+	                }),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return DialogBox;
+	})();
+
+	exports["default"] = DialogBox;
+	module.exports = exports["default"];
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var DialogMask = (function () {
+	    function DialogMask() {
+	        _classCallCheck(this, DialogMask);
+	    }
+
+	    _createClass(DialogMask, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2["default"].createElement("div", {
+	                className: "react-dialog-mask",
+	                onClick: this.props.onClose
+	            });
+	        }
+	    }]);
+
+	    return DialogMask;
+	})();
+
+	exports["default"] = DialogMask;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

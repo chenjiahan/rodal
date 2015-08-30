@@ -5,12 +5,14 @@ import DialogMask from './react-dialog-mask.jsx';
 const propTypes = {
     visible: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-    animation: PropTypes.string
+    animation: PropTypes.string,
+    showCloseButton: PropTypes.bool
 };
 
 const defaultProps = {
     visible: false,
-    animation: 'popup'
+    animation: 'popup',
+    showCloseButton: true
 };
 
 class Dialog extends Component {
@@ -49,7 +51,7 @@ class Dialog extends Component {
         let opacity = 100;
 
         var interval = setInterval(function() {
-            this.setState({ opacity: opacity });
+            this.setState({ opacity: opacity / 100 });
             if (opacity <= 0) {
                 clearInterval(interval);
                 this.setState({ isShow: 'none' });
@@ -61,11 +63,8 @@ class Dialog extends Component {
     render () {
         return (
             <div className="react-dialog" style={{display: this.state.isShow, opacity: this.state.opacity}}>
-                <DialogMask
-                    onClose={this.props.onClose}
-                    opacity={this.state.opacity}
-                />
-                <DialogBox opacity={this.state.opacity}>
+                <DialogMask onClose={this.props.onClose} />
+                <DialogBox {...this.props}>
                     {this.props.children}
                 </DialogBox>
             </div>

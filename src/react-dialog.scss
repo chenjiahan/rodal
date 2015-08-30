@@ -27,3 +27,42 @@
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
+
+.react-dialog-close {
+  position: absolute;
+  cursor: pointer;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #999;
+    transition: all .2s ease;
+  }
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    &:before,
+    &:after {
+      background: #333;
+    }
+    &:before {
+      transform: rotate(-45deg);
+    }
+    &:after {
+      transform: rotate(45deg);
+    }
+  }
+}
