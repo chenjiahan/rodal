@@ -5,14 +5,16 @@ import DialogMask from './react-dialog-mask.jsx';
 const propTypes = {
     visible: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
+    showCloseButton: PropTypes.bool,
     animation: PropTypes.string,
-    showCloseButton: PropTypes.bool
+    duration: PropTypes.number
 };
 
 const defaultProps = {
     visible: false,
+    showCloseButton: true,
     animation: 'popup',
-    showCloseButton: true
+    duration: 200
 };
 
 class Dialog extends Component {
@@ -23,7 +25,9 @@ class Dialog extends Component {
         this.state = {
             opacity: 0,
             isShow: 'none'
-        }
+        };
+
+        this.now = Date.now || (() => { return new Date().getTime() });
     }
 
     componentWillReceiveProps (nextProps) {
@@ -35,34 +39,49 @@ class Dialog extends Component {
     }
 
     fadeIn () {
-        let opacity = 0;
         this.setState({ isShow: 'block' });
-
-        var interval = setInterval(function() {
-            this.setState({ opacity: opacity / 100 });
-            if ( opacity >= 100 ) {
-                clearInterval(interval);
+        let opacity = 0;
+        let last = this.now();
+        let duration = this.props.duration;
+        let interval = duration / 20;
+        let tick = function () {
+            opacity = opacity + (this.now() - last) / duration;
+            last = this.now();
+            this.setState({ opacity: opacity });
+            if (opacity < 1) {
+                setTimeout(tick, interval);
             }
-            opacity += 5;
-        }.bind(this),10);
+        }.bind(this);
+        tick();
     }
 
     fadeOut () {
-        let opacity = 100;
-
-        var interval = setInterval(function() {
-            this.setState({ opacity: opacity / 100 });
-            if (opacity <= 0) {
-                clearInterval(interval);
-                this.setState({ isShow: 'none' });
+        let opacity = 1;
+        let last = this.now();
+        let duration = this.props.duration;
+        let interval = duration / 20;
+        let tick = function () {
+            opacity = opacity - (this.now() - last) / duration;
+            last = this.now();
+            this.setState({ opacity: opacity });
+            if (opacity > 0) {
+                setTimeout(tick, interval);
+            } else {
+                this.setState({ isShow: 'none' })
             }
-            opacity -= 5;
-        }.bind(this),10);
+        }.bind(this);
+        tick();
     }
 
     render () {
+
+        let style = {
+            display: this.state.isShow,
+            opacity: this.state.opacity
+        };
+
         return (
-            <div className="react-dialog" style={{display: this.state.isShow, opacity: this.state.opacity}}>
+            <div className="react-dialog" style={style}>
                 <DialogMask onClose={this.props.onClose} />
                 <DialogBox {...this.props}>
                     {this.props.children}

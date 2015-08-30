@@ -45,6 +45,7 @@
     left: 0;
     margin-top: -1px;
     background: #999;
+    border-radius: 100%;
     transition: all .2s ease;
   }
   &:before {
@@ -59,7 +60,7 @@
       background: #333;
     }
     &:before {
-      transform: rotate(-45deg);
+      transform: rotate(135deg);
     }
     &:after {
       transform: rotate(45deg);
