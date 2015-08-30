@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import '../src/react-dialog.scss';
+import 'rodal.scss';
 
-class DialogBox extends Component {
+class RodalBox extends Component {
     render () {
 
         let style = {
@@ -10,9 +10,9 @@ class DialogBox extends Component {
         };
 
         return (
-            <div className={"react-dialog-box " + this.props.animation} style={style}>
+            <div className={"rodal-box " + this.props.animation} style={style}>
                 <span
-                    className="react-dialog-close"
+                    className="rodal-close"
                     onClick={this.props.onClose}
                     style={{ display: this.props.showCloseButton ? 'block' : 'none' }}
                 />
@@ -22,18 +22,18 @@ class DialogBox extends Component {
     }
 }
 
-class DialogMask extends Component {
+class RodalMask extends Component {
     render () {
         return (
             <div
-                className="react-dialog-mask"
+                className="rodal-mask"
                 onClick={this.props.onClose}
             />
         )
     }
 }
 
-class Dialog extends Component {
+class Rodal extends Component {
 
     constructor (props) {
         super(props);
@@ -48,10 +48,10 @@ class Dialog extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (!this.props.visible && nextProps.visible) {
-            this.setState({ animation: 'react-dialog-' + this.props.animation + '-enter' });
+            this.setState({ animation: 'rodal-' + this.props.animation + '-enter' });
             this.fadeIn();
         } else if (this.props.visible && !nextProps.visible) {
-            this.setState({ animation: 'react-dialog-' + this.props.animation + '-leave' });
+            this.setState({ animation: 'rodal-' + this.props.animation + '-leave' });
             this.fadeOut();
         }
     }
@@ -99,11 +99,11 @@ class Dialog extends Component {
         };
 
         return (
-            <div className="react-dialog" style={style}>
-                <DialogMask onClose={this.props.onClose} />
-                <DialogBox {...this.props} animation={this.state.animation}>
+            <div className="rodal" style={style}>
+                <RodalMask onClose={this.props.onClose} />
+                <RodalBox {...this.props} animation={this.state.animation}>
                     {this.props.children}
-                </DialogBox>
+                </RodalBox>
             </div>
         )
     }
@@ -124,7 +124,7 @@ const defaultProps = {
     duration: 200
 };
 
-Dialog.propTypes = propTypes;
-Dialog.defaultProps = defaultProps;
+Rodal.propTypes = propTypes;
+Rodal.defaultProps = defaultProps;
 
-export default Dialog;
+export default Rodal;

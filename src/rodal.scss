@@ -1,23 +1,23 @@
 $closeButtonSize: 16px;
 
-.react-dialog,
-.react-dialog-mask {
+.rodal,
+.rodal-mask {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
 
-.react-dialog {
+.rodal {
   position: fixed;
 }
 
-.react-dialog-mask {
+.rodal-mask {
   position: absolute;
   background: rgba(0,0,0,.2);
 }
 
-.react-dialog-box {
+.rodal-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -30,7 +30,7 @@ $closeButtonSize: 16px;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 
-.react-dialog-close {
+.rodal-close {
   position: absolute;
   cursor: pointer;
   top: $closeButtonSize;
@@ -71,7 +71,7 @@ $closeButtonSize: 16px;
 }
 
 //animation
-@keyframes react-dialog-alert-enter {
+@keyframes rodal-alert-enter {
   0% {
     transform: scale(.2);
   }
@@ -79,11 +79,11 @@ $closeButtonSize: 16px;
     transform: scale(1);
   }
 }
-.react-dialog-alert-enter {
-  animation: react-dialog-alert-enter both;
+.rodal-alert-enter {
+  animation: rodal-alert-enter both;
 }
 
-@keyframes react-dialog-alert-leave {
+@keyframes rodal-alert-leave {
   0% {
     transform: scale(1);
   }
@@ -91,7 +91,7 @@ $closeButtonSize: 16px;
     transform: scale(.5);
   }
 }
-.react-dialog-alert-leave {
-  animation: react-dialog-alert-leave both;
+.rodal-alert-leave {
+  animation: rodal-alert-leave both;
 }
 

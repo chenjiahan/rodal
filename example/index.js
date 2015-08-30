@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dialog from '../src/react-dialog';
+import Rodal from '../src/rodal';
 
 class App extends Component {
 
@@ -8,26 +8,26 @@ class App extends Component {
         this.state = { visible: false }
     }
 
-    showDialog () {
+    showRodal () {
         this.setState({ visible: true });
     }
 
-    hideDialog () {
+    hideRodal () {
         this.setState({ visible: false });
     }
 
     render () {
         return (
             <div>
-                <button onClick={this.showDialog.bind(this)}>show</button>
+                <button onClick={this.showRodal.bind(this)}>show</button>
 
-                <Dialog
+                <Rodal
                     visible={this.state.visible}
-                    onClose={this.hideDialog.bind(this)}
+                    onClose={this.hideRodal.bind(this)}
                     duration={200}
                 >
-                    <h1>Dialog</h1>
-                </Dialog>
+                    <h1>Rodal</h1>
+                </Rodal>
             </div>
         )
     }
