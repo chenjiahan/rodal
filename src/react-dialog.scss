@@ -21,8 +21,8 @@
   left: 50%;
   width: 500px;
   height: 280px;
-  margin-top: -140px;
-  margin-left: -210px;
+  margin-top: -160px;
+  margin-left: -250px;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -31,10 +31,10 @@
 .react-dialog-close {
   position: absolute;
   cursor: pointer;
-  top: 15px;
-  right: 15px;
-  width: 15px;
-  height: 15px;
+  top: 16px;
+  right: 16px;
+  width: 16px;
+  height: 16px;
   &:before,
   &:after {
     position: absolute;
@@ -66,4 +66,34 @@
       transform: rotate(45deg);
     }
   }
+}
+
+@keyframes react-dialog-alert-enter {
+  0% {
+    transform: scale(0.7);
+  }
+  45% {
+    transform: scale(1.03);
+  }
+  80% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.react-dialog-alert-enter {
+  animation: react-dialog-alert-enter .4s both;
+}
+
+@keyframes react-dialog-alert-leave {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}
+.react-dialog-alert-leave {
+  animation: react-dialog-alert-leave .4s both;
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class DialogBox {
     render () {
         return (
-            <div className="react-dialog-box">
+            <div className={"react-dialog-box " + this.props.animation}>
                 <div
                     className="react-dialog-close"
                     onClick={this.props.onClose}

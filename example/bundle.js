@@ -20501,6 +20501,8 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -20536,7 +20538,7 @@
 	var defaultProps = {
 	    visible: false,
 	    showCloseButton: true,
-	    animation: 'popup',
+	    animation: 'alert',
 	    duration: 200
 	};
 
@@ -20562,8 +20564,10 @@
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (!this.props.visible && nextProps.visible) {
+	                this.setState({ animation: 'react-dialog-' + this.props.animation + '-enter' });
 	                this.fadeIn();
 	            } else if (this.props.visible && !nextProps.visible) {
+	                this.setState({ animation: 'react-dialog-' + this.props.animation + '-leave' });
 	                this.fadeOut();
 	            }
 	        }
@@ -20574,7 +20578,7 @@
 	            var opacity = 0;
 	            var last = this.now();
 	            var duration = this.props.duration;
-	            var interval = duration / 20;
+	            var interval = duration / 10;
 	            var tick = (function () {
 	                opacity = opacity + (this.now() - last) / duration;
 	                last = this.now();
@@ -20591,7 +20595,7 @@
 	            var opacity = 1;
 	            var last = this.now();
 	            var duration = this.props.duration;
-	            var interval = duration / 20;
+	            var interval = duration / 10;
 	            var tick = (function () {
 	                opacity = opacity - (this.now() - last) / duration;
 	                last = this.now();
@@ -20619,7 +20623,7 @@
 	                _react2['default'].createElement(_reactDialogMaskJsx2['default'], { onClose: this.props.onClose }),
 	                _react2['default'].createElement(
 	                    _reactDialogBoxJsx2['default'],
-	                    this.props,
+	                    _extends({}, this.props, { animation: this.state.animation }),
 	                    this.props.children
 	                )
 	            );
@@ -20665,7 +20669,7 @@
 	        value: function render() {
 	            return _react2["default"].createElement(
 	                "div",
-	                { className: "react-dialog-box" },
+	                { className: "react-dialog-box " + this.props.animation },
 	                _react2["default"].createElement("div", {
 	                    className: "react-dialog-close",
 	                    onClick: this.props.onClose,
@@ -20758,7 +20762,7 @@
 
 
 	// module
-	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -140px;\n  margin-left: -210px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.react-dialog-close {\n  position: absolute;\n  cursor: pointer;\n  top: 15px;\n  right: 15px;\n  width: 15px;\n  height: 15px; }\n  .react-dialog-close:before,\n  .react-dialog-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .react-dialog-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .react-dialog-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .react-dialog-close:hover:before,\n  .react-dialog-close:hover:after {\n    background: #333; }\n  .react-dialog-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .react-dialog-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n", ""]);
+	exports.push([module.id, ".react-dialog {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog-mask {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.react-dialog-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .react-dialog-close:before,\n  .react-dialog-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .react-dialog-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .react-dialog-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .react-dialog-close:hover:before,\n  .react-dialog-close:hover:after {\n    background: #333; }\n  .react-dialog-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .react-dialog-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes react-dialog-alert-enter {\n  0% {\n    -webkit-transform: scale(0.7);\n            transform: scale(0.7); }\n  45% {\n    -webkit-transform: scale(1.03);\n            transform: scale(1.03); }\n  80% {\n    -webkit-transform: scale(0.97);\n            transform: scale(0.97); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n@keyframes react-dialog-alert-enter {\n  0% {\n    -webkit-transform: scale(0.7);\n            transform: scale(0.7); }\n  45% {\n    -webkit-transform: scale(1.03);\n            transform: scale(1.03); }\n  80% {\n    -webkit-transform: scale(0.97);\n            transform: scale(0.97); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n.react-dialog-alert-enter {\n  -webkit-animation: react-dialog-alert-enter 0.4s both;\n          animation: react-dialog-alert-enter 0.4s both; }\n\n@-webkit-keyframes react-dialog-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.7);\n            transform: scale(0.7); } }\n\n@keyframes react-dialog-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.7);\n            transform: scale(0.7); } }\n\n.react-dialog-alert-leave {\n  -webkit-animation: react-dialog-alert-leave 0.4s both;\n          animation: react-dialog-alert-leave 0.4s both; }\n", ""]);
 
 	// exports
 

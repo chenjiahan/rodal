@@ -14,7 +14,7 @@ const propTypes = {
 const defaultProps = {
     visible: false,
     showCloseButton: true,
-    animation: 'popup',
+    animation: 'alert',
     duration: 200
 };
 
@@ -33,8 +33,10 @@ class Dialog extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (!this.props.visible && nextProps.visible) {
+            this.setState({ animation: 'react-dialog-' + this.props.animation + '-enter' });
             this.fadeIn();
         } else if (this.props.visible && !nextProps.visible) {
+            this.setState({ animation: 'react-dialog-' + this.props.animation + '-leave' });
             this.fadeOut();
         }
     }
@@ -44,7 +46,7 @@ class Dialog extends Component {
         let opacity = 0;
         let last = this.now();
         let duration = this.props.duration;
-        let interval = duration / 20;
+        let interval = duration / 10;
         let tick = function () {
             opacity = opacity + (this.now() - last) / duration;
             last = this.now();
@@ -60,7 +62,7 @@ class Dialog extends Component {
         let opacity = 1;
         let last = this.now();
         let duration = this.props.duration;
-        let interval = duration / 20;
+        let interval = duration / 10;
         let tick = function () {
             opacity = opacity - (this.now() - last) / duration;
             last = this.now();
@@ -84,7 +86,7 @@ class Dialog extends Component {
         return (
             <div className="react-dialog" style={style}>
                 <DialogMask onClose={this.props.onClose} />
-                <DialogBox {...this.props}>
+                <DialogBox {...this.props} animation={this.state.animation}>
                     {this.props.children}
                 </DialogBox>
             </div>
