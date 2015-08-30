@@ -1,7 +1,7 @@
 # react-dialog
+A simple dialog for React.
 
 ## Usage
----
 
     import React, { Component } from 'react';
     import Dialog from '../src/react-dialog.jsx';
@@ -38,12 +38,11 @@
     }
 
 ## API
----
 
 Property|Type|Default|Description
 ---|---|---|---
-onClose|func|required|function to close dialog
+onClose|func|required|hide the dialog
 visible|bool|false|visible
-showCloseButton|bool|true|
-animation|string|"zoomIn"|animation type
+showCloseButton|bool|true|whether to show close button
+animation|string|"zoomIn"|animation types
 duration|number|200|animation duration
