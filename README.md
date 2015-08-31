@@ -1,2 +1,2 @@
-# react-dialog
-A simple dialog for React.
+# Rodal
+A React component for modal and dialog.

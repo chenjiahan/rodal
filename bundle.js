@@ -60,9 +60,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _srcReactDialog = __webpack_require__(157);
+	var _srcRodal = __webpack_require__(157);
 
-	var _srcReactDialog2 = _interopRequireDefault(_srcReactDialog);
+	var _srcRodal2 = _interopRequireDefault(_srcRodal);
+
+	__webpack_require__(163);
 
 	var App = (function (_Component) {
 	    _inherits(App, _Component);
@@ -71,41 +73,73 @@
 	        _classCallCheck(this, App);
 
 	        _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
-	        this.state = { visible: false };
+	        this.state = {
+	            visible: false,
+	            animation: 'zoom'
+	        };
 	    }
 
 	    _createClass(App, [{
-	        key: 'showDialog',
-	        value: function showDialog() {
-	            this.setState({ visible: true });
+	        key: 'show',
+	        value: function show(animation) {
+	            this.setState({
+	                animation: animation,
+	                visible: true
+	            });
 	        }
 	    }, {
-	        key: 'hideDialog',
-	        value: function hideDialog() {
+	        key: 'hide',
+	        value: function hide() {
 	            this.setState({ visible: false });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+
 	            return _react2['default'].createElement(
 	                'div',
-	                null,
+	                { className: 'wrap', style: { height: window.innerHeight } },
 	                _react2['default'].createElement(
-	                    'button',
-	                    { onClick: this.showDialog.bind(this) },
-	                    'show'
-	                ),
-	                _react2['default'].createElement(
-	                    _srcReactDialog2['default'],
-	                    {
-	                        visible: this.state.visible,
-	                        onClose: this.hideDialog.bind(this),
-	                        duration: 200
-	                    },
+	                    'div',
+	                    { className: 'container' },
 	                    _react2['default'].createElement(
 	                        'h1',
-	                        null,
-	                        'Dialog'
+	                        { className: 'title' },
+	                        'Rodal'
+	                    ),
+	                    _react2['default'].createElement(
+	                        'h3',
+	                        { className: 'intro' },
+	                        'A React component for modal and dialog.'
+	                    ),
+	                    _react2['default'].createElement(
+	                        'button',
+	                        {
+	                            className: 'show-btn',
+	                            onClick: this.show.bind(this, "zoom")
+	                        },
+	                        'zoom'
+	                    ),
+	                    _react2['default'].createElement(
+	                        'button',
+	                        {
+	                            className: 'show-btn',
+	                            onClick: this.show.bind(this, "slide-down")
+	                        },
+	                        'slide-down'
+	                    ),
+	                    _react2['default'].createElement(
+	                        _srcRodal2['default'],
+	                        {
+	                            visible: this.state.visible,
+	                            onClose: this.hide.bind(this),
+	                            animation: this.state.animation
+	                        },
+	                        _react2['default'].createElement(
+	                            'h1',
+	                            { className: 'content-title' },
+	                            'Hello Rodal!'
+	                        )
 	                    )
 	                )
 	            );
@@ -115,7 +149,7 @@
 	    return App;
 	})(_react.Component);
 
-	_react2['default'].render(_react2['default'].createElement(App, null), document.getElementById('example'));
+	_react2['default'].render(_react2['default'].createElement(App, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -18281,154 +18315,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(158);
+	var _transition = __webpack_require__(158);
 
-	var DialogBox = (function (_Component) {
-	    _inherits(DialogBox, _Component);
+	var _transition2 = _interopRequireDefault(_transition);
 
-	    function DialogBox() {
-	        _classCallCheck(this, DialogBox);
-
-	        _get(Object.getPrototypeOf(DialogBox.prototype), 'constructor', this).apply(this, arguments);
-	    }
-
-	    _createClass(DialogBox, [{
-	        key: 'render',
-	        value: function render() {
-
-	            var style = {
-	                animationDuration: this.props.duration + 'ms',
-	                WebkitAnimationDuration: this.props.duration + 'ms'
-	            };
-
-	            return _react2['default'].createElement(
-	                'div',
-	                { className: "react-dialog-box " + this.props.animation, style: style },
-	                _react2['default'].createElement('span', {
-	                    className: 'react-dialog-close',
-	                    onClick: this.props.onClose,
-	                    style: { display: this.props.showCloseButton ? 'block' : 'none' }
-	                }),
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return DialogBox;
-	})(_react.Component);
-
-	var DialogMask = (function (_Component2) {
-	    _inherits(DialogMask, _Component2);
-
-	    function DialogMask() {
-	        _classCallCheck(this, DialogMask);
-
-	        _get(Object.getPrototypeOf(DialogMask.prototype), 'constructor', this).apply(this, arguments);
-	    }
-
-	    _createClass(DialogMask, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2['default'].createElement('div', {
-	                className: 'react-dialog-mask',
-	                onClick: this.props.onClose
-	            });
-	        }
-	    }]);
-
-	    return DialogMask;
-	})(_react.Component);
-
-	var Dialog = (function (_Component3) {
-	    _inherits(Dialog, _Component3);
-
-	    function Dialog(props) {
-	        _classCallCheck(this, Dialog);
-
-	        _get(Object.getPrototypeOf(Dialog.prototype), 'constructor', this).call(this, props);
-
-	        this.state = {
-	            opacity: 0,
-	            isShow: 'none'
-	        };
-
-	        this.now = Date.now || function () {
-	            return new Date().getTime();
-	        };
-	    }
-
-	    _createClass(Dialog, [{
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            if (!this.props.visible && nextProps.visible) {
-	                this.setState({ animation: 'react-dialog-' + this.props.animation + '-enter' });
-	                this.fadeIn();
-	            } else if (this.props.visible && !nextProps.visible) {
-	                this.setState({ animation: 'react-dialog-' + this.props.animation + '-leave' });
-	                this.fadeOut();
-	            }
-	        }
-	    }, {
-	        key: 'fadeIn',
-	        value: function fadeIn() {
-	            this.setState({ isShow: 'block' });
-	            var opacity = 0;
-	            var last = this.now();
-	            var duration = this.props.duration;
-	            var interval = duration / 10;
-	            var tick = (function () {
-	                opacity = opacity + (this.now() - last) / duration;
-	                last = this.now();
-	                this.setState({ opacity: opacity });
-	                if (opacity < 1) {
-	                    setTimeout(tick, interval);
-	                }
-	            }).bind(this);
-	            tick();
-	        }
-	    }, {
-	        key: 'fadeOut',
-	        value: function fadeOut() {
-	            var opacity = 1;
-	            var last = this.now();
-	            var duration = this.props.duration;
-	            var interval = duration / 10;
-	            var tick = (function () {
-	                opacity = opacity - (this.now() - last) / duration;
-	                last = this.now();
-	                this.setState({ opacity: opacity });
-	                if (opacity > 0) {
-	                    setTimeout(tick, interval);
-	                } else {
-	                    this.setState({ isShow: 'none' });
-	                }
-	            }).bind(this);
-	            tick();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            var style = {
-	                display: this.state.isShow,
-	                opacity: this.state.opacity
-	            };
-
-	            return _react2['default'].createElement(
-	                'div',
-	                { className: 'react-dialog', style: style },
-	                _react2['default'].createElement(DialogMask, { onClose: this.props.onClose }),
-	                _react2['default'].createElement(
-	                    DialogBox,
-	                    _extends({}, this.props, { animation: this.state.animation }),
-	                    this.props.children
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Dialog;
-	})(_react.Component);
+	__webpack_require__(159);
 
 	var propTypes = {
 	    visible: _react.PropTypes.bool,
@@ -18441,34 +18332,263 @@
 	var defaultProps = {
 	    visible: false,
 	    showCloseButton: true,
-	    animation: 'alert',
+	    animation: 'zoom',
 	    duration: 200
 	};
 
-	Dialog.propTypes = propTypes;
-	Dialog.defaultProps = defaultProps;
+	var RodalBox = (function (_Component) {
+	    _inherits(RodalBox, _Component);
 
-	exports['default'] = Dialog;
+	    function RodalBox() {
+	        _classCallCheck(this, RodalBox);
+
+	        _get(Object.getPrototypeOf(RodalBox.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(RodalBox, [{
+	        key: 'render',
+	        value: function render() {
+
+	            var style = {
+	                animationDuration: this.props.duration + 'ms',
+	                WebkitAnimationDuration: this.props.duration + 'ms'
+	            };
+
+	            return _react2['default'].createElement(
+	                'div',
+	                {
+	                    ref: 'box',
+	                    className: "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState,
+	                    style: style
+	                },
+	                _react2['default'].createElement('span', {
+	                    className: 'rodal-close',
+	                    onClick: this.props.onClose,
+	                    style: { display: this.props.showCloseButton ? 'block' : 'none' }
+	                }),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return RodalBox;
+	})(_react.Component);
+
+	var RodalMask = (function (_Component2) {
+	    _inherits(RodalMask, _Component2);
+
+	    function RodalMask() {
+	        _classCallCheck(this, RodalMask);
+
+	        _get(Object.getPrototypeOf(RodalMask.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(RodalMask, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement('div', {
+	                className: 'rodal-mask',
+	                onClick: this.props.onClose
+	            });
+	        }
+	    }]);
+
+	    return RodalMask;
+	})(_react.Component);
+
+	var Rodal = (function (_Component3) {
+	    _inherits(Rodal, _Component3);
+
+	    function Rodal(props) {
+	        _classCallCheck(this, Rodal);
+
+	        _get(Object.getPrototypeOf(Rodal.prototype), 'constructor', this).call(this, props);
+
+	        //initial state
+	        this.state = {
+	            isShow: this.props.visible,
+	            animationState: this.props.visible ? 'enter' : 'leave'
+	        };
+
+	        this.now = Date.now || function () {
+	            return new Date().getTime();
+	        };
+	    }
+
+	    _createClass(Rodal, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (!this.props.visible && nextProps.visible) {
+	                this.fadeIn();
+	            } else if (this.props.visible && !nextProps.visible) {
+	                this.fadeOut();
+	            }
+	        }
+	    }, {
+	        key: 'fadeIn',
+	        value: function fadeIn() {
+	            this.setState({
+	                animationState: 'enter',
+	                isShow: true
+	            });
+	        }
+	    }, {
+	        key: 'fadeOut',
+	        value: function fadeOut() {
+	            this.setState({
+	                animationState: 'leave'
+	            });
+	        }
+	    }, {
+	        key: 'transitionEnd',
+	        value: function transitionEnd() {
+	            var node = this.refs["rodal"].getDOMNode();
+	            var endListener = (function (e) {
+	                if (e && e.target !== node) {
+	                    return;
+	                }
+	                this.setState({
+	                    animationState: 'enter',
+	                    isShow: false
+	                });
+	                _transition2['default'].removeEndEventListener(node, endListener);
+	            }).bind(this);
+	            _transition2['default'].addEndEventListener(node, endListener);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            if (!this.state.isShow) return null;
+
+	            var style = {
+	                animationDuration: this.props.duration + 'ms',
+	                WebkitAnimationDuration: this.props.duration + 'ms'
+	            };
+	            if (this.state.animationState === 'leave') {
+	                this.transitionEnd();
+	            }
+	            return _react2['default'].createElement(
+	                'div',
+	                { ref: 'rodal', className: "rodal rodal-fade-" + this.state.animationState, style: style },
+	                _react2['default'].createElement(RodalMask, { onClose: this.props.onClose }),
+	                _react2['default'].createElement(
+	                    RodalBox,
+	                    _extends({}, this.props, {
+	                        animation: this.props.animation,
+	                        animationState: this.state.animationState
+	                    }),
+	                    this.props.children
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Rodal;
+	})(_react.Component);
+
+	Rodal.propTypes = propTypes;
+	Rodal.defaultProps = defaultProps;
+
+	exports['default'] = Rodal;
 	module.exports = exports['default'];
 
 /***/ },
 /* 158 */
+/***/ function(module, exports) {
+
+	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var EVENT_NAME_MAP = {
+	    transitionend: {
+	        'transition': 'transitionend',
+	        'WebkitTransition': 'webkitTransitionEnd',
+	        'MozTransition': 'mozTransitionEnd',
+	        'OTransition': 'oTransitionEnd',
+	        'msTransition': 'MSTransitionEnd'
+	    },
+
+	    animationend: {
+	        'animation': 'animationend',
+	        'WebkitAnimation': 'webkitAnimationEnd',
+	        'MozAnimation': 'mozAnimationEnd',
+	        'OAnimation': 'oAnimationEnd',
+	        'msAnimation': 'MSAnimationEnd'
+	    }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	    var testEl = document.createElement('div');
+	    var style = testEl.style;
+
+	    if (!('AnimationEvent' in window)) {
+	        delete EVENT_NAME_MAP.animationend.animation;
+	    }
+
+	    if (!('TransitionEvent' in window)) {
+	        delete EVENT_NAME_MAP.transitionend.transition;
+	    }
+
+	    for (var baseEventName in EVENT_NAME_MAP) {
+	        var baseEvents = EVENT_NAME_MAP[baseEventName];
+	        for (var styleName in baseEvents) {
+	            if (styleName in style) {
+	                endEvents.push(baseEvents[styleName]);
+	                break;
+	            }
+	        }
+	    }
+	}
+
+	if (typeof window !== 'undefined') {
+	    detectEvents();
+	}
+
+	exports['default'] = {
+	    addEndEventListener: function addEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            window.setTimeout(eventListener, 0);
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.addEventListener(endEvent, eventListener, false);
+	        });
+	    },
+	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.removeEventListener(endEvent, eventListener, false);
+	        });
+	    }
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(159);
+	var content = __webpack_require__(160);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(161)(content, {});
+	var update = __webpack_require__(162)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./react-dialog.scss", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./react-dialog.scss");
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./rodal.scss", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./rodal.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -18478,21 +18598,21 @@
 	}
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(160)();
+	exports = module.exports = __webpack_require__(161)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".react-dialog,\n.react-dialog-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.react-dialog {\n  position: fixed; }\n\n.react-dialog-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.react-dialog-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.react-dialog-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .react-dialog-close:before,\n  .react-dialog-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .react-dialog-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .react-dialog-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .react-dialog-close:hover:before,\n  .react-dialog-close:hover:after {\n    background: #333; }\n  .react-dialog-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .react-dialog-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes react-dialog-alert-enter {\n  0% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n@keyframes react-dialog-alert-enter {\n  0% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n.react-dialog-alert-enter {\n  -webkit-animation: react-dialog-alert-enter both;\n          animation: react-dialog-alert-enter both; }\n\n@-webkit-keyframes react-dialog-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.5);\n            transform: scale(0.5); } }\n\n@keyframes react-dialog-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.5);\n            transform: scale(0.5); } }\n\n.react-dialog-alert-leave {\n  -webkit-animation: react-dialog-alert-leave both;\n          animation: react-dialog-alert-leave both; }\n", ""]);
+	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n.rodal-fade-enter {\n  -webkit-animation: rodal-fade-enter both ease-in-out;\n          animation: rodal-fade-enter both ease-in-out; }\n\n@-webkit-keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n.rodal-fade-leave {\n  -webkit-animation: rodal-fade-leave both ease-in-out;\n          animation: rodal-fade-leave both ease-in-out; }\n\n@-webkit-keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n.rodal-zoom-enter {\n  -webkit-animation: rodal-zoom-enter both ease-in-out;\n          animation: rodal-zoom-enter both ease-in-out; }\n\n@-webkit-keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n@keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n.rodal-zoom-leave {\n  animation-animation: rodal-zoom-leave both ease-in-out; }\n\n@-webkit-keyframes rodal-slide-down-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n@keyframes rodal-slide-down-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n.rodal-slide-down-enter {\n  animation-animation: rodal-slide-down-enter both ease-in-out; }\n\n@-webkit-keyframes rodal-slide-down-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n@keyframes rodal-slide-down-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n.rodal-slide-down-leave {\n  animation-animation: rodal-slide-down-leave both ease-in-out; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports) {
 
 	/*
@@ -18547,7 +18667,7 @@
 	};
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -18769,6 +18889,46 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(164);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./index.scss", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/sass-loader/index.js!./index.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/*--normalize--*/\n*,\n*:before,\n*:after {\n  box-sizing: border-box; }\n\nhtml {\n  overflow-y: hidden;\n  font-family: \"Segoe UI\", \"Lucida Grande\", Helvetica, Arial, \"Microsoft YaHei\", sans-serif;\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%; }\n\nbody {\n  margin: 0;\n  font-size: 14px;\n  line-height: 1.42857143;\n  background: #03A9F4; }\n\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nmain,\nmenu,\nnav,\nsection,\nsummary {\n  display: block; }\n\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n  vertical-align: baseline; }\n\naudio:not([controls]) {\n  display: none;\n  height: 0; }\n\n[hidden],\ntemplate {\n  display: none; }\n\na {\n  text-decoration: none;\n  background-color: transparent; }\n\na:hover {\n  outline: 0;\n  text-decoration: none; }\n\na:focus {\n  outline: none;\n  text-decoration: none; }\n\na:active {\n  outline: 0; }\n\np {\n  margin: 0 0 10px 0; }\n\nabbr[title] {\n  border-bottom: 1px dotted; }\n\nb,\nstrong {\n  font-weight: bold; }\n\ndfn {\n  font-style: italic; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-weight: normal; }\n\nul {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n\nmark {\n  background: #ff0;\n  color: #000; }\n\nsmall {\n  font-size: 80%; }\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline; }\n\nsup {\n  top: -0.5em; }\n\nsub {\n  bottom: -0.25em; }\n\nimg {\n  border: 0; }\n\nsvg:not(:root) {\n  overflow: hidden; }\n\nfigure {\n  margin: 1em 40px; }\n\nhr {\n  box-sizing: content-box;\n  height: 0; }\n\npre {\n  overflow-x: hidden;\n  overflow-y: auto; }\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em; }\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit;\n  font: inherit;\n  margin: 0; }\n\nbutton {\n  overflow: visible; }\n\nbutton:focus {\n  outline: none !important; }\n\nbutton,\nselect {\n  text-transform: none; }\n\nbutton,\nhtml input[type=\"button\"],\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button;\n  cursor: pointer; }\n\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default; }\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0; }\n\nbutton,\ninput[type=\"button\"],\ninput[type=\"submit\"] {\n  border: none; }\n\ninput[type=\"submit\"]:focus {\n  outline: none; }\n\ninput {\n  line-height: normal; }\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box;\n  padding: 0; }\n\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n\ninput[type=\"search\"] {\n  -webkit-appearance: textfield;\n  box-sizing: content-box; }\n\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em; }\n\nlegend {\n  border: 0;\n  padding: 0; }\n\ntextarea {\n  overflow: auto; }\n\noptgroup {\n  font-weight: bold; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\ntd,\nth {\n  padding: 0; }\n\n/*--some common class--*/\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n.form-control {\n  display: block;\n  color: #666;\n  width: 100%;\n  height: 34px;\n  font-size: 14px;\n  padding: 6px 12px;\n  border-radius: 2px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  -webkit-transition: all 0.2s ease-in-out;\n          transition: all 0.2s ease-in-out; }\n  .form-control:focus {\n    outline: 0;\n    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px rgba(59, 180, 242, 0.3); }\n\n.nowrap {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis; }\n\n.container {\n  width: 1000px;\n  margin-left: auto;\n  margin-right: auto; }\n\n.no-select {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n\n.wrap {\n  overflow: hidden;\n  padding-top: 200px; }\n\n.title,\n.intro {\n  color: #fff;\n  text-align: center; }\n\n.title {\n  font-size: 60px;\n  margin: 0; }\n\n.intro {\n  font-size: 26px; }\n\n.show-btn {\n  display: block;\n  font-size: 20px;\n  color: #fff;\n  width: 140px;\n  margin: 40px auto;\n  line-height: 40px;\n  text-align: center;\n  background: #03A9F4;\n  border: 1px solid #fff;\n  border-radius: 4px; }\n\n.content-title {\n  font-size: 36px;\n  margin-top: 110px;\n  color: #03A9F4;\n  text-align: center; }\n", ""]);
+
+	// exports
 
 
 /***/ }
