@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Transition from './transition';
+import TransitionEvents from './ReactTransitionEvents';
 import './rodal.scss';
 
 const propTypes = {
@@ -46,13 +46,22 @@ class Rodal extends Component {
     constructor (props) {
         super(props);
 
-        //initial state
         this.state = {
             isShow: this.props.visible,
             animationState: this.props.visible ? 'enter' : 'leave'
         };
 
         this.now = Date.now || (() => { return new Date().getTime() });
+    }
+
+    componentDidMount () {
+        const node = React.findDOMNode(this);
+        TransitionEvents.addEndEventListener(node, this.transitionEnd.bind(this));
+    }
+
+    componentWillUnmount() {
+        const node = React.findDOMNode(this);
+        TransitionEvents.removeEndEventListener(node, this.transitionEnd.bind(this));
     }
 
     componentWillReceiveProps (nextProps) {
@@ -65,45 +74,37 @@ class Rodal extends Component {
 
     fadeIn () {
         this.setState({
-            animationState: 'enter',
-            isShow: true
+            isShow: true,
+            animationState: 'enter'
         });
     }
 
     fadeOut () {
-        this.setState({
-            animationState: 'leave'
-        });
+        this.setState({ animationState: 'leave' });
     }
 
-    transitionEnd () {
-        let node = this.refs["rodal"].getDOMNode();
-        var endListener = function(e) {
-            if (e && e.target !== node) {
-                return;
-            }
+    transitionEnd (e) {
+        const node = React.findDOMNode(this);
+        if (e && e.target !== node) {
+            return;
+        }
+        if(this.state.animationState === 'leave') {
             this.setState({
-                animationState: 'enter',
                 isShow: false
             });
-            Transition.removeEndEventListener(node, endListener);
-
-        }.bind(this);
-        Transition.addEndEventListener(node, endListener);
+        }
     }
 
     render () {
-        if(!this.state.isShow) return null;
 
         const style = {
+            display: this.state.isShow ? 'block' : 'none',
             animationDuration: this.props.duration + 'ms',
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
-        if(this.state.animationState === 'leave') {
-            this.transitionEnd();
-        }
+
         return (
-            <div ref="rodal" className={"rodal rodal-fade-" + this.state.animationState} style={style}>
+            <div className={"rodal rodal-fade-" + this.state.animationState} style={style}>
                 <div
                     className="rodal-mask"
                     onClick={this.props.onClose}

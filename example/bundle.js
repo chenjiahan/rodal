@@ -100,6 +100,7 @@
 	                return _react2['default'].createElement(
 	                    'button',
 	                    {
+	                        key: index,
 	                        className: 'show-btn',
 	                        onClick: this.show.bind(this, value)
 	                    },
@@ -18311,9 +18312,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _transition = __webpack_require__(158);
+	var _ReactTransitionEvents = __webpack_require__(165);
 
-	var _transition2 = _interopRequireDefault(_transition);
+	var _ReactTransitionEvents2 = _interopRequireDefault(_ReactTransitionEvents);
 
 	__webpack_require__(159);
 
@@ -18376,7 +18377,6 @@
 
 	        _get(Object.getPrototypeOf(Rodal.prototype), 'constructor', this).call(this, props);
 
-	        //initial state
 	        this.state = {
 	            isShow: this.props.visible,
 	            animationState: this.props.visible ? 'enter' : 'leave'
@@ -18388,6 +18388,18 @@
 	    }
 
 	    _createClass(Rodal, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var node = _react2['default'].findDOMNode(this);
+	            _ReactTransitionEvents2['default'].addEndEventListener(node, this.transitionEnd.bind(this));
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            var node = _react2['default'].findDOMNode(this);
+	            _ReactTransitionEvents2['default'].removeEndEventListener(node, this.transitionEnd.bind(this));
+	        }
+	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (!this.props.visible && nextProps.visible) {
@@ -18400,48 +18412,41 @@
 	        key: 'fadeIn',
 	        value: function fadeIn() {
 	            this.setState({
-	                animationState: 'enter',
-	                isShow: true
+	                isShow: true,
+	                animationState: 'enter'
 	            });
 	        }
 	    }, {
 	        key: 'fadeOut',
 	        value: function fadeOut() {
-	            this.setState({
-	                animationState: 'leave'
-	            });
+	            this.setState({ animationState: 'leave' });
 	        }
 	    }, {
 	        key: 'transitionEnd',
-	        value: function transitionEnd() {
-	            var node = this.refs["rodal"].getDOMNode();
-	            var endListener = (function (e) {
-	                if (e && e.target !== node) {
-	                    return;
-	                }
+	        value: function transitionEnd(e) {
+	            var node = _react2['default'].findDOMNode(this);
+	            if (e && e.target !== node) {
+	                return;
+	            }
+	            if (this.state.animationState === 'leave') {
 	                this.setState({
-	                    animationState: 'enter',
 	                    isShow: false
 	                });
-	                _transition2['default'].removeEndEventListener(node, endListener);
-	            }).bind(this);
-	            _transition2['default'].addEndEventListener(node, endListener);
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            if (!this.state.isShow) return null;
 
 	            var style = {
+	                display: this.state.isShow ? 'block' : 'none',
 	                animationDuration: this.props.duration + 'ms',
 	                WebkitAnimationDuration: this.props.duration + 'ms'
 	            };
-	            if (this.state.animationState === 'leave') {
-	                this.transitionEnd();
-	            }
+
 	            return _react2['default'].createElement(
 	                'div',
-	                { ref: 'rodal', className: "rodal rodal-fade-" + this.state.animationState, style: style },
+	                { className: "rodal rodal-fade-" + this.state.animationState, style: style },
 	                _react2['default'].createElement('div', {
 	                    className: 'rodal-mask',
 	                    onClick: this.props.onClose
@@ -18468,85 +18473,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 158 */
-/***/ function(module, exports) {
-
-	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	var EVENT_NAME_MAP = {
-	    transitionend: {
-	        'transition': 'transitionend',
-	        'WebkitTransition': 'webkitTransitionEnd',
-	        'MozTransition': 'mozTransitionEnd',
-	        'OTransition': 'oTransitionEnd',
-	        'msTransition': 'MSTransitionEnd'
-	    },
-
-	    animationend: {
-	        'animation': 'animationend',
-	        'WebkitAnimation': 'webkitAnimationEnd',
-	        'MozAnimation': 'mozAnimationEnd',
-	        'OAnimation': 'oAnimationEnd',
-	        'msAnimation': 'MSAnimationEnd'
-	    }
-	};
-
-	var endEvents = [];
-
-	function detectEvents() {
-	    var testEl = document.createElement('div');
-	    var style = testEl.style;
-
-	    if (!('AnimationEvent' in window)) {
-	        delete EVENT_NAME_MAP.animationend.animation;
-	    }
-
-	    if (!('TransitionEvent' in window)) {
-	        delete EVENT_NAME_MAP.transitionend.transition;
-	    }
-
-	    for (var baseEventName in EVENT_NAME_MAP) {
-	        var baseEvents = EVENT_NAME_MAP[baseEventName];
-	        for (var styleName in baseEvents) {
-	            if (styleName in style) {
-	                endEvents.push(baseEvents[styleName]);
-	                break;
-	            }
-	        }
-	    }
-	}
-
-	if (typeof window !== 'undefined') {
-	    detectEvents();
-	}
-
-	exports['default'] = {
-	    addEndEventListener: function addEndEventListener(node, eventListener) {
-	        if (endEvents.length === 0) {
-	            window.setTimeout(eventListener, 0);
-	            return;
-	        }
-	        endEvents.forEach(function (endEvent) {
-	            node.addEventListener(endEvent, eventListener, false);
-	        });
-	    },
-	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
-	        if (endEvents.length === 0) {
-	            return;
-	        }
-	        endEvents.forEach(function (endEvent) {
-	            node.removeEventListener(endEvent, eventListener, false);
-	        });
-	    }
-	};
-	module.exports = exports['default'];
-
-/***/ },
+/* 158 */,
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -18905,6 +18832,85 @@
 
 	// exports
 
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var EVENT_NAME_MAP = {
+	    transitionend: {
+	        'transition': 'transitionend',
+	        'WebkitTransition': 'webkitTransitionEnd',
+	        'MozTransition': 'mozTransitionEnd',
+	        'OTransition': 'oTransitionEnd',
+	        'msTransition': 'MSTransitionEnd'
+	    },
+
+	    animationend: {
+	        'animation': 'animationend',
+	        'WebkitAnimation': 'webkitAnimationEnd',
+	        'MozAnimation': 'mozAnimationEnd',
+	        'OAnimation': 'oAnimationEnd',
+	        'msAnimation': 'MSAnimationEnd'
+	    }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	    var testEl = document.createElement('div');
+	    var style = testEl.style;
+
+	    if (!('AnimationEvent' in window)) {
+	        delete EVENT_NAME_MAP.animationend.animation;
+	    }
+
+	    if (!('TransitionEvent' in window)) {
+	        delete EVENT_NAME_MAP.transitionend.transition;
+	    }
+
+	    for (var baseEventName in EVENT_NAME_MAP) {
+	        var baseEvents = EVENT_NAME_MAP[baseEventName];
+	        for (var styleName in baseEvents) {
+	            if (styleName in style) {
+	                endEvents.push(baseEvents[styleName]);
+	                break;
+	            }
+	        }
+	    }
+	}
+
+	if (typeof window !== 'undefined') {
+	    detectEvents();
+	}
+
+	exports['default'] = {
+	    addEndEventListener: function addEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            window.setTimeout(eventListener, 0);
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.addEventListener(endEvent, eventListener, false);
+	        });
+	    },
+	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.removeEventListener(endEvent, eventListener, false);
+	        });
+	    }
+	};
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

@@ -1,8 +1,9 @@
 # Rodal
 A React component for modal and dialog.
 
-## install
-> npm install rodal
+## Install
+
+    npm install rodal
 
 ## Usage
 
