@@ -64,7 +64,7 @@
 
 	var _srcRodal2 = _interopRequireDefault(_srcRodal);
 
-	__webpack_require__(162);
+	__webpack_require__(161);
 
 	var App = (function (_Component) {
 	    _inherits(App, _Component);
@@ -18312,6 +18312,24 @@
 	    }
 
 	    _createClass(RodalBox, [{
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps) {
+	            var props = this.props;
+	            if (props.onClose !== nextProps.onClose) {
+	                return true;
+	            }
+	            if (props.animation !== nextProps.animation) {
+	                return true;
+	            }
+	            if (props.showCloseButton !== nextProps.showCloseButton) {
+	                return true;
+	            }
+	            if (props.duration !== nextProps.duration) {
+	                return true;
+	            }
+	            return false;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 
@@ -18346,6 +18364,14 @@
 	    }
 
 	    _createClass(RodalMask, [{
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps) {
+	            if (this.props.onClose !== nextProps.onClose) {
+	                return true;
+	            }
+	            return false;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2['default'].createElement('div', {
@@ -18380,17 +18406,20 @@
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (!this.props.visible && nextProps.visible) {
-	                this.setState({ animation: 'rodal-' + this.props.animation + '-enter' });
 	                this.fadeIn();
 	            } else if (this.props.visible && !nextProps.visible) {
-	                this.setState({ animation: 'rodal-' + this.props.animation + '-leave' });
 	                this.fadeOut();
 	            }
 	        }
 	    }, {
 	        key: 'fadeIn',
 	        value: function fadeIn() {
-	            this.setState({ isShow: 'block' });
+
+	            this.setState({
+	                animation: 'rodal-' + this.props.animation + '-enter',
+	                isShow: 'block'
+	            });
+
 	            var opacity = 0;
 	            var last = this.now();
 	            var duration = this.props.duration;
@@ -18408,6 +18437,11 @@
 	    }, {
 	        key: 'fadeOut',
 	        value: function fadeOut() {
+
+	            this.setState({
+	                animation: 'rodal-' + this.props.animation + '-leave'
+	            });
+
 	            var opacity = 1;
 	            var last = this.now();
 	            var duration = this.props.duration;
@@ -18480,7 +18514,7 @@
 	var content = __webpack_require__(159);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(161)(content, {});
+	var update = __webpack_require__(160)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -18500,73 +18534,18 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(160)();
+	exports = module.exports = __webpack_require__(163)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n@keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n.rodal-alert-enter {\n  -webkit-animation: rodal-alert-enter both;\n          animation: rodal-alert-enter both; }\n\n@-webkit-keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); } }\n\n@keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.2);\n            transform: scale(0.2); } }\n\n.rodal-alert-leave {\n  -webkit-animation: rodal-alert-leave both;\n          animation: rodal-alert-leave both; }\n", ""]);
+	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n@keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n.rodal-alert-enter {\n  -webkit-animation-name: rodal-alert-enter;\n          animation-name: rodal-alert-enter;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); } }\n\n@keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); } }\n\n.rodal-alert-leave {\n  -webkit-animation-name: rodal-alert-leave;\n          animation-name: rodal-alert-leave;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n", ""]);
 
 	// exports
 
 
 /***/ },
 /* 160 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	"use strict";
-
-	module.exports = function () {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for (var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if (item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function (modules, mediaQuery) {
-			if (typeof modules === "string") modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for (var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if (typeof id === "number") alreadyImportedModules[id] = true;
-			}
-			for (i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if (mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if (mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-/***/ },
-/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -18791,16 +18770,16 @@
 
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(163);
+	var content = __webpack_require__(162);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(161)(content, {});
+	var update = __webpack_require__(160)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -18817,10 +18796,10 @@
 	}
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(160)();
+	exports = module.exports = __webpack_require__(163)();
 	// imports
 
 
@@ -18829,6 +18808,61 @@
 
 	// exports
 
+
+/***/ },
+/* 163 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	"use strict";
+
+	module.exports = function () {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for (var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if (item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function (modules, mediaQuery) {
+			if (typeof modules === "string") modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for (var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if (typeof id === "number") alreadyImportedModules[id] = true;
+			}
+			for (i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if (mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if (mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
 
 /***/ }
 /******/ ]);

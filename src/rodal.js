@@ -2,6 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import './rodal.scss';
 
 class RodalBox extends Component {
+
+    shouldComponentUpdate (nextProps) {
+        const props = this.props;
+        if (props.onClose !== nextProps.onClose) { return true }
+        if (props.animation !== nextProps.animation) { return true }
+        if (props.showCloseButton !== nextProps.showCloseButton) { return true }
+        if (props.duration !== nextProps.duration) { return true }
+        return false;
+    }
+
     render () {
 
         let style = {
@@ -23,6 +33,12 @@ class RodalBox extends Component {
 }
 
 class RodalMask extends Component {
+
+    shouldComponentUpdate (nextProps) {
+        if(this.props.onClose !== nextProps.onClose) { return true }
+        return false;
+    }
+
     render () {
         return (
             <div
@@ -48,21 +64,24 @@ class Rodal extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (!this.props.visible && nextProps.visible) {
-            this.setState({ animation: 'rodal-' + this.props.animation + '-enter' });
             this.fadeIn();
         } else if (this.props.visible && !nextProps.visible) {
-            this.setState({ animation: 'rodal-' + this.props.animation + '-leave' });
             this.fadeOut();
         }
     }
 
     fadeIn () {
-        this.setState({ isShow: 'block' });
+
+        this.setState({
+            animation: 'rodal-' + this.props.animation + '-enter',
+            isShow: 'block'
+        });
+
         let opacity = 0;
         let last = this.now();
-        let duration = this.props.duration;
-        let interval = duration / 20;
-        let tick = function () {
+        const duration = this.props.duration;
+        const interval = duration / 20;
+        const tick = function () {
             opacity = opacity + (this.now() - last) / duration;
             last = this.now();
             this.setState({ opacity: opacity });
@@ -74,11 +93,16 @@ class Rodal extends Component {
     }
 
     fadeOut () {
+
+        this.setState({
+            animation: 'rodal-' + this.props.animation + '-leave'
+        });
+
         let opacity = 1;
         let last = this.now();
-        let duration = this.props.duration;
-        let interval = duration / 20;
-        let tick = function () {
+        const duration = this.props.duration;
+        const interval = duration / 20;
+        const tick = function () {
             opacity = opacity - (this.now() - last) / duration;
             last = this.now();
             this.setState({ opacity: opacity });
@@ -93,7 +117,7 @@ class Rodal extends Component {
 
     render () {
 
-        let style = {
+        const style = {
             display: this.state.isShow,
             opacity: this.state.opacity
         };

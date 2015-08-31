@@ -1,4 +1,6 @@
-$closeButtonSize: 16px;
+$close-btn-size: 16px;
+$box-width: 500px;
+$box-height: 280px;
 
 .rodal,
 .rodal-mask {
@@ -21,10 +23,10 @@ $closeButtonSize: 16px;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;
-  height: 280px;
-  margin-top: -160px;
-  margin-left: -250px;
+  width: $box-width;
+  height: $box-height;
+  margin-top: - ($box-height / 2 + 20);
+  margin-left: - $box-width / 2;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -33,10 +35,10 @@ $closeButtonSize: 16px;
 .rodal-close {
   position: absolute;
   cursor: pointer;
-  top: $closeButtonSize;
-  right: $closeButtonSize;
-  width: $closeButtonSize;
-  height: $closeButtonSize;
+  top: $close-btn-size;
+  right: $close-btn-size;
+  width: $close-btn-size;
+  height: $close-btn-size;
   &:before,
   &:after {
     position: absolute;
@@ -73,14 +75,17 @@ $closeButtonSize: 16px;
 //animation
 @keyframes rodal-alert-enter {
   0% {
-    transform: scale(.2);
+    transform: scale(.4);
   }
   100% {
     transform: scale(1);
   }
 }
 .rodal-alert-enter {
-  animation: rodal-alert-enter both;
+  animation: {
+    name: rodal-alert-enter;
+    fill-mode: both;
+  }
 }
 
 @keyframes rodal-alert-leave {
@@ -88,11 +93,14 @@ $closeButtonSize: 16px;
     transform: scale(1);
   }
   100% {
-    transform: scale(.2);
+    transform: scale(.4);
   }
 }
 .rodal-alert-leave {
-  animation: rodal-alert-leave both;
+  animation: {
+    name: rodal-alert-leave;
+    fill-mode: both;
+  }
 }
 
 
