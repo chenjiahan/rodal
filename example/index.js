@@ -25,13 +25,13 @@ class App extends Component {
 
     render () {
 
-        const buttons = ['zoom','slideDown'].map(function(value,index){
+        const buttons = ['zoom', 'fade', 'slideDown'].map(function(value,index){
             return (
                 <button
                     key={index}
                     className="show-btn"
                     onClick={this.show.bind(this,value)}
-                    >
+                >
                     {value}
                 </button>
             )

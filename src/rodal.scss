@@ -72,7 +72,7 @@ $box-height: 280px;
   }
 }
 
-//animation fade
+//fade
 @keyframes rodal-fade-enter {
   0% {
     opacity: 0;
@@ -82,37 +82,31 @@ $box-height: 280px;
   }
 }
 .rodal-fade-enter {
-  animation: rodal-fade-enter both ease-in-out;
+  animation: rodal-fade-enter both ease-in;
 }
 @keyframes rodal-fade-leave {
   0% {
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 0
   }
 }
 .rodal-fade-leave {
-  animation: rodal-fade-leave both ease-in-out;
+  animation: rodal-fade-leave both ease-out;
 }
 
-//animation zoom
+//zoom
 @keyframes rodal-zoom-enter {
   0% {
     transform: scale3d(.3, .3, .3);
-  }
-  45% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-  75% {
-    transform: scale3d(.95, .95, .95);
   }
   100% {
     transform: scale3d(1, 1, 1);
   }
 }
 .rodal-zoom-enter {
-  animation: rodal-zoom-enter both cubic-bezier(0.6,0,0.4,1);
+  animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 @keyframes rodal-zoom-leave {
   0% {
@@ -123,11 +117,11 @@ $box-height: 280px;
   }
 }
 .rodal-zoom-leave {
-  animation: rodal-zoom-leave both cubic-bezier(0.6,0,0.4,1);
+  animation: rodal-zoom-leave both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 
-//animation slideDown
+//slideDown
 @keyframes rodal-slideDown-enter {
   0% {
     transform: translate3d(0, -100px, 0);
@@ -137,7 +131,7 @@ $box-height: 280px;
   }
 }
 .rodal-slideDown-enter {
-  animation: rodal-slideDown-enter both ease-in-out;
+  animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-slideDown-leave {
@@ -149,6 +143,6 @@ $box-height: 280px;
   }
 }
 .rodal-slideDown-leave {
-  animation: rodal-slideDown-leave both ease-in-out;
+  animation: rodal-slideDown-leave both cubic-bezier(0.4, 0, 0, 1.5);
 }
 

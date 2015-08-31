@@ -96,7 +96,7 @@
 	        key: 'render',
 	        value: function render() {
 
-	            var buttons = ['zoom', 'slideDown'].map((function (value, index) {
+	            var buttons = ['zoom', 'fade', 'slideDown'].map((function (value, index) {
 	                return _react2['default'].createElement(
 	                    'button',
 	                    {
@@ -18312,7 +18312,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactTransitionEvents = __webpack_require__(165);
+	var _ReactTransitionEvents = __webpack_require__(158);
 
 	var _ReactTransitionEvents2 = _interopRequireDefault(_ReactTransitionEvents);
 
@@ -18321,16 +18321,18 @@
 	var propTypes = {
 	    visible: _react.PropTypes.bool,
 	    onClose: _react.PropTypes.func.isRequired,
-	    showCloseButton: _react.PropTypes.bool,
 	    animation: _react.PropTypes.string,
-	    duration: _react.PropTypes.number
+	    duration: _react.PropTypes.number,
+	    showMask: _react.PropTypes.bool,
+	    showCloseButton: _react.PropTypes.bool
 	};
 
 	var defaultProps = {
 	    visible: false,
-	    showCloseButton: true,
 	    animation: 'zoom',
-	    duration: 300
+	    duration: 300,
+	    showMask: true,
+	    showCloseButton: true
 	};
 
 	var RodalBox = (function (_Component) {
@@ -18449,7 +18451,8 @@
 	                { className: "rodal rodal-fade-" + this.state.animationState, style: style },
 	                _react2['default'].createElement('div', {
 	                    className: 'rodal-mask',
-	                    onClick: this.props.onClose
+	                    onClick: this.props.onClose,
+	                    style: { display: this.props['showMask'] ? 'block' : 'none' }
 	                }),
 	                _react2['default'].createElement(
 	                    RodalBox,
@@ -18473,7 +18476,85 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 158 */,
+/* 158 */
+/***/ function(module, exports) {
+
+	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var EVENT_NAME_MAP = {
+	    transitionend: {
+	        'transition': 'transitionend',
+	        'WebkitTransition': 'webkitTransitionEnd',
+	        'MozTransition': 'mozTransitionEnd',
+	        'OTransition': 'oTransitionEnd',
+	        'msTransition': 'MSTransitionEnd'
+	    },
+
+	    animationend: {
+	        'animation': 'animationend',
+	        'WebkitAnimation': 'webkitAnimationEnd',
+	        'MozAnimation': 'mozAnimationEnd',
+	        'OAnimation': 'oAnimationEnd',
+	        'msAnimation': 'MSAnimationEnd'
+	    }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	    var testEl = document.createElement('div');
+	    var style = testEl.style;
+
+	    if (!('AnimationEvent' in window)) {
+	        delete EVENT_NAME_MAP.animationend.animation;
+	    }
+
+	    if (!('TransitionEvent' in window)) {
+	        delete EVENT_NAME_MAP.transitionend.transition;
+	    }
+
+	    for (var baseEventName in EVENT_NAME_MAP) {
+	        var baseEvents = EVENT_NAME_MAP[baseEventName];
+	        for (var styleName in baseEvents) {
+	            if (styleName in style) {
+	                endEvents.push(baseEvents[styleName]);
+	                break;
+	            }
+	        }
+	    }
+	}
+
+	if (typeof window !== 'undefined') {
+	    detectEvents();
+	}
+
+	exports['default'] = {
+	    addEndEventListener: function addEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            window.setTimeout(eventListener, 0);
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.addEventListener(endEvent, eventListener, false);
+	        });
+	    },
+	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.removeEventListener(endEvent, eventListener, false);
+	        });
+	    }
+	};
+	module.exports = exports['default'];
+
+/***/ },
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -18508,7 +18589,7 @@
 
 
 	// module
-	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.3); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n.rodal-fade-enter {\n  -webkit-animation: rodal-fade-enter both ease-in-out;\n          animation: rodal-fade-enter both ease-in-out; }\n\n@-webkit-keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n.rodal-fade-leave {\n  -webkit-animation: rodal-fade-leave both ease-in-out;\n          animation: rodal-fade-leave both ease-in-out; }\n\n@-webkit-keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  45% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n            transform: scale3d(1.05, 1.05, 1.05); }\n  75% {\n    -webkit-transform: scale3d(0.95, 0.95, 0.95);\n            transform: scale3d(0.95, 0.95, 0.95); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  45% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n            transform: scale3d(1.05, 1.05, 1.05); }\n  75% {\n    -webkit-transform: scale3d(0.95, 0.95, 0.95);\n            transform: scale3d(0.95, 0.95, 0.95); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n.rodal-zoom-enter {\n  -webkit-animation: rodal-zoom-enter both cubic-bezier(0.6, 0, 0.4, 1);\n          animation: rodal-zoom-enter both cubic-bezier(0.6, 0, 0.4, 1); }\n\n@-webkit-keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n@keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n.rodal-zoom-leave {\n  -webkit-animation: rodal-zoom-leave both cubic-bezier(0.6, 0, 0.4, 1);\n          animation: rodal-zoom-leave both cubic-bezier(0.6, 0, 0.4, 1); }\n\n@-webkit-keyframes rodal-slideDown-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n@keyframes rodal-slideDown-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n.rodal-slideDown-enter {\n  -webkit-animation: rodal-slideDown-enter both ease-in-out;\n          animation: rodal-slideDown-enter both ease-in-out; }\n\n@-webkit-keyframes rodal-slideDown-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n@keyframes rodal-slideDown-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n.rodal-slideDown-leave {\n  -webkit-animation: rodal-slideDown-leave both ease-in-out;\n          animation: rodal-slideDown-leave both ease-in-out; }\n", ""]);
+	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.3); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n.rodal-fade-enter {\n  -webkit-animation: rodal-fade-enter both ease-in;\n          animation: rodal-fade-enter both ease-in; }\n\n@-webkit-keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n.rodal-fade-leave {\n  -webkit-animation: rodal-fade-leave both ease-out;\n          animation: rodal-fade-leave both ease-out; }\n\n@-webkit-keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n.rodal-zoom-enter {\n  -webkit-animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n          animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5); }\n\n@-webkit-keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n@keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n.rodal-zoom-leave {\n  -webkit-animation: rodal-zoom-leave both cubic-bezier(0.4, 0, 0, 1.5);\n          animation: rodal-zoom-leave both cubic-bezier(0.4, 0, 0, 1.5); }\n\n@-webkit-keyframes rodal-slideDown-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n@keyframes rodal-slideDown-enter {\n  0% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n.rodal-slideDown-enter {\n  -webkit-animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n          animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5); }\n\n@-webkit-keyframes rodal-slideDown-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n@keyframes rodal-slideDown-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -100px, 0);\n            transform: translate3d(0, -100px, 0); } }\n\n.rodal-slideDown-leave {\n  -webkit-animation: rodal-slideDown-leave both cubic-bezier(0.4, 0, 0, 1.5);\n          animation: rodal-slideDown-leave both cubic-bezier(0.4, 0, 0, 1.5); }\n", ""]);
 
 	// exports
 
@@ -18832,85 +18913,6 @@
 
 	// exports
 
-
-/***/ },
-/* 165 */
-/***/ function(module, exports) {
-
-	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	var EVENT_NAME_MAP = {
-	    transitionend: {
-	        'transition': 'transitionend',
-	        'WebkitTransition': 'webkitTransitionEnd',
-	        'MozTransition': 'mozTransitionEnd',
-	        'OTransition': 'oTransitionEnd',
-	        'msTransition': 'MSTransitionEnd'
-	    },
-
-	    animationend: {
-	        'animation': 'animationend',
-	        'WebkitAnimation': 'webkitAnimationEnd',
-	        'MozAnimation': 'mozAnimationEnd',
-	        'OAnimation': 'oAnimationEnd',
-	        'msAnimation': 'MSAnimationEnd'
-	    }
-	};
-
-	var endEvents = [];
-
-	function detectEvents() {
-	    var testEl = document.createElement('div');
-	    var style = testEl.style;
-
-	    if (!('AnimationEvent' in window)) {
-	        delete EVENT_NAME_MAP.animationend.animation;
-	    }
-
-	    if (!('TransitionEvent' in window)) {
-	        delete EVENT_NAME_MAP.transitionend.transition;
-	    }
-
-	    for (var baseEventName in EVENT_NAME_MAP) {
-	        var baseEvents = EVENT_NAME_MAP[baseEventName];
-	        for (var styleName in baseEvents) {
-	            if (styleName in style) {
-	                endEvents.push(baseEvents[styleName]);
-	                break;
-	            }
-	        }
-	    }
-	}
-
-	if (typeof window !== 'undefined') {
-	    detectEvents();
-	}
-
-	exports['default'] = {
-	    addEndEventListener: function addEndEventListener(node, eventListener) {
-	        if (endEvents.length === 0) {
-	            window.setTimeout(eventListener, 0);
-	            return;
-	        }
-	        endEvents.forEach(function (endEvent) {
-	            node.addEventListener(endEvent, eventListener, false);
-	        });
-	    },
-	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
-	        if (endEvents.length === 0) {
-	            return;
-	        }
-	        endEvents.forEach(function (endEvent) {
-	            node.removeEventListener(endEvent, eventListener, false);
-	        });
-	    }
-	};
-	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

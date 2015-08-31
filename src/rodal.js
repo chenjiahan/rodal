@@ -5,16 +5,18 @@ import './rodal.scss';
 const propTypes = {
     visible: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-    showCloseButton: PropTypes.bool,
     animation: PropTypes.string,
-    duration: PropTypes.number
+    duration: PropTypes.number,
+    showMask: PropTypes.bool,
+    showCloseButton: PropTypes.bool
 };
 
 const defaultProps = {
     visible: false,
-    showCloseButton: true,
     animation: 'zoom',
-    duration: 300
+    duration: 300,
+    showMask: true,
+    showCloseButton: true
 };
 
 class RodalBox extends Component {
@@ -108,6 +110,7 @@ class Rodal extends Component {
                 <div
                     className="rodal-mask"
                     onClick={this.props.onClose}
+                    style={{display: this.props['showMask'] ? 'block' : 'none'}}
                 />
                 <RodalBox
                     {...this.props}

@@ -1,5 +1,6 @@
 # Rodal
-A React modal with animations.
+A React modal with animations.  
+[example](http://chenjiahan.github.io/rodal/)
 
 ## Install
 
@@ -41,8 +42,14 @@ A React modal with animations.
 
 Property|Type|Default|Description
 ---|---|---|---
-onClose|func|/|hide the dialog
-visible|bool|false|visible
-showCloseButton|bool|true|whether to show close button
-animation|string|zoom|animation types
+onClose|func|/|onClose handler function
+visible|bool|false|whether to show dialog
+animation|string|zoom|animation type
 duration|number|300|animation duration
+showMask|bool|true|whether to show mask
+showCloseButton|bool|true|whether to show close button
+
+## Animation
+* zoom
+* fade
+* slideDown
