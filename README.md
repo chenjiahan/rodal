@@ -1,5 +1,5 @@
 # Rodal
-A React component for modal and dialog.
+A React modal with animations.
 
 ## Install
 

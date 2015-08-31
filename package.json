@@ -1,7 +1,7 @@
 {
   "name": "rodal",
-  "version": "1.0.4",
-  "description": "A React modal conponent",
+  "version": "1.0.5",
+  "description": "A React modal with animations.",
   "main": "src/rodal.js",
   "directories": {
     "example": "example"
@@ -16,16 +16,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenjiahan/react-dialog.git"
+    "url": "git+https://github.com/chenjiahan/rodal.git"
   },
   "keywords": [
     "react",
-    "modal"
+    "modal",
+    "animation"
   ],
   "author": "chenjiahan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chenjiahan/react-dialog/issues"
+    "url": "https://github.com/chenjiahan/rodal/issues"
   },
-  "homepage": "https://github.com/chenjiahan/react-dialog#readme"
+  "homepage": "https://github.com/chenjiahan/rodal#readme"
 }
