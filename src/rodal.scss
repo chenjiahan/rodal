@@ -82,10 +82,7 @@ $box-height: 280px;
   }
 }
 .rodal-fade-enter {
-  animation: {
-    name: rodal-fade-enter;
-    fill-mode: both;
-  };
+  animation: rodal-fade-enter both ease-in-out;
 }
 
 @keyframes rodal-fade-leave {
@@ -97,10 +94,7 @@ $box-height: 280px;
   }
 }
 .rodal-fade-leave {
-  animation: {
-    name: rodal-fade-leave;
-    fill-mode: both;
-  }
+  animation: rodal-fade-leave both ease-in-out;
 }
 
 @keyframes rodal-zoom-enter {
@@ -112,10 +106,7 @@ $box-height: 280px;
   }
 }
 .rodal-zoom-enter {
-  animation: {
-    name: rodal-zoom-enter;
-    fill-mode: both;
-  }
+  animation: rodal-zoom-enter both ease-in-out;
 }
 
 @keyframes rodal-zoom-leave {
@@ -127,26 +118,20 @@ $box-height: 280px;
   }
 }
 .rodal-zoom-leave {
-  animation: {
-    name: rodal-zoom-leave;
-    fill-mode: both;
-  }
+  animation: rodal-zoom-leave both ease-in-out;
 }
 
 
 @keyframes rodal-slide-down-enter {
   0% {
-    transform: translate3d(0, -150px, 0);
+    transform: translate3d(0, -100px, 0);
   }
   100% {
     transform: translate3d(0, 0, 0);
   }
 }
 .rodal-slide-down-enter {
-  animation: {
-    name: rodal-slide-down-enter;
-    fill-mode: both;
-  };
+  animation: rodal-slide-down-enter both ease-in-out;
 }
 
 @keyframes rodal-slide-down-leave {
@@ -154,13 +139,10 @@ $box-height: 280px;
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(0, -150px, 0);
+    transform: translate3d(0, -100px, 0);
   }
 }
 .rodal-slide-down-leave {
-  animation: {
-    name: rodal-slide-down-leave;
-    fill-mode: both;
-  };
+  animation: rodal-slide-down-leave both ease-in-out;
 }
 
