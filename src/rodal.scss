@@ -16,7 +16,7 @@ $box-height: 280px;
 
 .rodal-mask {
   position: absolute;
-  background: rgba(0,0,0,.2);
+  background: rgba(0,0,0,.3);
 }
 
 .rodal-box {
@@ -72,7 +72,7 @@ $box-height: 280px;
   }
 }
 
-//animation
+//animation fade
 @keyframes rodal-fade-enter {
   0% {
     opacity: 0;
@@ -84,7 +84,6 @@ $box-height: 280px;
 .rodal-fade-enter {
   animation: rodal-fade-enter both ease-in-out;
 }
-
 @keyframes rodal-fade-leave {
   0% {
     opacity: 1;
@@ -97,18 +96,24 @@ $box-height: 280px;
   animation: rodal-fade-leave both ease-in-out;
 }
 
+//animation zoom
 @keyframes rodal-zoom-enter {
   0% {
     transform: scale3d(.3, .3, .3);
+  }
+  45% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  75% {
+    transform: scale3d(.95, .95, .95);
   }
   100% {
     transform: scale3d(1, 1, 1);
   }
 }
 .rodal-zoom-enter {
-  animation: rodal-zoom-enter both ease-in-out;
+  animation: rodal-zoom-enter both cubic-bezier(0.6,0,0.4,1);
 }
-
 @keyframes rodal-zoom-leave {
   0% {
     transform: scale3d(1, 1, 1);
@@ -118,10 +123,11 @@ $box-height: 280px;
   }
 }
 .rodal-zoom-leave {
-  animation: rodal-zoom-leave both ease-in-out;
+  animation: rodal-zoom-leave both cubic-bezier(0.6,0,0.4,1);
 }
 
 
+//animation slide-down
 @keyframes rodal-slide-down-enter {
   0% {
     transform: translate3d(0, -100px, 0);

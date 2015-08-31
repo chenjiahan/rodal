@@ -3,34 +3,29 @@ A React component for modal and dialog.
 
 ## Usage
 
-    import React, { Component } from 'react';
-    import Rodal from '../src/rodal';
+    import Rodal from 'rodal';
     
-    class App extends Component {
+    class App extends React.Component {
     
         constructor (props) {
             super(props);
             this.state = { visible: false }
         }
     
-        showRodal () {
+        show () {
             this.setState({ visible: true });
         }
     
-        hideRodal () {
+        hide () {
             this.setState({ visible: false });
         }
     
         render () {
             return (
                 <div>
-                    <button onClick={this.showRodal.bind(this)}>show</button>
+                    <button onClick={this.show.bind(this)}>show</button>
     
-                    <Rodal
-                        visible={this.state.visible}
-                        onClose={this.hideRodal.bind(this)}
-                        duration={200}
-                    >
+                    <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
                         <h1>Rodal</h1>
                     </Rodal>
                 </div>
@@ -46,4 +41,4 @@ onClose|func|required|hide the dialog
 visible|bool|false|visible
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation types
-duration|number|200|animation duration
+duration|number|300|animation duration

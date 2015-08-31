@@ -14,7 +14,7 @@ const defaultProps = {
     visible: false,
     showCloseButton: true,
     animation: 'zoom',
-    duration: 200
+    duration: 300
 };
 
 class RodalBox extends Component {
