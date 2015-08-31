@@ -73,34 +73,94 @@ $box-height: 280px;
 }
 
 //animation
-@keyframes rodal-alert-enter {
+@keyframes rodal-fade-enter {
   0% {
-    transform: scale(.4);
+    opacity: 0;
   }
   100% {
-    transform: scale(1);
+    opacity: 1;
   }
 }
-.rodal-alert-enter {
+.rodal-fade-enter {
   animation: {
-    name: rodal-alert-enter;
+    name: rodal-fade-enter;
+    fill-mode: both;
+  };
+}
+
+@keyframes rodal-fade-leave {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.rodal-fade-leave {
+  animation: {
+    name: rodal-fade-leave;
     fill-mode: both;
   }
 }
 
-@keyframes rodal-alert-leave {
+@keyframes rodal-zoom-enter {
   0% {
-    transform: scale(1);
+    transform: scale3d(.3, .3, .3);
   }
   100% {
-    transform: scale(.4);
+    transform: scale3d(1, 1, 1);
   }
 }
-.rodal-alert-leave {
+.rodal-zoom-enter {
   animation: {
-    name: rodal-alert-leave;
+    name: rodal-zoom-enter;
     fill-mode: both;
   }
 }
 
+@keyframes rodal-zoom-leave {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  100% {
+    transform: scale3d(.3, .3, .3);
+  }
+}
+.rodal-zoom-leave {
+  animation: {
+    name: rodal-zoom-leave;
+    fill-mode: both;
+  }
+}
+
+
+@keyframes rodal-slide-down-enter {
+  0% {
+    transform: translate3d(0, -150px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rodal-slide-down-enter {
+  animation: {
+    name: rodal-slide-down-enter;
+    fill-mode: both;
+  };
+}
+
+@keyframes rodal-slide-down-leave {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -150px, 0);
+  }
+}
+.rodal-slide-down-leave {
+  animation: {
+    name: rodal-slide-down-leave;
+    fill-mode: both;
+  };
+}
 

@@ -6,11 +6,17 @@ class App extends Component {
 
     constructor (props) {
         super(props);
-        this.state = { visible: false }
+        this.state = {
+            visible: false,
+            animation: 'zoom'
+        }
     }
 
-    show () {
-        this.setState({ visible: true });
+    show (animation) {
+        this.setState({
+            animation: animation,
+            visible: true
+        });
     }
 
     hide () {
@@ -18,6 +24,7 @@ class App extends Component {
     }
 
     render () {
+
         return (
             <div className="wrap" style={{height: window.innerHeight}}>
                 <div className="container">
@@ -26,16 +33,23 @@ class App extends Component {
 
                     <button
                         className="show-btn"
-                        onClick={this.show.bind(this)}
+                        onClick={this.show.bind(this,"zoom")}
                     >
-                        show
+                        zoom
+                    </button>
+
+                    <button
+                        className="show-btn"
+                        onClick={this.show.bind(this,"slide-down")}
+                    >
+                        slide-down
                     </button>
 
                     <Rodal
                         visible={this.state.visible}
                         onClose={this.hide.bind(this)}
-                        duration={200}
-                        >
+                        animation={this.state.animation}
+                    >
                         <h1 className="content-title">Hello Rodal!</h1>
                     </Rodal>
 

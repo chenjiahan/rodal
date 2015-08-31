@@ -1,16 +1,23 @@
 import React, { Component, PropTypes } from 'react';
+import Transition from './transition';
 import './rodal.scss';
 
-class RodalBox extends Component {
+const propTypes = {
+    visible: PropTypes.bool,
+    onClose: PropTypes.func.isRequired,
+    showCloseButton: PropTypes.bool,
+    animation: PropTypes.string,
+    duration: PropTypes.number
+};
 
-    shouldComponentUpdate (nextProps) {
-        const props = this.props;
-        if (props.onClose !== nextProps.onClose) { return true }
-        if (props.animation !== nextProps.animation) { return true }
-        if (props.showCloseButton !== nextProps.showCloseButton) { return true }
-        if (props.duration !== nextProps.duration) { return true }
-        return false;
-    }
+const defaultProps = {
+    visible: false,
+    showCloseButton: true,
+    animation: 'zoom',
+    duration: 200
+};
+
+class RodalBox extends Component {
 
     render () {
 
@@ -20,7 +27,11 @@ class RodalBox extends Component {
         };
 
         return (
-            <div className={"rodal-box " + this.props.animation} style={style}>
+            <div
+                ref="box"
+                className={"rodal-box rodal-" + this.props.animation + "-" + this.props.animationState}
+                style={style}
+            >
                 <span
                     className="rodal-close"
                     onClick={this.props.onClose}
@@ -33,11 +44,6 @@ class RodalBox extends Component {
 }
 
 class RodalMask extends Component {
-
-    shouldComponentUpdate (nextProps) {
-        if(this.props.onClose !== nextProps.onClose) { return true }
-        return false;
-    }
 
     render () {
         return (
@@ -54,9 +60,10 @@ class Rodal extends Component {
     constructor (props) {
         super(props);
 
+        //initial state
         this.state = {
-            opacity: 0,
-            isShow: 'none'
+            isShow: this.props.visible,
+            animationState: this.props.visible ? 'enter' : 'leave'
         };
 
         this.now = Date.now || (() => { return new Date().getTime() });
@@ -71,82 +78,58 @@ class Rodal extends Component {
     }
 
     fadeIn () {
-
         this.setState({
-            animation: 'rodal-' + this.props.animation + '-enter',
-            isShow: 'block'
+            animationState: 'enter',
+            isShow: true
         });
-
-        let opacity = 0;
-        let last = this.now();
-        const duration = this.props.duration;
-        const interval = duration / 20;
-        const tick = function () {
-            opacity = opacity + (this.now() - last) / duration;
-            last = this.now();
-            this.setState({ opacity: opacity });
-            if (opacity < 1) {
-                setTimeout(tick, interval);
-            }
-        }.bind(this);
-        tick();
     }
 
     fadeOut () {
-
         this.setState({
-            animation: 'rodal-' + this.props.animation + '-leave'
+            animationState: 'leave'
         });
+    }
 
-        let opacity = 1;
-        let last = this.now();
-        const duration = this.props.duration;
-        const interval = duration / 20;
-        const tick = function () {
-            opacity = opacity - (this.now() - last) / duration;
-            last = this.now();
-            this.setState({ opacity: opacity });
-            if (opacity > 0) {
-                setTimeout(tick, interval);
-            } else {
-                this.setState({ isShow: 'none' })
+    transitionEnd () {
+        let node = this.refs["rodal"].getDOMNode();
+        var endListener = function(e) {
+            if (e && e.target !== node) {
+                return;
             }
+            this.setState({
+                animationState: 'enter',
+                isShow: false
+            });
+            Transition.removeEndEventListener(node, endListener);
+
         }.bind(this);
-        tick();
+        Transition.addEndEventListener(node, endListener);
     }
 
     render () {
+        if(!this.state.isShow) return null;
 
         const style = {
-            display: this.state.isShow,
-            opacity: this.state.opacity
+            animationDuration: this.props.duration + 'ms',
+            WebkitAnimationDuration: this.props.duration + 'ms'
         };
-
+        if(this.state.animationState === 'leave') {
+            this.transitionEnd();
+        }
         return (
-            <div className="rodal" style={style}>
+            <div ref="rodal" className={"rodal rodal-fade-" + this.state.animationState} style={style}>
                 <RodalMask onClose={this.props.onClose} />
-                <RodalBox {...this.props} animation={this.state.animation}>
+                <RodalBox
+                    {...this.props}
+                    animation={this.props.animation}
+                    animationState={this.state.animationState}
+                >
                     {this.props.children}
                 </RodalBox>
             </div>
         )
     }
 }
-
-const propTypes = {
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
-    showCloseButton: PropTypes.bool,
-    animation: PropTypes.string,
-    duration: PropTypes.number
-};
-
-const defaultProps = {
-    visible: false,
-    showCloseButton: true,
-    animation: 'alert',
-    duration: 200
-};
 
 Rodal.propTypes = propTypes;
 Rodal.defaultProps = defaultProps;

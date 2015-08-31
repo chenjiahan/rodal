@@ -73,13 +73,19 @@
 	        _classCallCheck(this, App);
 
 	        _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
-	        this.state = { visible: false };
+	        this.state = {
+	            visible: false,
+	            animation: 'zoom'
+	        };
 	    }
 
 	    _createClass(App, [{
 	        key: 'show',
-	        value: function show() {
-	            this.setState({ visible: true });
+	        value: function show(animation) {
+	            this.setState({
+	                animation: animation,
+	                visible: true
+	            });
 	        }
 	    }, {
 	        key: 'hide',
@@ -89,6 +95,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+
 	            return _react2['default'].createElement(
 	                'div',
 	                { className: 'wrap', style: { height: window.innerHeight } },
@@ -109,16 +116,24 @@
 	                        'button',
 	                        {
 	                            className: 'show-btn',
-	                            onClick: this.show.bind(this)
+	                            onClick: this.show.bind(this, "zoom")
 	                        },
-	                        'show'
+	                        'zoom'
+	                    ),
+	                    _react2['default'].createElement(
+	                        'button',
+	                        {
+	                            className: 'show-btn',
+	                            onClick: this.show.bind(this, "slide-down")
+	                        },
+	                        'slide-down'
 	                    ),
 	                    _react2['default'].createElement(
 	                        _srcRodal2['default'],
 	                        {
 	                            visible: this.state.visible,
 	                            onClose: this.hide.bind(this),
-	                            duration: 200
+	                            animation: this.state.animation
 	                        },
 	                        _react2['default'].createElement(
 	                            'h1',
@@ -18300,7 +18315,26 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _transition = __webpack_require__(164);
+
+	var _transition2 = _interopRequireDefault(_transition);
+
 	__webpack_require__(158);
+
+	var propTypes = {
+	    visible: _react.PropTypes.bool,
+	    onClose: _react.PropTypes.func.isRequired,
+	    showCloseButton: _react.PropTypes.bool,
+	    animation: _react.PropTypes.string,
+	    duration: _react.PropTypes.number
+	};
+
+	var defaultProps = {
+	    visible: false,
+	    showCloseButton: true,
+	    animation: 'zoom',
+	    duration: 200
+	};
 
 	var RodalBox = (function (_Component) {
 	    _inherits(RodalBox, _Component);
@@ -18312,24 +18346,6 @@
 	    }
 
 	    _createClass(RodalBox, [{
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps) {
-	            var props = this.props;
-	            if (props.onClose !== nextProps.onClose) {
-	                return true;
-	            }
-	            if (props.animation !== nextProps.animation) {
-	                return true;
-	            }
-	            if (props.showCloseButton !== nextProps.showCloseButton) {
-	                return true;
-	            }
-	            if (props.duration !== nextProps.duration) {
-	                return true;
-	            }
-	            return false;
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 
@@ -18340,7 +18356,11 @@
 
 	            return _react2['default'].createElement(
 	                'div',
-	                { className: "rodal-box " + this.props.animation, style: style },
+	                {
+	                    ref: 'box',
+	                    className: "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState,
+	                    style: style
+	                },
 	                _react2['default'].createElement('span', {
 	                    className: 'rodal-close',
 	                    onClick: this.props.onClose,
@@ -18364,14 +18384,6 @@
 	    }
 
 	    _createClass(RodalMask, [{
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps) {
-	            if (this.props.onClose !== nextProps.onClose) {
-	                return true;
-	            }
-	            return false;
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2['default'].createElement('div', {
@@ -18392,9 +18404,10 @@
 
 	        _get(Object.getPrototypeOf(Rodal.prototype), 'constructor', this).call(this, props);
 
+	        //initial state
 	        this.state = {
-	            opacity: 0,
-	            isShow: 'none'
+	            isShow: this.props.visible,
+	            animationState: this.props.visible ? 'enter' : 'leave'
 	        };
 
 	        this.now = Date.now || function () {
@@ -18414,66 +18427,56 @@
 	    }, {
 	        key: 'fadeIn',
 	        value: function fadeIn() {
-
 	            this.setState({
-	                animation: 'rodal-' + this.props.animation + '-enter',
-	                isShow: 'block'
+	                animationState: 'enter',
+	                isShow: true
 	            });
-
-	            var opacity = 0;
-	            var last = this.now();
-	            var duration = this.props.duration;
-	            var interval = duration / 20;
-	            var tick = (function () {
-	                opacity = opacity + (this.now() - last) / duration;
-	                last = this.now();
-	                this.setState({ opacity: opacity });
-	                if (opacity < 1) {
-	                    setTimeout(tick, interval);
-	                }
-	            }).bind(this);
-	            tick();
 	        }
 	    }, {
 	        key: 'fadeOut',
 	        value: function fadeOut() {
-
 	            this.setState({
-	                animation: 'rodal-' + this.props.animation + '-leave'
+	                animationState: 'leave'
 	            });
-
-	            var opacity = 1;
-	            var last = this.now();
-	            var duration = this.props.duration;
-	            var interval = duration / 20;
-	            var tick = (function () {
-	                opacity = opacity - (this.now() - last) / duration;
-	                last = this.now();
-	                this.setState({ opacity: opacity });
-	                if (opacity > 0) {
-	                    setTimeout(tick, interval);
-	                } else {
-	                    this.setState({ isShow: 'none' });
+	        }
+	    }, {
+	        key: 'transitionEnd',
+	        value: function transitionEnd() {
+	            var node = this.refs["rodal"].getDOMNode();
+	            var endListener = (function (e) {
+	                if (e && e.target !== node) {
+	                    return;
 	                }
+	                this.setState({
+	                    animationState: 'enter',
+	                    isShow: false
+	                });
+	                _transition2['default'].removeEndEventListener(node, endListener);
 	            }).bind(this);
-	            tick();
+	            _transition2['default'].addEndEventListener(node, endListener);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            if (!this.state.isShow) return null;
 
 	            var style = {
-	                display: this.state.isShow,
-	                opacity: this.state.opacity
+	                animationDuration: this.props.duration + 'ms',
+	                WebkitAnimationDuration: this.props.duration + 'ms'
 	            };
-
+	            if (this.state.animationState === 'leave') {
+	                this.transitionEnd();
+	            }
 	            return _react2['default'].createElement(
 	                'div',
-	                { className: 'rodal', style: style },
+	                { ref: 'rodal', className: "rodal rodal-fade-" + this.state.animationState, style: style },
 	                _react2['default'].createElement(RodalMask, { onClose: this.props.onClose }),
 	                _react2['default'].createElement(
 	                    RodalBox,
-	                    _extends({}, this.props, { animation: this.state.animation }),
+	                    _extends({}, this.props, {
+	                        animation: this.props.animation,
+	                        animationState: this.state.animationState
+	                    }),
 	                    this.props.children
 	                )
 	            );
@@ -18482,21 +18485,6 @@
 
 	    return Rodal;
 	})(_react.Component);
-
-	var propTypes = {
-	    visible: _react.PropTypes.bool,
-	    onClose: _react.PropTypes.func.isRequired,
-	    showCloseButton: _react.PropTypes.bool,
-	    animation: _react.PropTypes.string,
-	    duration: _react.PropTypes.number
-	};
-
-	var defaultProps = {
-	    visible: false,
-	    showCloseButton: true,
-	    animation: 'alert',
-	    duration: 200
-	};
 
 	Rodal.propTypes = propTypes;
 	Rodal.defaultProps = defaultProps;
@@ -18539,7 +18527,7 @@
 
 
 	// module
-	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n@keyframes rodal-alert-enter {\n  0% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1); } }\n\n.rodal-alert-enter {\n  -webkit-animation-name: rodal-alert-enter;\n          animation-name: rodal-alert-enter;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); } }\n\n@keyframes rodal-alert-leave {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1); }\n  100% {\n    -webkit-transform: scale(0.4);\n            transform: scale(0.4); } }\n\n.rodal-alert-leave {\n  -webkit-animation-name: rodal-alert-leave;\n          animation-name: rodal-alert-leave;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n", ""]);
+	exports.push([module.id, ".rodal,\n.rodal-mask {\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.rodal {\n  position: fixed; }\n\n.rodal-mask {\n  position: absolute;\n  background: rgba(0, 0, 0, 0.2); }\n\n.rodal-box {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 500px;\n  height: 280px;\n  margin-top: -160px;\n  margin-left: -250px;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }\n\n.rodal-close {\n  position: absolute;\n  cursor: pointer;\n  top: 16px;\n  right: 16px;\n  width: 16px;\n  height: 16px; }\n  .rodal-close:before,\n  .rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: all 0.2s ease;\n            transition: all 0.2s ease; }\n  .rodal-close:before {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n  .rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n        -ms-transform: rotate(-45deg);\n            transform: rotate(-45deg); }\n  .rodal-close:hover:before,\n  .rodal-close:hover:after {\n    background: #333; }\n  .rodal-close:hover:before {\n    -webkit-transform: rotate(135deg);\n        -ms-transform: rotate(135deg);\n            transform: rotate(135deg); }\n  .rodal-close:hover:after {\n    -webkit-transform: rotate(45deg);\n        -ms-transform: rotate(45deg);\n            transform: rotate(45deg); }\n\n@-webkit-keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes rodal-fade-enter {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n.rodal-fade-enter {\n  -webkit-animation-name: rodal-fade-enter;\n          animation-name: rodal-fade-enter;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes rodal-fade-leave {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n.rodal-fade-leave {\n  -webkit-animation-name: rodal-fade-leave;\n          animation-name: rodal-fade-leave;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@keyframes rodal-zoom-enter {\n  0% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); }\n  100% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n.rodal-zoom-enter {\n  -webkit-animation-name: rodal-zoom-enter;\n          animation-name: rodal-zoom-enter;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n@keyframes rodal-zoom-leave {\n  0% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); }\n  100% {\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3); } }\n\n.rodal-zoom-leave {\n  -webkit-animation-name: rodal-zoom-leave;\n          animation-name: rodal-zoom-leave;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-slide-down-enter {\n  0% {\n    -webkit-transform: translate3d(0, -150px, 0);\n            transform: translate3d(0, -150px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n@keyframes rodal-slide-down-enter {\n  0% {\n    -webkit-transform: translate3d(0, -150px, 0);\n            transform: translate3d(0, -150px, 0); }\n  100% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); } }\n\n.rodal-slide-down-enter {\n  -webkit-animation-name: rodal-slide-down-enter;\n          animation-name: rodal-slide-down-enter;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n\n@-webkit-keyframes rodal-slide-down-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -150px, 0);\n            transform: translate3d(0, -150px, 0); } }\n\n@keyframes rodal-slide-down-leave {\n  0% {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  100% {\n    -webkit-transform: translate3d(0, -150px, 0);\n            transform: translate3d(0, -150px, 0); } }\n\n.rodal-slide-down-leave {\n  -webkit-animation-name: rodal-slide-down-leave;\n          animation-name: rodal-slide-down-leave;\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both; }\n", ""]);
 
 	// exports
 
@@ -18863,6 +18851,85 @@
 		};
 		return list;
 	};
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	//https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var EVENT_NAME_MAP = {
+	    transitionend: {
+	        'transition': 'transitionend',
+	        'WebkitTransition': 'webkitTransitionEnd',
+	        'MozTransition': 'mozTransitionEnd',
+	        'OTransition': 'oTransitionEnd',
+	        'msTransition': 'MSTransitionEnd'
+	    },
+
+	    animationend: {
+	        'animation': 'animationend',
+	        'WebkitAnimation': 'webkitAnimationEnd',
+	        'MozAnimation': 'mozAnimationEnd',
+	        'OAnimation': 'oAnimationEnd',
+	        'msAnimation': 'MSAnimationEnd'
+	    }
+	};
+
+	var endEvents = [];
+
+	function detectEvents() {
+	    var testEl = document.createElement('div');
+	    var style = testEl.style;
+
+	    if (!('AnimationEvent' in window)) {
+	        delete EVENT_NAME_MAP.animationend.animation;
+	    }
+
+	    if (!('TransitionEvent' in window)) {
+	        delete EVENT_NAME_MAP.transitionend.transition;
+	    }
+
+	    for (var baseEventName in EVENT_NAME_MAP) {
+	        var baseEvents = EVENT_NAME_MAP[baseEventName];
+	        for (var styleName in baseEvents) {
+	            if (styleName in style) {
+	                endEvents.push(baseEvents[styleName]);
+	                break;
+	            }
+	        }
+	    }
+	}
+
+	if (typeof window !== 'undefined') {
+	    detectEvents();
+	}
+
+	exports['default'] = {
+	    addEndEventListener: function addEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            window.setTimeout(eventListener, 0);
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.addEventListener(endEvent, eventListener, false);
+	        });
+	    },
+	    removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	        if (endEvents.length === 0) {
+	            return;
+	        }
+	        endEvents.forEach(function (endEvent) {
+	            node.removeEventListener(endEvent, eventListener, false);
+	        });
+	    }
+	};
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
