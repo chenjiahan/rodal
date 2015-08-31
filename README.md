@@ -37,7 +37,7 @@ A React component for modal and dialog.
 
 Property|Type|Default|Description
 ---|---|---|---
-onClose|func|required|hide the dialog
+onClose|func|/|hide the dialog
 visible|bool|false|visible
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation types

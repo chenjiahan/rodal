@@ -25,26 +25,23 @@ class App extends Component {
 
     render () {
 
+        const buttons = ['zoom','slideDown'].map(function(value,index){
+            return (
+                <button
+                    className="show-btn"
+                    onClick={this.show.bind(this,value)}
+                    >
+                    {value}
+                </button>
+            )
+        }.bind(this));
+
         return (
             <div className="wrap" style={{height: window.innerHeight}}>
                 <div className="container">
                     <h1 className="title">Rodal</h1>
                     <h3 className="intro">A React component for modal and dialog.</h3>
-
-                    <button
-                        className="show-btn"
-                        onClick={this.show.bind(this,"zoom")}
-                    >
-                        zoom
-                    </button>
-
-                    <button
-                        className="show-btn"
-                        onClick={this.show.bind(this,"slide-down")}
-                    >
-                        slide-down
-                    </button>
-
+                    {buttons}
                     <Rodal
                         visible={this.state.visible}
                         onClose={this.hide.bind(this)}

@@ -21,17 +21,15 @@ class RodalBox extends Component {
 
     render () {
 
-        let style = {
+        const style = {
             animationDuration: this.props.duration + 'ms',
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
 
+        const className = "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState;
+
         return (
-            <div
-                ref="box"
-                className={"rodal-box rodal-" + this.props.animation + "-" + this.props.animationState}
-                style={style}
-            >
+            <div ref="box" style={style} className={className}>
                 <span
                     className="rodal-close"
                     onClick={this.props.onClose}
@@ -39,18 +37,6 @@ class RodalBox extends Component {
                 />
                 {this.props.children}
             </div>
-        )
-    }
-}
-
-class RodalMask extends Component {
-
-    render () {
-        return (
-            <div
-                className="rodal-mask"
-                onClick={this.props.onClose}
-            />
         )
     }
 }
@@ -118,7 +104,10 @@ class Rodal extends Component {
         }
         return (
             <div ref="rodal" className={"rodal rodal-fade-" + this.state.animationState} style={style}>
-                <RodalMask onClose={this.props.onClose} />
+                <div
+                    className="rodal-mask"
+                    onClick={this.props.onClose}
+                />
                 <RodalBox
                     {...this.props}
                     animation={this.props.animation}

@@ -127,8 +127,8 @@ $box-height: 280px;
 }
 
 
-//animation slide-down
-@keyframes rodal-slide-down-enter {
+//animation slideDown
+@keyframes rodal-slideDown-enter {
   0% {
     transform: translate3d(0, -100px, 0);
   }
@@ -136,11 +136,11 @@ $box-height: 280px;
     transform: translate3d(0, 0, 0);
   }
 }
-.rodal-slide-down-enter {
-  animation: rodal-slide-down-enter both ease-in-out;
+.rodal-slideDown-enter {
+  animation: rodal-slideDown-enter both ease-in-out;
 }
 
-@keyframes rodal-slide-down-leave {
+@keyframes rodal-slideDown-leave {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -148,7 +148,7 @@ $box-height: 280px;
     transform: translate3d(0, -100px, 0);
   }
 }
-.rodal-slide-down-leave {
-  animation: rodal-slide-down-leave both ease-in-out;
+.rodal-slideDown-leave {
+  animation: rodal-slideDown-leave both ease-in-out;
 }
 
