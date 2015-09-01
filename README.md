@@ -1,6 +1,6 @@
 # Rodal
 A React modal with animations.  
-[example](http://chenjiahan.github.io/rodal/)
+[example](http://rodal.cn)
 
 ## Install
 
@@ -9,6 +9,7 @@ A React modal with animations.
 ## Usage
 
     import Rodal from 'rodal';
+    import 'rodal.css';
     
     class App extends React.Component {
     
@@ -55,3 +56,5 @@ showCloseButton|bool|true|whether to show close button
 * flip
 * slideUp
 * slideDown
+* slideLeft
+* slideRight
