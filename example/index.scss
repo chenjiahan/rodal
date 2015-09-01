@@ -183,3 +183,50 @@ input[type="search"]::-webkit-search-decoration {
   color: $baseColor;
   text-align: center;
 }
+@media screen and (min-width: 800px) {
+  #fork {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 9999;
+    overflow: hidden;
+    a {
+      position: absolute;
+      width: 280px;
+      top: 50px;
+      right: -70px;
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
+      font-weight: bold;
+      padding: 10px 40px;
+      background: #FFA500;
+      transform: rotate(45deg);
+      transition: all 0.3s ease-in-out;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+
+      &:hover {
+        background: #FF8500;
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        width: 100%;
+        display: block;
+        position: absolute;
+        top: 1px;
+        left: 0;
+        height: 1px;
+        background: #fff;
+      }
+      &:after {
+        bottom: 1px;
+        top: auto;
+      }
+    }
+  }
+}

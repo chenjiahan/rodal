@@ -42,25 +42,29 @@ class App extends Component {
         });
 
         const wrapStyle = {
-            paddingTop:window.innerHeight / 2 - 200,
+            paddingTop:window.innerHeight / 2 - 230,
             height: window.innerHeight
         }
 
         return (
-            <div className="wrap" style={wrapStyle}>
-                <div className="container">
-                    <h1 className="title">Rodal</h1>
-                    <h3 className="intro">A React modal with animations.</h3>
-                    <div className="btn-area">{buttons}</div>
-                    <Rodal
-                        visible={this.state.visible}
-                        onClose={this.hide.bind(this)}
-                        animation={this.state.animation}
-                    >
-                        <h1 className="content-title">Hello Rodal!</h1>
-                    </Rodal>
+            <div>
+                <div className="wrap" style={wrapStyle}>
+                    <div className="container">
+                        <h1 className="title">Rodal</h1>
+                        <h3 className="intro">A React modal with animations.</h3>
+                        <div className="btn-area">{buttons}</div>
 
+                        <Rodal
+                            visible={this.state.visible}
+                            onClose={this.hide.bind(this)}
+                            animation={this.state.animation}
+                            >
+                            <h1 className="content-title">Hello Rodal!</h1>
+                        </Rodal>
+
+                    </div>
                 </div>
+                <span id="fork"><a target="_blank" href="https://github.com/chenjiahan/rodal">Fork me on GitHub</a></span>
             </div>
         )
     }

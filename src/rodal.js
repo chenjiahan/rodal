@@ -67,7 +67,7 @@ const TransitionEvents =  {
             window.setTimeout(eventListener, 0);
             return;
         }
-        endEvents.forEach((endEvent) => {
+        endEvents.forEach( endEvent => {
             node.addEventListener(endEvent, eventListener, false);
         });
     },
@@ -75,7 +75,7 @@ const TransitionEvents =  {
         if (endEvents.length === 0) {
             return;
         }
-        endEvents.forEach((endEvent) => {
+        endEvents.forEach( endEvent => {
             node.removeEventListener(endEvent, eventListener, false);
         });
     }
@@ -90,7 +90,7 @@ class RodalBox extends Component {
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
 
-        const className = "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState;
+        const className = `rodal-box rodal-${this.props.animation}-${this.props.animationState}`;
 
         const CloseButton = this.props.showCloseButton ? <span className="rodal-close" onClick={this.props.onClose} /> : null;
 

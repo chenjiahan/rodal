@@ -56,3 +56,5 @@ showCloseButton|bool|true|whether to show close button
 * flip
 * slideUp
 * slideDown
+* slideLeft
+* slideRight
