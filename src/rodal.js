@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import TransitionEvents from './ReactTransitionEvents';
-import './rodal.scss';
 
 const propTypes = {
     visible: PropTypes.bool,
@@ -19,6 +17,70 @@ const defaultProps = {
     showCloseButton: true
 };
 
+let EVENT_NAME_MAP = {
+    transitionend: {
+        'transition': 'transitionend',
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'mozTransitionEnd',
+        'OTransition': 'oTransitionEnd',
+        'msTransition': 'MSTransitionEnd'
+    },
+
+    animationend: {
+        'animation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd',
+        'MozAnimation': 'mozAnimationEnd',
+        'OAnimation': 'oAnimationEnd',
+        'msAnimation': 'MSAnimationEnd'
+    }
+};
+
+let endEvents = [];
+
+//detect events
+(() => {
+    let testEl = document.createElement('div');
+    let style = testEl.style;
+
+    if (!('AnimationEvent' in window)) {
+        delete EVENT_NAME_MAP.animationend.animation;
+    }
+
+    if (!('TransitionEvent' in window)) {
+        delete EVENT_NAME_MAP.transitionend.transition;
+    }
+
+    for (let baseEventName in EVENT_NAME_MAP) {
+        let baseEvents = EVENT_NAME_MAP[baseEventName];
+        for (let styleName in baseEvents) {
+            if (styleName in style) {
+                endEvents.push(baseEvents[styleName]);
+                break;
+            }
+        }
+    }
+})();
+
+const TransitionEvents =  {
+    addEndEventListener: (node, eventListener) => {
+        if (endEvents.length === 0) {
+            window.setTimeout(eventListener, 0);
+            return;
+        }
+        endEvents.forEach((endEvent) => {
+            node.addEventListener(endEvent, eventListener, false);
+        });
+    },
+    removeEndEventListener: (node, eventListener) => {
+        if (endEvents.length === 0) {
+            return;
+        }
+        endEvents.forEach((endEvent) => {
+            node.removeEventListener(endEvent, eventListener, false);
+        });
+    }
+};
+
 class RodalBox extends Component {
 
     render () {
@@ -30,13 +92,11 @@ class RodalBox extends Component {
 
         const className = "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState;
 
+        const CloseButton = this.props.showCloseButton ? <span className="rodal-close" onClick={this.props.onClose} /> : null;
+
         return (
-            <div ref="box" style={style} className={className}>
-                <span
-                    className="rodal-close"
-                    onClick={this.props.onClose}
-                    style={{ display: this.props.showCloseButton ? 'block' : 'none' }}
-                />
+            <div style={style} className={className}>
+                {CloseButton}
                 {this.props.children}
             </div>
         )
@@ -63,7 +123,7 @@ class Rodal extends Component {
 
     componentWillUnmount() {
         const node = React.findDOMNode(this);
-        TransitionEvents.removeEndEventListener(node, this.transitionEnd.bind(this));
+        TransitionEvents.removeEndEventListener(node, this.transitionEnd);
     }
 
     componentWillReceiveProps (nextProps) {
@@ -82,7 +142,9 @@ class Rodal extends Component {
     }
 
     fadeOut () {
-        this.setState({ animationState: 'leave' });
+        this.setState({
+            animationState: 'leave'
+        });
     }
 
     transitionEnd (e) {
@@ -105,18 +167,12 @@ class Rodal extends Component {
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
 
+        const Mask = this.props.showMask ? <div className="rodal-mask" onClick={this.props.onClose} /> : null;
+
         return (
             <div className={"rodal rodal-fade-" + this.state.animationState} style={style}>
-                <div
-                    className="rodal-mask"
-                    onClick={this.props.onClose}
-                    style={{display: this.props['showMask'] ? 'block' : 'none'}}
-                />
-                <RodalBox
-                    {...this.props}
-                    animation={this.props.animation}
-                    animationState={this.state.animationState}
-                >
+                {Mask}
+                <RodalBox {...this.props} animationState={this.state.animationState}>
                     {this.props.children}
                 </RodalBox>
             </div>

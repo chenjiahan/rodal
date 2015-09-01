@@ -7,7 +7,8 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.js$/, loader: "babel" },
-            { test: /\.scss$/, loader: "style!css!autoprefixer!sass" }
+            { test: /\.scss$/, loader: "style!css!autoprefixer!sass" },
+            { test: /\.css$/, loader: "style!css!autoprefixer" }
         ]
     }
 };

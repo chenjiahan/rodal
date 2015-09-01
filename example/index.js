@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Rodal from '../src/rodal';
 import './index.scss';
+import '../src/rodal.scss';
 
 class App extends Component {
 
@@ -31,7 +32,7 @@ class App extends Component {
 
     render () {
 
-        const types = ['zoom', 'fade', 'flip', 'slideUp', 'slideDown'];
+        const types = ['zoom', 'fade', 'flip', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
         const buttons = types.map((value,index) => {
             return (
                 <button key={index} className="btn" onClick={this.show.bind(this,value)}>

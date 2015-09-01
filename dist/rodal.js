@@ -1,0 +1,237 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var propTypes = {
+    visible: _react.PropTypes.bool,
+    onClose: _react.PropTypes.func.isRequired,
+    animation: _react.PropTypes.string,
+    duration: _react.PropTypes.number,
+    showMask: _react.PropTypes.bool,
+    showCloseButton: _react.PropTypes.bool
+};
+
+var defaultProps = {
+    visible: false,
+    animation: 'zoom',
+    duration: 300,
+    showMask: true,
+    showCloseButton: true
+};
+
+var EVENT_NAME_MAP = {
+    transitionend: {
+        'transition': 'transitionend',
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'mozTransitionEnd',
+        'OTransition': 'oTransitionEnd',
+        'msTransition': 'MSTransitionEnd'
+    },
+
+    animationend: {
+        'animation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd',
+        'MozAnimation': 'mozAnimationEnd',
+        'OAnimation': 'oAnimationEnd',
+        'msAnimation': 'MSAnimationEnd'
+    }
+};
+
+var endEvents = [];
+
+//detect events
+(function () {
+    var testEl = document.createElement('div');
+    var style = testEl.style;
+
+    if (!('AnimationEvent' in window)) {
+        delete EVENT_NAME_MAP.animationend.animation;
+    }
+
+    if (!('TransitionEvent' in window)) {
+        delete EVENT_NAME_MAP.transitionend.transition;
+    }
+
+    for (var baseEventName in EVENT_NAME_MAP) {
+        var baseEvents = EVENT_NAME_MAP[baseEventName];
+        for (var styleName in baseEvents) {
+            if (styleName in style) {
+                endEvents.push(baseEvents[styleName]);
+                break;
+            }
+        }
+    }
+})();
+
+var TransitionEvents = {
+    addEndEventListener: function addEndEventListener(node, eventListener) {
+        if (endEvents.length === 0) {
+            window.setTimeout(eventListener, 0);
+            return;
+        }
+        endEvents.forEach(function (endEvent) {
+            node.addEventListener(endEvent, eventListener, false);
+        });
+    },
+    removeEndEventListener: function removeEndEventListener(node, eventListener) {
+        if (endEvents.length === 0) {
+            return;
+        }
+        endEvents.forEach(function (endEvent) {
+            node.removeEventListener(endEvent, eventListener, false);
+        });
+    }
+};
+
+var RodalBox = (function (_Component) {
+    _inherits(RodalBox, _Component);
+
+    function RodalBox() {
+        _classCallCheck(this, RodalBox);
+
+        _get(Object.getPrototypeOf(RodalBox.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(RodalBox, [{
+        key: 'render',
+        value: function render() {
+
+            var style = {
+                animationDuration: this.props.duration + 'ms',
+                WebkitAnimationDuration: this.props.duration + 'ms'
+            };
+
+            var className = "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState;
+
+            var CloseButton = this.props.showCloseButton ? _react2['default'].createElement('span', { className: 'rodal-close', onClick: this.props.onClose }) : null;
+
+            return _react2['default'].createElement(
+                'div',
+                { style: style, className: className },
+                CloseButton,
+                this.props.children
+            );
+        }
+    }]);
+
+    return RodalBox;
+})(_react.Component);
+
+var Rodal = (function (_Component2) {
+    _inherits(Rodal, _Component2);
+
+    function Rodal(props) {
+        _classCallCheck(this, Rodal);
+
+        _get(Object.getPrototypeOf(Rodal.prototype), 'constructor', this).call(this, props);
+
+        this.state = {
+            isShow: this.props.visible,
+            animationState: this.props.visible ? 'enter' : 'leave'
+        };
+
+        this.now = Date.now || function () {
+            return new Date().getTime();
+        };
+    }
+
+    _createClass(Rodal, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var node = _react2['default'].findDOMNode(this);
+            TransitionEvents.addEndEventListener(node, this.transitionEnd.bind(this));
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            var node = _react2['default'].findDOMNode(this);
+            TransitionEvents.removeEndEventListener(node, this.transitionEnd);
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (!this.props.visible && nextProps.visible) {
+                this.fadeIn();
+            } else if (this.props.visible && !nextProps.visible) {
+                this.fadeOut();
+            }
+        }
+    }, {
+        key: 'fadeIn',
+        value: function fadeIn() {
+            this.setState({
+                isShow: true,
+                animationState: 'enter'
+            });
+        }
+    }, {
+        key: 'fadeOut',
+        value: function fadeOut() {
+            this.setState({
+                animationState: 'leave'
+            });
+        }
+    }, {
+        key: 'transitionEnd',
+        value: function transitionEnd(e) {
+            var node = _react2['default'].findDOMNode(this);
+            if (e && e.target !== node) {
+                return;
+            }
+            if (this.state.animationState === 'leave') {
+                this.setState({
+                    isShow: false
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var style = {
+                display: this.state.isShow ? 'block' : 'none',
+                animationDuration: this.props.duration + 'ms',
+                WebkitAnimationDuration: this.props.duration + 'ms'
+            };
+
+            var Mask = this.props.showMask ? _react2['default'].createElement('div', { className: 'rodal-mask', onClick: this.props.onClose }) : null;
+
+            return _react2['default'].createElement(
+                'div',
+                { className: "rodal rodal-fade-" + this.state.animationState, style: style },
+                Mask,
+                _react2['default'].createElement(
+                    RodalBox,
+                    _extends({}, this.props, { animationState: this.state.animationState }),
+                    this.props.children
+                )
+            );
+        }
+    }]);
+
+    return Rodal;
+})(_react.Component);
+
+Rodal.propTypes = propTypes;
+Rodal.defaultProps = defaultProps;
+
+exports['default'] = Rodal;
+module.exports = exports['default'];

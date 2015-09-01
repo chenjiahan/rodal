@@ -147,6 +147,56 @@ $box-height: 280px;
   animation: rodal-slideDown-leave both ease;
 }
 
+//slideLeft
+@keyframes rodal-slideLeft-enter {
+  0% {
+    transform: translate3d(-150px, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rodal-slideLeft-enter {
+  animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+
+@keyframes rodal-slideLeft-leave {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-150px, 0, 0);
+  }
+}
+.rodal-slideLeft-leave {
+  animation: rodal-slideLeft-leave both ease;
+}
+
+//slideRight
+@keyframes rodal-slideRight-enter {
+  0% {
+    transform: translate3d(150px, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rodal-slideRight-enter {
+  animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+
+@keyframes rodal-slideRight-leave {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(150px, 0, 0);
+  }
+}
+.rodal-slideRight-leave {
+  animation: rodal-slideRight-leave both ease;
+}
+
 //slideUp
 @keyframes rodal-slideUp-enter {
   0% {
@@ -175,18 +225,10 @@ $box-height: 280px;
 //flip
 @keyframes rodal-flip-enter {
   from {
-    transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
-    animation-timing-function: ease-in;
+    transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
   }
-  40% {
+  70% {
     transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
-    animation-timing-function: ease-in;
-  }
-  60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-  }
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
   }
   to {
     transform: perspective(400px);
@@ -194,7 +236,7 @@ $box-height: 280px;
 }
 .rodal-flip-enter {
   backface-visibility: visible !important;
-  animation: rodal-flip-enter both;
+  animation: rodal-flip-enter both ease-in;
 }
 
 @keyframes rodal-flip-leave {

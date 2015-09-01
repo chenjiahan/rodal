@@ -1,6 +1,6 @@
 # Rodal
 A React modal with animations.  
-[example](http://chenjiahan.github.io/rodal/)
+[example](http://rodal.cn)
 
 ## Install
 
