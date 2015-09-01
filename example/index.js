@@ -34,8 +34,12 @@ class App extends Component {
 
         const types = ['zoom', 'fade', 'flip', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
         const buttons = types.map((value,index) => {
+            const style = {
+                animationDelay : index * 100 + 'ms',
+                WebkitAnimationDelay : index * 100 + 'ms'
+            };
             return (
-                <button key={index} className="btn" onClick={this.show.bind(this,value)}>
+                <button key={index} className="btn" onClick={this.show.bind(this,value)} style={style}>
                     {value}
                 </button>
             )

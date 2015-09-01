@@ -9,7 +9,7 @@ $baseColor: #03A9F4;
 html {
   overflow-y: hidden;
   text-size-adjust: 100%;
-  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+  font-family: "Open Sans",sans-serif;
 }
 body {
   margin: 0;
@@ -136,7 +136,7 @@ input[type="search"]::-webkit-search-decoration {
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  @media ( max-width : 480px ) {
+  @media (max-width: 480px) {
     width: 100%;
   }
 }
@@ -156,25 +156,40 @@ input[type="search"]::-webkit-search-decoration {
 .btn-area {
   width: 600px;
   margin: 0 auto;
-  @media ( max-width : 480px ) {
+  @media (max-width: 480px) {
     width: 100%;
   }
 }
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .btn {
   display: inline-block;
-  color: #fff;
+  color: #0a1855;
   width: 140px;
+  padding: 0;
   font-size: 18px;
+  background: #fff;
   margin: 20px 30px;
-  line-height: 36px;
+  line-height: 42px;
   user-select: none;
   text-align: center;
   border-radius: 4px;
-  background: $baseColor;
-  border: 1px solid #fff;
-  @media ( max-width : 480px ) {
+  animation: scale both .4s;
+  transition: cubic-bezier(0.4, 0, 0, 1.5);
+  @media (max-width: 480px) {
     width: 40%;
     margin: 15px 5%;
+  }
+  &:hover {
+    box-shadow: 0 0 50px rgba(255,255,255,.3);
   }
 }
 .content-title {
@@ -183,6 +198,7 @@ input[type="search"]::-webkit-search-decoration {
   color: $baseColor;
   text-align: center;
 }
+
 @media screen and (min-width: 800px) {
   #fork {
     position: absolute;
@@ -207,11 +223,9 @@ input[type="search"]::-webkit-search-decoration {
       transform: rotate(45deg);
       transition: all 0.3s ease-in-out;
       box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-
       &:hover {
         background: #FF8500;
       }
-
       &:before,
       &:after {
         content: "";
