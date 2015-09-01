@@ -9,6 +9,7 @@ A React modal with animations.
 ## Usage
 
     import Rodal from 'rodal';
+    import 'rodal.css';
     
     class App extends React.Component {
     

@@ -85,6 +85,7 @@ $box-height: 280px;
 .rodal-fade-enter {
   animation: rodal-fade-enter both ease-in;
 }
+
 @keyframes rodal-fade-leave {
   0% {
     opacity: 1;
@@ -109,6 +110,7 @@ $box-height: 280px;
 .rodal-zoom-enter {
   animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
+
 @keyframes rodal-zoom-leave {
   0% {
     transform: scale3d(1, 1, 1);

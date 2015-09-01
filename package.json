@@ -2,12 +2,11 @@
   "name": "rodal",
   "version": "1.0.7",
   "description": "A React modal with animations.",
-  "main": "src/rodal.js",
+  "main": "dist/rodal.js",
   "directories": {
     "example": "example"
   },
   "dependencies": {
-    "babel-core": "^5.8.23",
     "react": "^0.13.3"
   },
   "devDependencies": {},
