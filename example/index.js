@@ -23,26 +23,34 @@ class App extends Component {
         this.setState({ visible: false });
     }
 
+    componentDidMount () {
+        window.onresize = () => {
+            this.forceUpdate();
+        }
+    }
+
     render () {
 
-        const buttons = ['zoom', 'fade', 'slideDown'].map(function(value,index){
+        const types = ['zoom', 'fade', 'flip', 'slideUp', 'slideDown'];
+        const buttons = types.map((value,index) => {
             return (
-                <button
-                    key={index}
-                    className="show-btn"
-                    onClick={this.show.bind(this,value)}
-                >
+                <button key={index} className="btn" onClick={this.show.bind(this,value)}>
                     {value}
                 </button>
             )
-        }.bind(this));
+        });
+
+        const wrapStyle = {
+            paddingTop:window.innerHeight / 2 - 200,
+            height: window.innerHeight
+        }
 
         return (
-            <div className="wrap" style={{height: window.innerHeight}}>
+            <div className="wrap" style={wrapStyle}>
                 <div className="container">
                     <h1 className="title">Rodal</h1>
-                    <h3 className="intro">A React component for modal and dialog.</h3>
-                    {buttons}
+                    <h3 className="intro">A React modal with animations.</h3>
+                    <div className="btn-area">{buttons}</div>
                     <Rodal
                         visible={this.state.visible}
                         onClose={this.hide.bind(this)}

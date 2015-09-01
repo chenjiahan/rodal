@@ -52,4 +52,6 @@ showCloseButton|bool|true|whether to show close button
 ## Animation
 * zoom
 * fade
+* flip
+* slideUp
 * slideDown
