@@ -147,11 +147,12 @@ input[type="search"]::-webkit-search-decoration {
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .title {
-  font-size: 60px;
+  font-size: 70px;
   margin: 0;
 }
 .intro {
-  font-size: 26px;
+  font-size: 30px;
+  margin: 15px 0 20px;
 }
 .btn-area {
   width: 600px;
@@ -163,11 +164,16 @@ input[type="search"]::-webkit-search-decoration {
 
 @keyframes scale {
   from {
-    transform: scale(0);
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
   }
   to {
-    transform: scale(1);
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
   }
+}
+.scale {
+  animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 .btn {
@@ -182,14 +188,15 @@ input[type="search"]::-webkit-search-decoration {
   user-select: none;
   text-align: center;
   border-radius: 4px;
-  animation: scale both .4s;
-  transition: cubic-bezier(0.4, 0, 0, 1.5);
   @media (max-width: 480px) {
     width: 40%;
     margin: 15px 5%;
   }
   &:hover {
     box-shadow: 0 0 50px rgba(255,255,255,.3);
+  }
+  &:active {
+    box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
   }
 }
 .content-title {

@@ -39,7 +39,7 @@ class App extends Component {
                 WebkitAnimationDelay : index * 100 + 'ms'
             };
             return (
-                <button key={index} className="btn" onClick={this.show.bind(this,value)} style={style}>
+                <button key={index} className="btn scale" onClick={this.show.bind(this,value)} style={style}>
                     {value}
                 </button>
             )
@@ -54,8 +54,8 @@ class App extends Component {
             <div>
                 <div className="wrap" style={wrapStyle}>
                     <div className="container">
-                        <h1 className="title">Rodal</h1>
-                        <h3 className="intro">A React modal with animations.</h3>
+                        <h1 className="title scale">Rodal</h1>
+                        <h3 className="intro scale">A React modal with animations.</h3>
                         <div className="btn-area">{buttons}</div>
 
                         <Rodal
@@ -68,7 +68,7 @@ class App extends Component {
 
                     </div>
                 </div>
-                <span id="fork"><a target="_blank" href="https://github.com/chenjiahan/rodal">Fork me on GitHub</a></span>
+                <span id="fork"><a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a></span>
             </div>
         )
     }
