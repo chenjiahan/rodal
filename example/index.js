@@ -32,7 +32,7 @@ class App extends Component {
 
     render () {
 
-        const types = ['zoom', 'fade', 'flip', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
+        const types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
         const buttons = types.map((value,index) => {
             const style = {
                 animationDelay : index * 100 + 'ms',

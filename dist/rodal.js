@@ -119,7 +119,7 @@ var RodalBox = (function (_Component) {
                 WebkitAnimationDuration: this.props.duration + 'ms'
             };
 
-            var className = "rodal-box rodal-" + this.props.animation + "-" + this.props.animationState;
+            var className = 'rodal-box rodal-' + this.props.animation + '-' + this.props.animationState;
 
             var CloseButton = this.props.showCloseButton ? _react2['default'].createElement('span', { className: 'rodal-close', onClick: this.props.onClose }) : null;
 

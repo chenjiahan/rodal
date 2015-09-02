@@ -54,6 +54,8 @@ showCloseButton|bool|true|whether to show close button
 * zoom
 * fade
 * flip
+* door
+* rotate
 * slideUp
 * slideDown
 * slideLeft

@@ -256,3 +256,56 @@ $box-height: 280px;
   animation: rodal-flip-leave both;
   backface-visibility: visible !important;
 }
+
+@keyframes rodal-rotate-enter {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
+  }
+  to {
+    transform-origin: center;
+    transform: scale3d(1, 1, 1);
+  }
+}
+.rodal-rotate-enter {
+  animation: rodal-rotate-enter both;
+}
+
+@keyframes rodal-rotate-leave {
+  from {
+    transform-origin: center;
+  }
+  to {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
+  }
+}
+.rodal-rotate-leave {
+  animation: rodal-rotate-leave;
+}
+
+@keyframes rodal-door-enter {
+  from {
+    transform: scale3d(0, 1, 1);
+  }
+  to {
+    transform: scale3d(1, 1, .1);
+  }
+}
+.rodal-door-enter {
+  animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@keyframes rodal-door-leave {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+  60% {
+    transform: scale3d(.01, 1, 1);
+  }
+  to {
+    transform: scale3d(0, 1, .1);
+  }
+}
+.rodal-door-leave {
+  animation: rodal-door-leave both;
+}

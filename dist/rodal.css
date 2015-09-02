@@ -347,3 +347,101 @@
   animation: rodal-flip-leave both;
   -webkit-backface-visibility: visible !important;
   backface-visibility: visible !important; }
+
+@-webkit-keyframes rodal-rotate-enter {
+  from {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+    transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3); }
+  to {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@keyframes rodal-rotate-enter {
+  from {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+    transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3); }
+  to {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+.rodal-rotate-enter {
+  -webkit-animation: rodal-rotate-enter both;
+  animation: rodal-rotate-enter both; }
+
+@-webkit-keyframes rodal-rotate-leave {
+  from {
+    -webkit-transform-origin: center;
+    transform-origin: center; }
+  to {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+    transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3); } }
+
+@keyframes rodal-rotate-leave {
+  from {
+    -webkit-transform-origin: center;
+    transform-origin: center; }
+  to {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+    transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3); } }
+
+.rodal-rotate-leave {
+  -webkit-animation: rodal-rotate-leave;
+  animation: rodal-rotate-leave; }
+
+@-webkit-keyframes rodal-door-enter {
+  from {
+    -webkit-transform: scale3d(0, 1, 1);
+    transform: scale3d(0, 1, 1); }
+  to {
+    -webkit-transform: scale3d(1, 1, 0.1);
+    transform: scale3d(1, 1, 0.1); } }
+
+@keyframes rodal-door-enter {
+  from {
+    -webkit-transform: scale3d(0, 1, 1);
+    transform: scale3d(0, 1, 1); }
+  to {
+    -webkit-transform: scale3d(1, 1, 0.1);
+    transform: scale3d(1, 1, 0.1); } }
+
+.rodal-door-enter {
+  -webkit-animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
+  animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5); }
+
+@-webkit-keyframes rodal-door-leave {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+  60% {
+    -webkit-transform: scale3d(0.01, 1, 1);
+    transform: scale3d(0.01, 1, 1); }
+  to {
+    -webkit-transform: scale3d(0, 1, 0.1);
+    transform: scale3d(0, 1, 0.1); } }
+
+@keyframes rodal-door-leave {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+  60% {
+    -webkit-transform: scale3d(0.01, 1, 1);
+    transform: scale3d(0.01, 1, 1); }
+  to {
+    -webkit-transform: scale3d(0, 1, 0.1);
+    transform: scale3d(0, 1, 0.1); } }
+
+.rodal-door-leave {
+  -webkit-animation: rodal-door-leave both;
+  animation: rodal-door-leave both; }
