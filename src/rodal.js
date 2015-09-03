@@ -145,6 +145,13 @@ class Rodal extends Component {
         this.setState({
             animationState: 'leave'
         });
+
+        //IE9
+        if (endEvents.length === 0) {
+            this.setState({
+                isShow: false
+            });
+        }
     }
 
     transitionEnd (e) {

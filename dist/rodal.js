@@ -188,6 +188,13 @@ var Rodal = (function (_Component2) {
             this.setState({
                 animationState: 'leave'
             });
+
+            //IE9
+            if (endEvents.length === 0) {
+                this.setState({
+                    isShow: false
+                });
+            }
         }
     }, {
         key: 'transitionEnd',

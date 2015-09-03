@@ -48,7 +48,7 @@ class App extends Component {
         const wrapStyle = {
             paddingTop:window.innerHeight / 2 - 230,
             height: window.innerHeight
-        }
+        };
 
         return (
             <div>
