@@ -1,3 +1,7 @@
+/* ===============================
+ * Rodal v1.0.9 http://rodal.cn
+ * =============================== */
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -203,11 +207,20 @@ var Rodal = (function (_Component2) {
             if (e && e.target !== node) {
                 return;
             }
-            if (this.state.animationState === 'leave') {
+            var state = this.state.animationState;
+            if (state === 'enter') {
+                this.refs['rodal'].getDOMNode().focus();
+            } else {
                 this.setState({
                     isShow: false
                 });
             }
+        }
+    }, {
+        key: 'handleKeyDown',
+        value: function handleKeyDown() {
+            //Escape
+            event.keyCode === 27 && this.props.onClose();
         }
     }, {
         key: 'render',
@@ -223,7 +236,13 @@ var Rodal = (function (_Component2) {
 
             return _react2['default'].createElement(
                 'div',
-                { className: "rodal rodal-fade-" + this.state.animationState, style: style },
+                {
+                    ref: 'rodal',
+                    style: style,
+                    className: "rodal rodal-fade-" + this.state.animationState,
+                    onKeyDown: this.handleKeyDown.bind(this),
+                    tabIndex: -1
+                },
                 Mask,
                 _react2['default'].createElement(
                     RodalBox,

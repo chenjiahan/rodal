@@ -1,3 +1,7 @@
+/* ===============================
+ * Rodal v1.0.9 http://rodal.cn
+ * =============================== */
+
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
@@ -121,7 +125,7 @@ class Rodal extends Component {
         TransitionEvents.addEndEventListener(node, this.transitionEnd.bind(this));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         const node = React.findDOMNode(this);
         TransitionEvents.removeEndEventListener(node, this.transitionEnd);
     }
@@ -159,11 +163,19 @@ class Rodal extends Component {
         if (e && e.target !== node) {
             return;
         }
-        if(this.state.animationState === 'leave') {
+        const state = this.state.animationState;
+        if (state === 'enter') {
+            this.refs['rodal'].getDOMNode().focus();
+        } else {
             this.setState({
                 isShow: false
             });
         }
+    }
+
+    handleKeyDown () {
+        //Escape
+        event.keyCode === 27 && this.props.onClose();
     }
 
     render () {
@@ -177,7 +189,13 @@ class Rodal extends Component {
         const Mask = this.props.showMask ? <div className="rodal-mask" onClick={this.props.onClose} /> : null;
 
         return (
-            <div className={"rodal rodal-fade-" + this.state.animationState} style={style}>
+            <div
+                ref="rodal"
+                style={style}
+                className={"rodal rodal-fade-" + this.state.animationState}
+                onKeyDown={this.handleKeyDown.bind(this)}
+                tabIndex={-1}
+            >
                 {Mask}
                 <RodalBox {...this.props} animationState={this.state.animationState}>
                     {this.props.children}
