@@ -151,23 +151,17 @@ var Rodal = (function (_Component2) {
             isShow: this.props.visible,
             animationState: this.props.visible ? 'enter' : 'leave'
         };
-
-        this.now = Date.now || function () {
-            return new Date().getTime();
-        };
     }
 
     _createClass(Rodal, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var node = _react2['default'].findDOMNode(this);
-            TransitionEvents.addEndEventListener(node, this.transitionEnd.bind(this));
+            TransitionEvents.addEndEventListener(_react2['default'].findDOMNode(this), this.transitionEnd.bind(this));
         }
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            var node = _react2['default'].findDOMNode(this);
-            TransitionEvents.removeEndEventListener(node, this.transitionEnd);
+            TransitionEvents.removeEndEventListener(_react2['default'].findDOMNode(this), this.transitionEnd);
         }
     }, {
         key: 'componentWillReceiveProps',
@@ -207,8 +201,8 @@ var Rodal = (function (_Component2) {
             if (e && e.target !== node) {
                 return;
             }
-            var state = this.state.animationState;
-            if (state === 'enter') {
+
+            if (this.state.animationState === 'enter') {
                 this.refs['rodal'].getDOMNode().focus();
             } else {
                 this.setState({

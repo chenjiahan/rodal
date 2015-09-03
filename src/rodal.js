@@ -96,7 +96,9 @@ class RodalBox extends Component {
 
         const className = `rodal-box rodal-${this.props.animation}-${this.props.animationState}`;
 
-        const CloseButton = this.props.showCloseButton ? <span className="rodal-close" onClick={this.props.onClose} /> : null;
+        const CloseButton = this.props.showCloseButton
+            ? <span className="rodal-close" onClick={this.props.onClose} />
+            : null;
 
         return (
             <div style={style} className={className}>
@@ -116,18 +118,20 @@ class Rodal extends Component {
             isShow: this.props.visible,
             animationState: this.props.visible ? 'enter' : 'leave'
         };
-
-        this.now = Date.now || (() => { return new Date().getTime() });
     }
 
     componentDidMount () {
-        const node = React.findDOMNode(this);
-        TransitionEvents.addEndEventListener(node, this.transitionEnd.bind(this));
+        TransitionEvents.addEndEventListener (
+            React.findDOMNode(this),
+            this.transitionEnd.bind(this)
+        );
     }
 
     componentWillUnmount () {
-        const node = React.findDOMNode(this);
-        TransitionEvents.removeEndEventListener(node, this.transitionEnd);
+        TransitionEvents.removeEndEventListener (
+            React.findDOMNode(this),
+            this.transitionEnd
+        );
     }
 
     componentWillReceiveProps (nextProps) {
@@ -163,8 +167,8 @@ class Rodal extends Component {
         if (e && e.target !== node) {
             return;
         }
-        const state = this.state.animationState;
-        if (state === 'enter') {
+
+        if (this.state.animationState === 'enter') {
             this.refs['rodal'].getDOMNode().focus();
         } else {
             this.setState({
