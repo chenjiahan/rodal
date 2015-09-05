@@ -16,11 +16,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;
-  height: 280px;
-  padding: 15px;
-  margin-top: -160px;
-  margin-left: -250px;
+  width: 420px;
+  height: 240px;
+  padding: 16px;
+  margin-top: -140px;
+  margin-left: -210px;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
@@ -59,6 +59,50 @@
   .rodal-close:hover:after {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg); }
+
+.rodal-title {
+  color: #555;
+  margin: 0 -16px;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 0 0 16px 16px;
+  border-bottom: 1px solid #e9e9e9; }
+
+.rodal-body {
+  color: #555;
+  padding-top: 16px; }
+
+.rodal-confirm-btn,
+.rodal-cancel-btn {
+  position: absolute;
+  width: 70px;
+  bottom: 16px;
+  padding: 0;
+  line-height: 30px;
+  border: 1px solid #03A9F4;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out; }
+
+.rodal-confirm-btn {
+  color: #fff;
+  right: 102px;
+  background: #03A9F4; }
+  .rodal-confirm-btn:hover {
+    background: #0299E4; }
+  .rodal-confirm-btn:active {
+    background: #0189D4; }
+
+.rodal-cancel-btn {
+  color: #03A9F4;
+  right: 16px;
+  background: #fff; }
+  .rodal-cancel-btn:hover {
+    color: #0189D4;
+    background: #fafafa; }
+  .rodal-cancel-btn:active {
+    color: #0189D4;
+    background: #fafafa;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px transparent; }
 
 @-webkit-keyframes rodal-fade-enter {
   0% {

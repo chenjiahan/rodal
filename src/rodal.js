@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.0.9 http://rodal.cn
+ * Rodal v1.1.0 http://rodal.cn
  * =============================== */
 
 import React, { Component, PropTypes } from 'react';

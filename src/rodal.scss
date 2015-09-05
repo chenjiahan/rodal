@@ -1,6 +1,11 @@
-$close-btn-size: 16px;
-$box-width: 500px;
-$box-height: 280px;
+$box-width: 420px;
+$box-height: 240px;
+$base-size: 16px;
+$button-width: 70px;
+$text-color: #555;
+$base-color: #03A9F4;
+$hover-color: #0299E4;
+$active-color: #0189D4;
 
 .rodal,
 .rodal-mask {
@@ -25,7 +30,7 @@ $box-height: 280px;
   left: 50%;
   width: $box-width;
   height: $box-height;
-  padding: 15px;
+  padding: 16px;
   margin-top: - ($box-height / 2 + 20);
   margin-left: - $box-width / 2;
   background: #fff;
@@ -36,10 +41,10 @@ $box-height: 280px;
 .rodal-close {
   position: absolute;
   cursor: pointer;
-  top: $close-btn-size;
-  right: $close-btn-size;
-  width: $close-btn-size;
-  height: $close-btn-size;
+  top: $base-size;
+  right: $base-size;
+  width: $base-size;
+  height: $base-size;
   &:before,
   &:after {
     position: absolute;
@@ -70,6 +75,57 @@ $box-height: 280px;
     &:after {
       transform: rotate(45deg);
     }
+  }
+}
+
+.rodal-title {
+  color: $text-color;
+  margin: 0 (-$base-size);
+  font-size: $base-size;
+  line-height: $base-size;
+  padding: 0 0 $base-size $base-size;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.rodal-body {
+  color: $text-color;
+  padding-top: $base-size;
+}
+
+.rodal-confirm-btn,
+.rodal-cancel-btn {
+  position: absolute;
+  width: $button-width;
+  bottom: $base-size;
+  padding: 0;
+  line-height: 30px;
+  border: 1px solid $base-color;
+  border-radius: 3px;
+  transition: all .2s ease-in-out;
+}
+.rodal-confirm-btn {
+  color: #fff;
+  right: $base-size * 2 + $button-width;
+  background: $base-color;
+  &:hover {
+    background: $hover-color;
+  }
+  &:active {
+    background: $active-color;
+  }
+}
+.rodal-cancel-btn {
+  color: $base-color;
+  right: $base-size;
+  background: #fff;
+  &:hover {
+    color: $active-color;
+    background: #fafafa;
+  }
+  &:active {
+    color: $active-color;
+    background: #fafafa;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
   }
 }
 

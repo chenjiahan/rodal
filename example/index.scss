@@ -199,12 +199,6 @@ input[type="search"]::-webkit-search-decoration {
     box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
   }
 }
-.content-title {
-  font-size: 36px;
-  margin-top: 95px;
-  color: $baseColor;
-  text-align: center;
-}
 
 @media screen and (min-width: 800px) {
   #fork {

@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Rodal from '../src/rodal';
 import './index.scss';
 import '../src/rodal.scss';
 
-class App extends Component {
+class App extends React.Component {
 
     constructor (props) {
         super(props);
+
         this.state = {
             visible: false,
             animation: 'zoom'
@@ -46,7 +47,7 @@ class App extends Component {
         });
 
         const wrapStyle = {
-            paddingTop:window.innerHeight / 2 - 230,
+            paddingTop: (window.innerHeight  - 430) / 2,
             height: window.innerHeight
         };
 
@@ -63,12 +64,17 @@ class App extends Component {
                             onClose={this.hide.bind(this)}
                             animation={this.state.animation}
                             >
-                            <h1 className="content-title">Hello Rodal!</h1>
+                            <h3 className="rodal-title">Rodal</h3>
+                            <p className="rodal-body">A React modal with animations.</p>
+                            <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
+                            <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
                         </Rodal>
-
                     </div>
                 </div>
-                <span id="fork"><a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a></span>
+
+                <span id="fork">
+                    <a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a>
+                </span>
             </div>
         )
     }
