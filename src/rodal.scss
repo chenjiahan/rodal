@@ -4,8 +4,8 @@ $base-size: 16px;
 $button-width: 70px;
 $text-color: #555;
 $base-color: #03A9F4;
-$hover-color: #0299E4;
-$active-color: #0189D4;
+$hover-color: $base-color - #111;
+$active-color: $base-color - #222;
 
 .rodal,
 .rodal-mask {
@@ -297,6 +297,7 @@ $active-color: #0189D4;
   animation: rodal-flip-enter both ease-in;
 }
 
+//flip
 @keyframes rodal-flip-leave {
   from {
     transform: perspective(400px);
@@ -313,6 +314,7 @@ $active-color: #0189D4;
   backface-visibility: visible !important;
 }
 
+//rotate
 @keyframes rodal-rotate-enter {
   from {
     transform-origin: center;
@@ -340,6 +342,7 @@ $active-color: #0189D4;
   animation: rodal-rotate-leave;
 }
 
+//door
 @keyframes rodal-door-enter {
   from {
     transform: scale3d(0, 1, 1);
@@ -351,6 +354,7 @@ $active-color: #0189D4;
 .rodal-door-enter {
   animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
+
 @keyframes rodal-door-leave {
   from {
     transform: scale3d(1, 1, 1);
