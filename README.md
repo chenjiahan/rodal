@@ -49,6 +49,7 @@ animation|string|zoom|animation type
 duration|number|300|animation duration
 showMask|bool|true|whether to show mask
 showCloseButton|bool|true|whether to show close button
+autoClose|number||close the modal after some time(ms)
 
 ## Animation
 * zoom

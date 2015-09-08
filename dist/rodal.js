@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.0.9 http://rodal.cn
+ * Rodal v1.1.0 http://rodal.cn
  * =============================== */
 
 'use strict';
@@ -30,7 +30,8 @@ var propTypes = {
     animation: _react.PropTypes.string,
     duration: _react.PropTypes.number,
     showMask: _react.PropTypes.bool,
-    showCloseButton: _react.PropTypes.bool
+    showCloseButton: _react.PropTypes.bool,
+    autoClose: _react.PropTypes.number
 };
 
 var defaultProps = {
@@ -123,7 +124,7 @@ var RodalBox = (function (_Component) {
                 WebkitAnimationDuration: this.props.duration + 'ms'
             };
 
-            var className = 'rodal-box rodal-' + this.props.animation + '-' + this.props.animationState;
+            var className = 'rodal-box rodal-' + this.props.animation + '-' + this.props.animationType;
 
             var CloseButton = this.props.showCloseButton ? _react2['default'].createElement('span', { className: 'rodal-close', onClick: this.props.onClose }) : null;
 
@@ -149,7 +150,7 @@ var Rodal = (function (_Component2) {
 
         this.state = {
             isShow: this.props.visible,
-            animationState: this.props.visible ? 'enter' : 'leave'
+            animationType: this.props.visible ? 'enter' : 'leave'
         };
     }
 
@@ -177,14 +178,14 @@ var Rodal = (function (_Component2) {
         value: function fadeIn() {
             this.setState({
                 isShow: true,
-                animationState: 'enter'
+                animationType: 'enter'
             });
         }
     }, {
         key: 'fadeOut',
         value: function fadeOut() {
             this.setState({
-                animationState: 'leave'
+                animationType: 'leave'
             });
 
             //IE9
@@ -202,7 +203,7 @@ var Rodal = (function (_Component2) {
                 return;
             }
 
-            if (this.state.animationState === 'enter') {
+            if (this.state.animationType === 'enter') {
                 this.refs['rodal'].getDOMNode().focus();
             } else {
                 this.setState({
@@ -228,19 +229,30 @@ var Rodal = (function (_Component2) {
 
             var Mask = this.props.showMask ? _react2['default'].createElement('div', { className: 'rodal-mask', onClick: this.props.onClose }) : null;
 
+            var animationType = this.state.animationType;
+
+            var autoClose = this.props.autoClose;
+            if (typeof autoClose === 'number' && animationType === 'enter') {
+                this.autoClose = setTimeout((function () {
+                    this.props.onClose();
+                }).bind(this), autoClose);
+            } else {
+                this.autoClose && clearTimeout(this.autoClose);
+            }
+
             return _react2['default'].createElement(
                 'div',
                 {
                     ref: 'rodal',
                     style: style,
-                    className: "rodal rodal-fade-" + this.state.animationState,
+                    className: "rodal rodal-fade-" + animationType,
                     onKeyDown: this.handleKeyDown.bind(this),
                     tabIndex: -1
                 },
                 Mask,
                 _react2['default'].createElement(
                     RodalBox,
-                    _extends({}, this.props, { animationState: this.state.animationState }),
+                    _extends({}, this.props, { animationType: animationType }),
                     this.props.children
                 )
             );

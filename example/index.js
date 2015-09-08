@@ -63,7 +63,7 @@ class App extends React.Component {
                             visible={this.state.visible}
                             onClose={this.hide.bind(this)}
                             animation={this.state.animation}
-                            >
+                         >
                             <h3 className="rodal-title">Rodal</h3>
                             <p className="rodal-body">A React modal with animations.</p>
                             <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>

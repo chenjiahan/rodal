@@ -10,7 +10,8 @@ const propTypes = {
     animation: PropTypes.string,
     duration: PropTypes.number,
     showMask: PropTypes.bool,
-    showCloseButton: PropTypes.bool
+    showCloseButton: PropTypes.bool,
+    autoClose: PropTypes.number
 };
 
 const defaultProps = {
@@ -94,11 +95,11 @@ class RodalBox extends Component {
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
 
-        const className = `rodal-box rodal-${this.props.animation}-${this.props.animationState}`;
+        const className = `rodal-box rodal-${this.props.animation}-${this.props.animationType}`;
 
-        const CloseButton = this.props.showCloseButton
-            ? <span className="rodal-close" onClick={this.props.onClose} />
-            : null;
+        const CloseButton = this.props.showCloseButton ?
+            <span className="rodal-close" onClick={this.props.onClose} /> :
+            null;
 
         return (
             <div style={style} className={className}>
@@ -116,7 +117,7 @@ class Rodal extends Component {
 
         this.state = {
             isShow: this.props.visible,
-            animationState: this.props.visible ? 'enter' : 'leave'
+            animationType: this.props.visible ? 'enter' : 'leave'
         };
     }
 
@@ -145,13 +146,13 @@ class Rodal extends Component {
     fadeIn () {
         this.setState({
             isShow: true,
-            animationState: 'enter'
+            animationType: 'enter'
         });
     }
 
     fadeOut () {
         this.setState({
-            animationState: 'leave'
+            animationType: 'leave'
         });
 
         //IE9
@@ -168,7 +169,7 @@ class Rodal extends Component {
             return;
         }
 
-        if (this.state.animationState === 'enter') {
+        if (this.state.animationType === 'enter') {
             this.refs['rodal'].getDOMNode().focus();
         } else {
             this.setState({
@@ -192,16 +193,27 @@ class Rodal extends Component {
 
         const Mask = this.props.showMask ? <div className="rodal-mask" onClick={this.props.onClose} /> : null;
 
+        const animationType = this.state.animationType;
+
+        const autoClose = this.props.autoClose;
+        if ( typeof autoClose === 'number' && animationType === 'enter' ) {
+            this.autoClose = setTimeout( function() {
+                this.props.onClose();
+            }.bind(this), autoClose );
+        } else {
+            this.autoClose && clearTimeout(this.autoClose);
+        }
+
         return (
             <div
                 ref="rodal"
                 style={style}
-                className={"rodal rodal-fade-" + this.state.animationState}
+                className={"rodal rodal-fade-" + animationType}
                 onKeyDown={this.handleKeyDown.bind(this)}
                 tabIndex={-1}
             >
                 {Mask}
-                <RodalBox {...this.props} animationState={this.state.animationState}>
+                <RodalBox {...this.props} animationType={animationType}>
                     {this.props.children}
                 </RodalBox>
             </div>

@@ -88,19 +88,19 @@
   right: 102px;
   background: #03A9F4; }
   .rodal-confirm-btn:hover {
-    background: #0299E4; }
+    background: #0098e3; }
   .rodal-confirm-btn:active {
-    background: #0189D4; }
+    background: #0087d2; }
 
 .rodal-cancel-btn {
   color: #03A9F4;
   right: 16px;
   background: #fff; }
   .rodal-cancel-btn:hover {
-    color: #0189D4;
+    color: #0087d2;
     background: #fafafa; }
   .rodal-cancel-btn:active {
-    color: #0189D4;
+    color: #0087d2;
     background: #fafafa;
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px transparent; }
 
