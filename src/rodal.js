@@ -137,20 +137,20 @@ class Rodal extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (!this.props.visible && nextProps.visible) {
-            this.fadeIn();
+            this.enter();
         } else if (this.props.visible && !nextProps.visible) {
-            this.fadeOut();
+            this.leave();
         }
     }
 
-    fadeIn () {
+    enter () {
         this.setState({
             isShow: true,
             animationType: 'enter'
         });
     }
 
-    fadeOut () {
+    leave () {
         this.setState({
             animationType: 'leave'
         });
@@ -200,8 +200,8 @@ class Rodal extends Component {
             this.autoClose = setTimeout( function() {
                 this.props.onClose();
             }.bind(this), autoClose );
-        } else {
-            this.autoClose && clearTimeout(this.autoClose);
+        } else if (this.autoClose !== undefined) {
+            clearTimeout(this.autoClose);
         }
 
         return (

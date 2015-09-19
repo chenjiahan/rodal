@@ -168,22 +168,22 @@ var Rodal = (function (_Component2) {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             if (!this.props.visible && nextProps.visible) {
-                this.fadeIn();
+                this.enter();
             } else if (this.props.visible && !nextProps.visible) {
-                this.fadeOut();
+                this.leave();
             }
         }
     }, {
-        key: 'fadeIn',
-        value: function fadeIn() {
+        key: 'enter',
+        value: function enter() {
             this.setState({
                 isShow: true,
                 animationType: 'enter'
             });
         }
     }, {
-        key: 'fadeOut',
-        value: function fadeOut() {
+        key: 'leave',
+        value: function leave() {
             this.setState({
                 animationType: 'leave'
             });
@@ -236,8 +236,8 @@ var Rodal = (function (_Component2) {
                 this.autoClose = setTimeout((function () {
                     this.props.onClose();
                 }).bind(this), autoClose);
-            } else {
-                this.autoClose && clearTimeout(this.autoClose);
+            } else if (this.autoClose !== undefined) {
+                clearTimeout(this.autoClose);
             }
 
             return _react2['default'].createElement(
