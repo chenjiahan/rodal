@@ -221,7 +221,7 @@ class Rodal extends Component {
                 onKeyDown={this.handleKeyDown.bind(this)}
                 tabIndex={-1}
             >
-                {this.props.showMask ? Mask : null}
+                {this.props.showMask ? <Mask onClose={this.props.onClose} /> : null}
                 <Modal {...this.props} animationType={animationType}>
                     {this.props.children}
                 </Modal>

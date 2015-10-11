@@ -38458,7 +38458,7 @@
 	                    onKeyDown: this.handleKeyDown.bind(this),
 	                    tabIndex: -1
 	                },
-	                this.props.showMask ? Mask : null,
+	                this.props.showMask ? _react2['default'].createElement(Mask, { onClose: this.props.onClose }) : null,
 	                _react2['default'].createElement(
 	                    Modal,
 	                    _extends({}, this.props, { animationType: animationType }),
