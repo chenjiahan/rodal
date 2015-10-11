@@ -3,6 +3,7 @@
  * =============================== */
 
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 
 const propTypes = {
     visible: PropTypes.bool,
@@ -86,30 +87,39 @@ const TransitionEvents =  {
     }
 };
 
-class RodalBox extends Component {
+/**
+ * Modal Component
+ */
+const Modal = (props) => {
+    const style = {
+        animationDuration: props.duration + 'ms',
+        WebkitAnimationDuration: props.duration + 'ms'
+    };
 
-    render () {
+    const className = `rodal-box rodal-${props.animation}-${props.animationType}`;
 
-        const style = {
-            animationDuration: this.props.duration + 'ms',
-            WebkitAnimationDuration: this.props.duration + 'ms'
-        };
+    const CloseButton = props.showCloseButton ?
+        <span className="rodal-close" onClick={props.onClose} /> :
+        null;
 
-        const className = `rodal-box rodal-${this.props.animation}-${this.props.animationType}`;
+    return (
+        <div style={style} className={className}>
+            {CloseButton}
+            {props.children}
+        </div>
+    )
+};
 
-        const CloseButton = this.props.showCloseButton ?
-            <span className="rodal-close" onClick={this.props.onClose} /> :
-            null;
+/**
+ * Mask Component
+ */
+const Mask = ({onClose}) => (
+    <div className="rodal-mask" onClick={onClose} />
+);
 
-        return (
-            <div style={style} className={className}>
-                {CloseButton}
-                {this.props.children}
-            </div>
-        )
-    }
-}
-
+/**
+ * Rodal Component
+ */
 class Rodal extends Component {
 
     constructor (props) {
@@ -123,7 +133,7 @@ class Rodal extends Component {
 
     componentDidMount () {
         TransitionEvents.addEndEventListener (
-            React.findDOMNode(this),
+            ReactDOM.findDOMNode(this),
             this.transitionEnd.bind(this)
         );
     }
@@ -164,13 +174,13 @@ class Rodal extends Component {
     }
 
     transitionEnd (e) {
-        const node = React.findDOMNode(this);
+        const node = ReactDOM.findDOMNode(this);
         if (e && e.target !== node) {
             return;
         }
 
         if (this.state.animationType === 'enter') {
-            this.refs['rodal'].getDOMNode().focus();
+            node.focus();
         } else {
             this.setState({
                 isShow: false
@@ -178,9 +188,11 @@ class Rodal extends Component {
         }
     }
 
-    handleKeyDown () {
+    handleKeyDown (e) {
         //Escape
-        event.keyCode === 27 && this.props.onClose();
+        if (e.keyCode === 27) {
+            this.props.onClose();
+        }
     }
 
     render () {
@@ -190,8 +202,6 @@ class Rodal extends Component {
             animationDuration: this.props.duration + 'ms',
             WebkitAnimationDuration: this.props.duration + 'ms'
         };
-
-        const Mask = this.props.showMask ? <div className="rodal-mask" onClick={this.props.onClose} /> : null;
 
         const animationType = this.state.animationType;
 
@@ -206,16 +216,15 @@ class Rodal extends Component {
 
         return (
             <div
-                ref="rodal"
                 style={style}
                 className={"rodal rodal-fade-" + animationType}
                 onKeyDown={this.handleKeyDown.bind(this)}
                 tabIndex={-1}
             >
-                {Mask}
-                <RodalBox {...this.props} animationType={animationType}>
+                {this.props.showMask ? Mask : null}
+                <Modal {...this.props} animationType={animationType}>
                     {this.props.children}
-                </RodalBox>
+                </Modal>
             </div>
         )
     }

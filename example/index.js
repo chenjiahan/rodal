@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Rodal from '../src/rodal';
 import './index.scss';
 import '../src/rodal.scss';
@@ -80,7 +81,7 @@ class App extends React.Component {
     }
 }
 
-React.render(
+ReactDOM.render(
     <App />,
     document.getElementById('app')
 );
