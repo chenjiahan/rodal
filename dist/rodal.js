@@ -24,6 +24,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+/**
+ * Props
+ */
 var propTypes = {
     visible: _react.PropTypes.bool,
     onClose: _react.PropTypes.func.isRequired,
@@ -33,7 +40,6 @@ var propTypes = {
     showCloseButton: _react.PropTypes.bool,
     autoClose: _react.PropTypes.number
 };
-
 var defaultProps = {
     visible: false,
     animation: 'zoom',
@@ -42,6 +48,10 @@ var defaultProps = {
     showCloseButton: true
 };
 
+/**
+ * detect animation events
+ */
+var endEvents = [];
 var EVENT_NAME_MAP = {
     transitionend: {
         'transition': 'transitionend',
@@ -59,10 +69,6 @@ var EVENT_NAME_MAP = {
         'msAnimation': 'MSAnimationEnd'
     }
 };
-
-var endEvents = [];
-
-//detect events
 (function () {
     var testEl = document.createElement('div');
     var style = testEl.style;
@@ -85,7 +91,6 @@ var endEvents = [];
         }
     }
 })();
-
 var TransitionEvents = {
     addEndEventListener: function addEndEventListener(node, eventListener) {
         if (endEvents.length === 0) {
@@ -106,42 +111,41 @@ var TransitionEvents = {
     }
 };
 
-var RodalBox = (function (_Component) {
-    _inherits(RodalBox, _Component);
+/**
+ * Modal Component
+ */
+var Modal = function Modal(props) {
+    var style = {
+        animationDuration: props.duration + 'ms',
+        WebkitAnimationDuration: props.duration + 'ms'
+    };
 
-    function RodalBox() {
-        _classCallCheck(this, RodalBox);
+    var className = 'rodal-box rodal-' + props.animation + '-' + props.animationType;
 
-        _get(Object.getPrototypeOf(RodalBox.prototype), 'constructor', this).apply(this, arguments);
-    }
+    var CloseButton = props.showCloseButton ? _react2['default'].createElement('span', { className: 'rodal-close', onClick: props.onClose }) : null;
 
-    _createClass(RodalBox, [{
-        key: 'render',
-        value: function render() {
+    return _react2['default'].createElement(
+        'div',
+        { style: style, className: className },
+        CloseButton,
+        props.children
+    );
+};
 
-            var style = {
-                animationDuration: this.props.duration + 'ms',
-                WebkitAnimationDuration: this.props.duration + 'ms'
-            };
+/**
+ * Mask Component
+ */
+var Mask = function Mask(_ref) {
+    var onClose = _ref.onClose;
+    return _react2['default'].createElement('div', { className: 'rodal-mask', onClick: onClose });
+};
 
-            var className = 'rodal-box rodal-' + this.props.animation + '-' + this.props.animationType;
+/**
+ * Rodal Component
+ */
 
-            var CloseButton = this.props.showCloseButton ? _react2['default'].createElement('span', { className: 'rodal-close', onClick: this.props.onClose }) : null;
-
-            return _react2['default'].createElement(
-                'div',
-                { style: style, className: className },
-                CloseButton,
-                this.props.children
-            );
-        }
-    }]);
-
-    return RodalBox;
-})(_react.Component);
-
-var Rodal = (function (_Component2) {
-    _inherits(Rodal, _Component2);
+var Rodal = (function (_Component) {
+    _inherits(Rodal, _Component);
 
     function Rodal(props) {
         _classCallCheck(this, Rodal);
@@ -157,7 +161,7 @@ var Rodal = (function (_Component2) {
     _createClass(Rodal, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            TransitionEvents.addEndEventListener(_react2['default'].findDOMNode(this), this.transitionEnd.bind(this));
+            TransitionEvents.addEndEventListener(_reactDom2['default'].findDOMNode(this), this.transitionEnd.bind(this));
         }
     }, {
         key: 'componentWillUnmount',
@@ -198,13 +202,13 @@ var Rodal = (function (_Component2) {
     }, {
         key: 'transitionEnd',
         value: function transitionEnd(e) {
-            var node = _react2['default'].findDOMNode(this);
+            var node = _reactDom2['default'].findDOMNode(this);
             if (e && e.target !== node) {
                 return;
             }
 
             if (this.state.animationType === 'enter') {
-                this.refs['rodal'].getDOMNode().focus();
+                node.focus();
             } else {
                 this.setState({
                     isShow: false
@@ -213,9 +217,11 @@ var Rodal = (function (_Component2) {
         }
     }, {
         key: 'handleKeyDown',
-        value: function handleKeyDown() {
+        value: function handleKeyDown(e) {
             //Escape
-            event.keyCode === 27 && this.props.onClose();
+            if (e.keyCode === 27) {
+                this.props.onClose();
+            }
         }
     }, {
         key: 'render',
@@ -227,9 +233,9 @@ var Rodal = (function (_Component2) {
                 WebkitAnimationDuration: this.props.duration + 'ms'
             };
 
-            var Mask = this.props.showMask ? _react2['default'].createElement('div', { className: 'rodal-mask', onClick: this.props.onClose }) : null;
-
             var animationType = this.state.animationType;
+
+            var showMask = this.props.showMask ? _react2['default'].createElement(Mask, { onClose: this.props.onClose }) : null;
 
             var autoClose = this.props.autoClose;
             if (typeof autoClose === 'number' && animationType === 'enter') {
@@ -243,15 +249,14 @@ var Rodal = (function (_Component2) {
             return _react2['default'].createElement(
                 'div',
                 {
-                    ref: 'rodal',
                     style: style,
                     className: "rodal rodal-fade-" + animationType,
                     onKeyDown: this.handleKeyDown.bind(this),
                     tabIndex: -1
                 },
-                Mask,
+                showMask,
                 _react2['default'].createElement(
-                    RodalBox,
+                    Modal,
                     _extends({}, this.props, { animationType: animationType }),
                     this.props.children
                 )

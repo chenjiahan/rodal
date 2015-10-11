@@ -1,10 +1,13 @@
 /* ===============================
- * Rodal v1.1.0 http://rodal.cn
+ * Rodal v1.1.1 http://rodal.cn
  * =============================== */
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
+/**
+ * Props
+ */
 const propTypes = {
     visible: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
@@ -14,7 +17,6 @@ const propTypes = {
     showCloseButton: PropTypes.bool,
     autoClose: PropTypes.number
 };
-
 const defaultProps = {
     visible: false,
     animation: 'zoom',
@@ -23,6 +25,12 @@ const defaultProps = {
     showCloseButton: true
 };
 
+
+
+/**
+ * detect animation events
+ */
+let endEvents = [];
 let EVENT_NAME_MAP = {
     transitionend: {
         'transition': 'transitionend',
@@ -40,10 +48,6 @@ let EVENT_NAME_MAP = {
         'msAnimation': 'MSAnimationEnd'
     }
 };
-
-let endEvents = [];
-
-//detect events
 (() => {
     let testEl = document.createElement('div');
     let style = testEl.style;
@@ -66,7 +70,6 @@ let endEvents = [];
         }
     }
 })();
-
 const TransitionEvents =  {
     addEndEventListener: (node, eventListener) => {
         if (endEvents.length === 0) {
@@ -205,6 +208,8 @@ class Rodal extends Component {
 
         const animationType = this.state.animationType;
 
+        const showMask = this.props.showMask ? <Mask onClose={this.props.onClose} /> : null;
+
         const autoClose = this.props.autoClose;
         if ( typeof autoClose === 'number' && animationType === 'enter' ) {
             this.autoClose = setTimeout( function() {
@@ -221,7 +226,7 @@ class Rodal extends Component {
                 onKeyDown={this.handleKeyDown.bind(this)}
                 tabIndex={-1}
             >
-                {this.props.showMask ? <Mask onClose={this.props.onClose} /> : null}
+                {showMask}
                 <Modal {...this.props} animationType={animationType}>
                     {this.props.children}
                 </Modal>
