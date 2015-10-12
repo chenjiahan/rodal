@@ -16,12 +16,16 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   background: $baseColor;
-}
-footer,
-header,
-nav,
-section {
-  display: block;
+  background:
+    -webkit-linear-gradient(45deg,  hsla(190, 100%, 50%, 1) 0%,   hsla(190, 100%, 50%, 0) 70%),
+    -webkit-linear-gradient(315deg, hsla(199,  98%, 48%, 1) 10%,  hsla(199,  98%, 48%, 0) 80%),
+    -webkit-linear-gradient(225deg, hsla(190, 100%, 50%, 1) 10%,  hsla(190, 100%, 50%, 0) 80%),
+    -webkit-linear-gradient(135deg, hsla(199,  98%, 48%, 1) 100%, hsla(199,  98%, 48%, 0) 70%);
+  background:
+    linear-gradient(45deg,  hsla(190, 100%, 50%, 1) 0%,   hsla(190, 100%, 50%, 0) 70%),
+    linear-gradient(135deg, hsla(199,  98%, 48%, 1) 10%,  hsla(199,  98%, 48%, 0) 80%),
+    linear-gradient(225deg, hsla(190, 100%, 50%, 1) 10%,  hsla(190, 100%, 50%, 0) 80%),
+    linear-gradient(315deg, hsla(199,  98%, 48%, 1) 100%, hsla(199,  98%, 48%, 0) 70%);
 }
 a {
   text-decoration: none;
@@ -41,13 +45,6 @@ a:active {
 p {
   margin: 0 0 10px 0;
 }
-b,
-strong {
-  font-weight: bold;
-}
-dfn {
-  font-style: italic;
-}
 h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
 }
@@ -59,11 +56,7 @@ ul {
 img {
   border: 0;
 }
-button,
-input,
-optgroup,
-select,
-textarea {
+button {
   color: inherit;
   font: inherit;
   margin: 0;
@@ -94,44 +87,7 @@ input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-button,
-input[type="button"],
-input[type="submit"] {
-  border: none;
-}
-input[type="submit"]:focus {
-  outline: none;
-}
-input {
-  line-height: normal;
-}
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-input[type="search"] {
-  -webkit-appearance: textfield;
-  box-sizing: content-box;
-}
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
 
-
-.clearfix:before,
-.clearfix:after {
-  content:" ";
-  display:table;
-}
-.clearfix:after {
-  clear:both;
-}
 .container {
   width: 1000px;
   margin-left: auto;
@@ -187,6 +143,7 @@ input[type="search"]::-webkit-search-decoration {
   line-height: 42px;
   user-select: none;
   text-align: center;
+  border: none;
   border-radius: 4px;
   @media (max-width: 480px) {
     width: 40%;
@@ -208,7 +165,6 @@ input[type="search"]::-webkit-search-decoration {
     right: 0;
     width: 200px;
     height: 200px;
-    z-index: 9999;
     overflow: hidden;
     a {
       position: absolute;
@@ -216,32 +172,14 @@ input[type="search"]::-webkit-search-decoration {
       top: 50px;
       right: -70px;
       color: #fff;
-      font-size: 15px;
+      font-size: 16px;
       text-align: center;
       font-weight: bold;
       padding: 10px 40px;
-      background: #FFA500;
       transform: rotate(45deg);
       transition: all 0.3s ease-in-out;
-      box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-      &:hover {
-        background: #FF8500;
-      }
-      &:before,
-      &:after {
-        content: "";
-        width: 100%;
-        display: block;
-        position: absolute;
-        top: 1px;
-        left: 0;
-        height: 1px;
-        background: #fff;
-      }
-      &:after {
-        bottom: 1px;
-        top: auto;
-      }
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+      background: linear-gradient(top, #FF6138, #FF7551);
     }
   }
 }
