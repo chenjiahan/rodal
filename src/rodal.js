@@ -143,7 +143,7 @@ class Rodal extends Component {
 
     componentWillUnmount () {
         TransitionEvents.removeEndEventListener (
-            React.findDOMNode(this),
+            ReactDOM.findDOMNode(this),
             this.transitionEnd
         );
     }
