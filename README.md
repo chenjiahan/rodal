@@ -8,10 +8,10 @@ A React modal with animations.
 
 ## Usage
 
+    import React, { Component } from 'react';
     import Rodal from 'rodal';
-    import 'rodal.css';
     
-    class App extends React.Component {
+    class App extends Component {
     
         constructor (props) {
             super(props);
@@ -39,7 +39,7 @@ A React modal with animations.
         }
     }
 
-## API
+## Props
 
 Property|Type|Default|Description
 ---|---|---|---
@@ -51,7 +51,7 @@ showMask|bool|true|whether to show mask
 showCloseButton|bool|true|whether to show close button
 autoClose|number||close the modal after some time(ms)
 
-## Animation
+## Animation Type
 * zoom
 * fade
 * flip
