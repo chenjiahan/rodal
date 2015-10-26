@@ -1,11 +1,11 @@
 $box-width: 420px;
 $box-height: 240px;
-$base-size: 16px;
 $button-width: 70px;
 $text-color: #555;
+$base-size: 16px;
 $base-color: #03A9F4;
-$hover-color: $base-color - #111;
-$active-color: $base-color - #222;
+$base-color-hover: $base-color - #111;
+$base-color-active: $base-color - #222;
 
 .rodal,
 .rodal-mask {
@@ -55,7 +55,8 @@ $active-color: $base-color - #222;
     margin-top: -1px;
     background: #999;
     border-radius: 100%;
-    transition: all .2s ease;
+    transition-duration: .2s;
+    transition-property: transform, background;
   }
   &:before {
     transform: rotate(45deg);
@@ -100,17 +101,17 @@ $active-color: $base-color - #222;
   line-height: 30px;
   border: 1px solid $base-color;
   border-radius: 3px;
-  transition: all .2s ease-in-out;
+  transition: background .2s;
 }
 .rodal-confirm-btn {
   color: #fff;
   right: $base-size * 2 + $button-width;
   background: $base-color;
   &:hover {
-    background: $hover-color;
+    background: $base-color-hover;
   }
   &:active {
-    background: $active-color;
+    background: $base-color-active;
   }
 }
 .rodal-cancel-btn {
@@ -118,11 +119,11 @@ $active-color: $base-color - #222;
   right: $base-size;
   background: #fff;
   &:hover {
-    color: $active-color;
+    color: $base-color-active;
     background: #fafafa;
   }
   &:active {
-    color: $active-color;
+    color: $base-color-active;
     background: #fafafa;
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
   }
@@ -175,9 +176,8 @@ $active-color: $base-color - #222;
   }
 }
 .rodal-zoom-leave {
-  animation: rodal-zoom-leave both cubic-bezier(0.4, 0, 0, 1.5);
+  animation: rodal-zoom-leave both ease;
 }
-
 
 //slideDown
 @keyframes rodal-slideDown-enter {
