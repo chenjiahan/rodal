@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.1.1 http://rodal.cn
+ * Rodal v1.1.2 http://rodal.cn
  * =============================== */
 
 import React, { Component, PropTypes } from 'react';
@@ -27,6 +27,7 @@ let EVENT_NAME_MAP = {
         'msAnimation': 'MSAnimationEnd'
     }
 };
+
 (() => {
     let testEl = document.createElement('div');
     let style = testEl.style;
@@ -49,13 +50,14 @@ let EVENT_NAME_MAP = {
         }
     }
 })();
+
 const TransitionEvents =  {
     addEndEventListener: (node, eventListener) => {
         if (endEvents.length === 0) {
             window.setTimeout(eventListener, 0);
             return;
         }
-        endEvents.forEach( endEvent => {
+        endEvents.forEach(endEvent => {
             node.addEventListener(endEvent, eventListener, false);
         });
     },
@@ -63,7 +65,7 @@ const TransitionEvents =  {
         if (endEvents.length === 0) {
             return;
         }
-        endEvents.forEach( endEvent => {
+        endEvents.forEach(endEvent => {
             node.removeEventListener(endEvent, eventListener, false);
         });
     }
@@ -103,6 +105,14 @@ const Mask = ({ onClose }) => (
  * Rodal Component
  */
 class Rodal extends Component {
+
+    static defaultProps = {
+        visible: false,
+        animation: 'zoom',
+        duration: 300,
+        showMask: true,
+        showCloseButton: true
+    }
 
     constructor (props) {
         super(props);
@@ -216,13 +226,6 @@ Rodal.propTypes = {
     showMask: PropTypes.bool,
     showCloseButton: PropTypes.bool,
     autoClose: PropTypes.number
-};
-Rodal.defaultProps = {
-    visible: false,
-    animation: 'zoom',
-    duration: 300,
-    showMask: true,
-    showCloseButton: true
 };
 
 export default Rodal;
