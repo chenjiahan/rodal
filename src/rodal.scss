@@ -1,11 +1,11 @@
-$box-width: 420px;
-$box-height: 240px;
-$button-width: 70px;
-$text-color: #555;
-$base-size: 16px;
-$base-color: #03A9F4;
-$base-color-hover: $base-color - #111;
-$base-color-active: $base-color - #222;
+$box-width         : 420px;
+$box-height        : 240px;
+$button-width      : 70px;
+$text-color        : #555;
+$base-size         : 16px;
+$base-color        : #03A9F4;
+$base-color-hover  : $base-color - #111;
+$base-color-active : $base-color - #222;
 
 .rodal,
 .rodal-mask {
@@ -14,7 +14,6 @@ $base-color-active: $base-color - #222;
   width: 100%;
   height: 100%;
 }
-
 .rodal {
   position: fixed;
 }
@@ -22,7 +21,6 @@ $base-color-active: $base-color - #222;
   position: absolute;
   background: rgba(0,0,0,.3);
 }
-
 .rodal-box {
   position: absolute;
   top: 50%;
@@ -36,7 +34,6 @@ $base-color-active: $base-color - #222;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
-
 .rodal-close {
   position: absolute;
   cursor: pointer;
@@ -65,19 +62,16 @@ $base-color-active: $base-color - #222;
     transform: rotate(-45deg);
   }
   &:hover {
-    &:before,
-    &:after {
-      background: #333;
-    }
     &:before {
+      background: #333;
       transform: rotate(135deg);
     }
     &:after {
+      background: #333;
       transform: rotate(45deg);
     }
   }
 }
-
 .rodal-title {
   color: $text-color;
   margin: 0 (-$base-size);
@@ -86,12 +80,10 @@ $base-color-active: $base-color - #222;
   padding: 0 0 $base-size $base-size;
   border-bottom: 1px solid #e9e9e9;
 }
-
 .rodal-body {
   color: $text-color;
   padding-top: $base-size;
 }
-
 .rodal-confirm-btn,
 .rodal-cancel-btn {
   position: absolute;
@@ -296,7 +288,6 @@ $base-color-active: $base-color - #222;
   animation: rodal-flip-enter both ease-in;
 }
 
-//flip
 @keyframes rodal-flip-leave {
   from {
     transform: perspective(400px);

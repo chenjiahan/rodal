@@ -11,6 +11,15 @@
     "react-dom": "^0.14.2"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^3.1.0",
+    "babel-loader": "^5.3.3",
+    "css-loader": "^0.22.0",
+    "jsx-loader": "^0.13.2",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "sass-loader": "^3.1.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2"
   },
   "scripts": {
     "build": "webpack --watch"

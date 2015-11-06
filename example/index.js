@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Rodal from '../src/rodal';
 import './index.scss';
-import '../src/rodal.scss';
 
-class App extends React.Component {
+class App extends Component {
 
     constructor (props) {
         super(props);
@@ -46,7 +45,6 @@ class App extends React.Component {
                 </button>
             )
         });
-
         const wrapStyle = {
             paddingTop: (window.innerHeight  - 430) / 2,
             height: window.innerHeight
@@ -60,10 +58,9 @@ class App extends React.Component {
                         <h3 className="intro scale">A React modal with animations.</h3>
                         <div className="btn-area">{buttons}</div>
 
-                        <Rodal
-                            visible={this.state.visible}
-                            onClose={this.hide.bind(this)}
-                            animation={this.state.animation}
+                        <Rodal visible={this.state.visible}
+                               onClose={this.hide.bind(this)}
+                               animation={this.state.animation}
                          >
                             <h3 className="rodal-title">Rodal</h3>
                             <p className="rodal-body">A React modal with animations.</p>
@@ -73,7 +70,7 @@ class App extends React.Component {
                     </div>
                 </div>
 
-                <span id="fork">
+                <span className="fork-btn">
                     <a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a>
                 </span>
             </div>

@@ -157,8 +157,11 @@ input::-moz-focus-inner {
   }
 }
 
+.fork-btn {
+  display: none;
+}
 @media screen and (min-width: 800px) {
-  #fork {
+  .fork-btn {
     position: absolute;
     display: block;
     top: 0;

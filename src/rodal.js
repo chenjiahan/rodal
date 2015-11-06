@@ -1,7 +1,6 @@
 /* ===============================
  * Rodal v1.1.2 http://rodal.cn
  * =============================== */
-
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import './rodal.scss';
@@ -12,19 +11,19 @@ import './rodal.scss';
 let endEvents = [];
 let EVENT_NAME_MAP = {
     transitionend: {
-        'transition': 'transitionend',
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'mozTransitionEnd',
-        'OTransition': 'oTransitionEnd',
-        'msTransition': 'MSTransitionEnd'
+              'transition' :       'transitionend',
+             'OTransition' :      'oTransitionEnd',
+            'msTransition' :     'MSTransitionEnd',
+           'MozTransition' :    'mozTransitionEnd',
+        'WebkitTransition' : 'webkitTransitionEnd'
     },
 
     animationend: {
-        'animation': 'animationend',
-        'WebkitAnimation': 'webkitAnimationEnd',
-        'MozAnimation': 'mozAnimationEnd',
-        'OAnimation': 'oAnimationEnd',
-        'msAnimation': 'MSAnimationEnd'
+              'animation' :       'animationend',
+             'OAnimation' :      'oAnimationEnd',
+            'msAnimation' :     'MSAnimationEnd',
+           'MozAnimation' :    'mozAnimationEnd',
+        'WebkitAnimation' : 'webkitAnimationEnd'
     }
 };
 
@@ -75,21 +74,18 @@ const TransitionEvents =  {
  * Modal Component
  */
 const Modal = props => {
-
+    const { animation, animationType, onClose, children } = props;
+    const className = `rodal-box rodal-${animation}-${animationType}`;
+    const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={onClose} /> : null;
     const style = {
-        animationDuration: props.duration + 'ms',
-        WebkitAnimationDuration: props.duration + 'ms'
+        animationDuration       : props.duration + 'ms',
+        WebkitAnimationDuration : props.duration + 'ms'
     };
-
-    const className = `rodal-box rodal-${props.animation}-${props.animationType}`;
-
-    const CloseButton = props.showCloseButton ?
-        <span className="rodal-close" onClick={props.onClose} /> : null;
 
     return (
         <div style={style} className={className}>
             {CloseButton}
-            {props.children}
+            {children}
         </div>
     )
 };
@@ -107,12 +103,22 @@ const Mask = ({ onClose }) => (
 class Rodal extends Component {
 
     static defaultProps = {
-        visible: false,
-        animation: 'zoom',
-        duration: 300,
-        showMask: true,
-        showCloseButton: true
-    }
+        visible         : false,
+        animation       : 'zoom',
+        duration        : 300,
+        showMask        : true,
+        showCloseButton : true
+    };
+
+    static propTypes = {
+        visible         : PropTypes.bool,
+        onClose         : PropTypes.func.isRequired,
+        animation       : PropTypes.string,
+        duration        : PropTypes.number,
+        showMask        : PropTypes.bool,
+        showCloseButton : PropTypes.bool,
+        autoClose       : PropTypes.number
+    };
 
     constructor (props) {
         super(props);
@@ -125,14 +131,14 @@ class Rodal extends Component {
     }
 
     componentDidMount () {
-        TransitionEvents.addEndEventListener (
+        TransitionEvents.addEndEventListener(
             ReactDOM.findDOMNode(this),
             this.transitionEnd.bind(this)
         );
     }
 
     componentWillUnmount () {
-        TransitionEvents.removeEndEventListener (
+        TransitionEvents.removeEndEventListener(
             ReactDOM.findDOMNode(this),
             this.transitionEnd
         );
@@ -183,49 +189,34 @@ class Rodal extends Component {
     }
 
     render () {
-
-        const { duration, showMask, autoClose, onClose } = this.props;
+        const { duration, showMask, autoClose, onClose, children } = this.props;
         const { isShow, animationType } = this.state;
-
+        const mask = showMask ? <Mask onClose={onClose} /> : null;
         const style = {
-            display: isShow ? 'block' : 'none',
-            animationDuration: duration + 'ms',
-            WebkitAnimationDuration: duration + 'ms'
+            display                 : isShow ? 'block' : 'none',
+            animationDuration       : duration + 'ms',
+            WebkitAnimationDuration : duration + 'ms'
         };
 
-        if ( autoClose && animationType === 'enter' ) {
+        if (autoClose && animationType === 'enter') {
             this.autoClose = setTimeout(() => {
                 onClose();
-            }, autoClose );
+            }, autoClose);
         }
 
         return (
-            <div
-                style={style}
-                className={"rodal rodal-fade-" + animationType}
-                onKeyDown={this.handleKeyDown.bind(this)}
-                tabIndex={-1}
+            <div style={style}
+                 className={"rodal rodal-fade-" + animationType}
+                 onKeyDown={this.handleKeyDown.bind(this)}
+                 tabIndex={-1}
             >
-                {showMask ? <Mask onClose={onClose} /> : null}
+                {mask}
                 <Modal {...this.props} animationType={animationType}>
-                    {this.props.children}
+                    {children}
                 </Modal>
             </div>
         )
     }
 }
-
-/**
- * props
- */
-Rodal.propTypes = {
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
-    animation: PropTypes.string,
-    duration: PropTypes.number,
-    showMask: PropTypes.bool,
-    showCloseButton: PropTypes.bool,
-    autoClose: PropTypes.number
-};
 
 export default Rodal;
