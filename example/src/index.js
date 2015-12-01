@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React    from 'react';
 import ReactDOM from 'react-dom';
-import Rodal from '../src/rodal';
+import Rodal    from '../../src/rodal';
 import './index.scss';
 
-class App extends Component {
+class App extends React.Component {
 
     constructor (props) {
         super(props);
@@ -16,7 +16,7 @@ class App extends Component {
 
     show (animation) {
         this.setState({
-            animation: animation,
+            animation,
             visible: true
         });
     }
@@ -25,27 +25,21 @@ class App extends Component {
         this.setState({ visible: false });
     }
 
-    componentDidMount () {
-        window.onresize = () => {
-            this.forceUpdate();
-        }
-    }
-
     render () {
 
-        const types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
-        const buttons = types.map((value,index) => {
-            const style = {
-                animationDelay : index * 100 + 'ms',
+        let types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
+        let buttons = types.map((value, index) => {
+            let style = {
+                animationDelay       : index * 100 + 'ms',
                 WebkitAnimationDelay : index * 100 + 'ms'
             };
             return (
-                <button key={index} className="btn scale" onClick={this.show.bind(this,value)} style={style}>
+                <button key={index} className="btn scale" onClick={this.show.bind(this, value)} style={style}>
                     {value}
                 </button>
             )
         });
-        const wrapStyle = {
+        let wrapStyle = {
             paddingTop: (window.innerHeight  - 430) / 2,
             height: window.innerHeight
         };
@@ -62,8 +56,8 @@ class App extends Component {
                                onClose={this.hide.bind(this)}
                                animation={this.state.animation}
                          >
-                            <h3 className="rodal-title">Rodal</h3>
-                            <p className="rodal-body">A React modal with animations.</p>
+                            <div className="rodal-header">Rodal</div>
+                            <div className="rodal-body">A React modal with animations.</div>
                             <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
                             <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
                         </Rodal>

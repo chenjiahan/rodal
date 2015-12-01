@@ -1,361 +1,358 @@
-$box-width         : 420px;
-$box-height        : 240px;
-$button-width      : 70px;
-$text-color        : #555;
-$base-size         : 16px;
-$base-color        : #03A9F4;
-$base-color-hover  : $base-color - #111;
-$base-color-active : $base-color - #222;
+$box-width    : 420px;
+$box-height   : 240px;
+$button-width : 70px;
+$base-size    : 16px;
+$base-color   : #03A9F4;
 
+/* -- container -- */
 .rodal,
 .rodal-mask {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .rodal {
-  position: fixed;
-}
-.rodal-mask {
-  position: absolute;
-  background: rgba(0,0,0,.3);
-}
-.rodal-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: $box-width;
-  height: $box-height;
-  padding: 16px;
-  margin-top: - ($box-height / 2 + 20);
-  margin-left: - $box-width / 2;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.1);
-}
-.rodal-close {
-  position: absolute;
-  cursor: pointer;
-  top: $base-size;
-  right: $base-size;
-  width: $base-size;
-  height: $base-size;
-  &:before,
-  &:after {
-    position: absolute;
-    content: '';
-    height: 2px;
-    width: 100%;
-    top: 50%;
-    left: 0;
-    margin-top: -1px;
-    background: #999;
-    border-radius: 100%;
-    transition-duration: .2s;
-    transition-property: transform, background;
-  }
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
-  &:hover {
-    &:before {
-      background: #333;
-      transform: rotate(135deg);
-    }
-    &:after {
-      background: #333;
-      transform: rotate(45deg);
-    }
-  }
-}
-.rodal-title {
-  color: $text-color;
-  margin: 0 (-$base-size);
-  font-size: $base-size;
-  line-height: $base-size;
-  padding: 0 0 $base-size $base-size;
-  border-bottom: 1px solid #e9e9e9;
-}
-.rodal-body {
-  color: $text-color;
-  padding-top: $base-size;
-}
-.rodal-confirm-btn,
-.rodal-cancel-btn {
-  position: absolute;
-  width: $button-width;
-  bottom: $base-size;
-  padding: 0;
-  line-height: 30px;
-  border: 1px solid $base-color;
-  border-radius: 3px;
-  transition: background .2s;
-}
-.rodal-confirm-btn {
-  color: #fff;
-  right: $base-size * 2 + $button-width;
-  background: $base-color;
-  &:hover {
-    background: $base-color-hover;
-  }
-  &:active {
-    background: $base-color-active;
-  }
-}
-.rodal-cancel-btn {
-  color: $base-color;
-  right: $base-size;
-  background: #fff;
-  &:hover {
-    color: $base-color-active;
-    background: #fafafa;
-  }
-  &:active {
-    color: $base-color-active;
-    background: #fafafa;
-    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
-  }
+    position: fixed;
 }
 
-//fade
+/* -- mask -- */
+.rodal-mask {
+    position: absolute;
+    background: rgba(0,0,0,.3);
+}
+
+/* -- dialog -- */
+.rodal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $box-width;
+    height: $box-height;
+    background: #fff;
+    border-radius: 3px;
+    margin-top: - ($box-height / 2 + 20);
+    margin-left: - $box-width / 2;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+
+/* -- close button -- */
+.rodal-close {
+    position: absolute;
+    cursor: pointer;
+    top: $base-size;
+    right: $base-size;
+    width: $base-size;
+    height: $base-size;
+    &:before,
+    &:after {
+        position: absolute;
+        content: '';
+        height: 2px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        margin-top: -1px;
+        background: #999;
+        border-radius: 100%;
+        transition: background .2s;
+    }
+    &:before {
+        transform: rotate(45deg);
+    }
+    &:after {
+        transform: rotate(-45deg);
+    }
+    &:hover {
+        &:before,
+        &:after {
+            background: #333;
+        }
+    }
+}
+
+/* -- title -- */
+.rodal-header {
+    font-size: $base-size;
+    padding: $base-size;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+/* -- body -- */
+.rodal-body {
+    padding: $base-size;
+}
+
+/* -- button -- */
+.rodal-confirm-btn,
+.rodal-cancel-btn {
+    position: absolute;
+    width: $button-width;
+    bottom: $base-size;
+    padding: 4px 0;
+    border: 1px solid $base-color;
+    border-radius: 3px;
+    transition: background .2s;
+}
+.rodal-confirm-btn {
+    color: #fff;
+    right: $base-size * 2 + $button-width;
+    background: $base-color;
+    &:hover {
+        background: $base-color - #111;
+    }
+    &:active {
+        background: $base-color - #222;
+    }
+}
+.rodal-cancel-btn {
+    color: $base-color;
+    right: $base-size;
+    background: #fff;
+    &:hover {
+        background: #fafafa;
+    }
+    &:active {
+        background: #fafafa;
+        box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
+    }
+}
+
+/* -- fade -- */
 @keyframes rodal-fade-enter {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 .rodal-fade-enter {
-  animation: rodal-fade-enter both ease-in;
+    animation: rodal-fade-enter both ease-in;
 }
 
 @keyframes rodal-fade-leave {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0
-  }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0
+    }
 }
 .rodal-fade-leave {
-  animation: rodal-fade-leave both ease-out;
+    animation: rodal-fade-leave both ease-out;
 }
 
-//zoom
+/* -- zoom -- */
 @keyframes rodal-zoom-enter {
-  0% {
-    transform: scale3d(.3, .3, .3);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
+    0% {
+        transform: scale3d(.3, .3, .3);
+    }
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
 }
 .rodal-zoom-enter {
-  animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-zoom-leave {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-  100% {
-    transform: scale3d(.3, .3, .3);
-  }
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+    100% {
+        transform: scale3d(.3, .3, .3);
+    }
 }
 .rodal-zoom-leave {
-  animation: rodal-zoom-leave both ease;
+    animation: rodal-zoom-leave both;
 }
 
-//slideDown
+/* -- slideDown -- */
 @keyframes rodal-slideDown-enter {
-  0% {
-    transform: translate3d(0, -100px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(0, -100px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 .rodal-slideDown-enter {
-  animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-slideDown-leave {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, -100px, 0);
-  }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, -100px, 0);
+    }
 }
 .rodal-slideDown-leave {
-  animation: rodal-slideDown-leave both ease;
+    animation: rodal-slideDown-leave both;
 }
 
-//slideLeft
+/* -- slideLeft -- */
 @keyframes rodal-slideLeft-enter {
-  0% {
-    transform: translate3d(-150px, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(-150px, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 .rodal-slideLeft-enter {
-  animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-slideLeft-leave {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-150px, 0, 0);
-  }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-150px, 0, 0);
+    }
 }
 .rodal-slideLeft-leave {
-  animation: rodal-slideLeft-leave both ease;
+    animation: rodal-slideLeft-leave both;
 }
 
-//slideRight
+/* -- slideRight -- */
 @keyframes rodal-slideRight-enter {
-  0% {
-    transform: translate3d(150px, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(150px, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 .rodal-slideRight-enter {
-  animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-slideRight-leave {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(150px, 0, 0);
-  }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(150px, 0, 0);
+    }
 }
 .rodal-slideRight-leave {
-  animation: rodal-slideRight-leave both ease;
+    animation: rodal-slideRight-leave both;
 }
 
-//slideUp
+/* -- slideUp -- */
 @keyframes rodal-slideUp-enter {
-  0% {
-    transform: translate3d(0, 100px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(0, 100px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 .rodal-slideUp-enter {
-  animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-slideUp-leave {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 100px, 0);
-  }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 100px, 0);
+    }
 }
 .rodal-slideUp-leave {
-  animation: rodal-slideUp-leave both ease;
+    animation: rodal-slideUp-leave both;
 }
 
-//flip
+/* -- flip -- */
 @keyframes rodal-flip-enter {
-  from {
-    transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
-  }
-  70% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
-  }
-  to {
-    transform: perspective(400px);
-  }
+    from {
+        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+    }
+    70% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+    }
+    to {
+        transform: perspective(400px);
+    }
 }
 .rodal-flip-enter {
-  backface-visibility: visible !important;
-  animation: rodal-flip-enter both ease-in;
+    animation: rodal-flip-enter both ease-in;
+    backface-visibility: visible !important;
 }
 
 @keyframes rodal-flip-leave {
-  from {
-    transform: perspective(400px);
-  }
-  30% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
-  }
-  to {
-    transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
-  }
+    from {
+        transform: perspective(400px);
+    }
+    30% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+    }
+    to {
+        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
+    }
 }
 .rodal-flip-leave {
-  animation: rodal-flip-leave both;
-  backface-visibility: visible !important;
+    animation: rodal-flip-leave both;
+    backface-visibility: visible !important;
 }
 
-//rotate
+/* -- rotate -- */
 @keyframes rodal-rotate-enter {
-  from {
-    transform-origin: center;
-    transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
-  }
-  to {
-    transform-origin: center;
-    transform: scale3d(1, 1, 1);
-  }
+    from {
+        transform-origin: center;
+        transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
+    }
+    to {
+        transform-origin: center;
+        transform: scale3d(1, 1, 1);
+    }
 }
 .rodal-rotate-enter {
-  animation: rodal-rotate-enter both;
+    animation: rodal-rotate-enter both;
 }
 
 @keyframes rodal-rotate-leave {
-  from {
-    transform-origin: center;
-  }
-  to {
-    transform-origin: center;
-    transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
-  }
+    from {
+        transform-origin: center;
+    }
+    to {
+        transform-origin: center;
+        transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
+    }
 }
 .rodal-rotate-leave {
-  animation: rodal-rotate-leave;
+    animation: rodal-rotate-leave both;
 }
 
-//door
+/* -- door -- */
 @keyframes rodal-door-enter {
-  from {
-    transform: scale3d(0, 1, 1);
-  }
-  to {
-    transform: scale3d(1, 1, .1);
-  }
+    from {
+        transform: scale3d(0, 1, 1);
+    }
+    to {
+        transform: scale3d(1, 1, .1);
+    }
 }
 .rodal-door-enter {
-  animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 @keyframes rodal-door-leave {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-  60% {
-    transform: scale3d(.01, 1, 1);
-  }
-  to {
-    transform: scale3d(0, 1, .1);
-  }
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    60% {
+        transform: scale3d(.01, 1, 1);
+    }
+    to {
+        transform: scale3d(0, 1, .1);
+    }
 }
 .rodal-door-leave {
-  animation: rodal-door-leave both;
+    animation: rodal-door-leave both;
 }

@@ -8,31 +8,31 @@ A React modal with animations.
 
 ## Usage
 
-    import React, { Component } from 'react';
+    import React from 'react';
     import Rodal from 'rodal';
     
-    class App extends Component {
+    class App extends React.Component {
     
-        constructor (props) {
+        constructor(props) {
             super(props);
-            this.state = { visible: false }
+            this.state = { visible: false };
         }
     
-        show () {
+        show() {
             this.setState({ visible: true });
         }
     
-        hide () {
+        hide() {
             this.setState({ visible: false });
         }
     
-        render () {
+        render() {
             return (
                 <div>
                     <button onClick={this.show.bind(this)}>show</button>
     
                     <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
-                        <h1>Rodal</h1>
+                        <div>Content</div>
                     </Rodal>
                 </div>
             )
@@ -45,13 +45,12 @@ Property|Type|Default|Description
 ---|---|---|---
 onClose|func|/|onClose handler function
 visible|bool|false|whether to show dialog
-animation|string|zoom|animation type
-duration|number|300|animation duration
 showMask|bool|true|whether to show mask
 showCloseButton|bool|true|whether to show close button
-autoClose|number||close the modal after some time(ms)
+animation|string|zoom|animation type
+duration|number|300|animation duration
 
-## Animation Type
+## Animation Types
 * zoom
 * fade
 * flip
