@@ -3,6 +3,7 @@ $box-height   : 240px;
 $button-width : 70px;
 $base-size    : 16px;
 $base-color   : #03A9F4;
+$z-index      : 100;
 
 /* -- container -- */
 .rodal,
@@ -11,6 +12,7 @@ $base-color   : #03A9F4;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: $z-index;
 }
 .rodal {
     position: fixed;
@@ -31,6 +33,7 @@ $base-color   : #03A9F4;
     height: $box-height;
     background: #fff;
     border-radius: 3px;
+    z-index: $z-index + 1;
     margin-top: - ($box-height / 2 + 20);
     margin-left: - $box-width / 2;
     box-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -120,10 +123,10 @@ $base-color   : #03A9F4;
 
 /* -- fade -- */
 @keyframes rodal-fade-enter {
-    0% {
+    from {
         opacity: 0;
     }
-    100% {
+    to {
         opacity: 1;
     }
 }
@@ -132,10 +135,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-fade-leave {
-    0% {
+    from {
         opacity: 1;
     }
-    100% {
+    to {
         opacity: 0
     }
 }
@@ -145,10 +148,10 @@ $base-color   : #03A9F4;
 
 /* -- zoom -- */
 @keyframes rodal-zoom-enter {
-    0% {
+    from {
         transform: scale3d(.3, .3, .3);
     }
-    100% {
+    to {
         transform: scale3d(1, 1, 1);
     }
 }
@@ -157,10 +160,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-zoom-leave {
-    0% {
+    from {
         transform: scale3d(1, 1, 1);
     }
-    100% {
+    to {
         transform: scale3d(.3, .3, .3);
     }
 }
@@ -170,10 +173,10 @@ $base-color   : #03A9F4;
 
 /* -- slideDown -- */
 @keyframes rodal-slideDown-enter {
-    0% {
+    from {
         transform: translate3d(0, -100px, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, 0, 0);
     }
 }
@@ -182,10 +185,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-slideDown-leave {
-    0% {
+    from {
         transform: translate3d(0, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, -100px, 0);
     }
 }
@@ -195,10 +198,10 @@ $base-color   : #03A9F4;
 
 /* -- slideLeft -- */
 @keyframes rodal-slideLeft-enter {
-    0% {
+    from {
         transform: translate3d(-150px, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, 0, 0);
     }
 }
@@ -207,10 +210,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-slideLeft-leave {
-    0% {
+    from {
         transform: translate3d(0, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(-150px, 0, 0);
     }
 }
@@ -220,10 +223,10 @@ $base-color   : #03A9F4;
 
 /* -- slideRight -- */
 @keyframes rodal-slideRight-enter {
-    0% {
+    from {
         transform: translate3d(150px, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, 0, 0);
     }
 }
@@ -232,10 +235,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-slideRight-leave {
-    0% {
+    from {
         transform: translate3d(0, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(150px, 0, 0);
     }
 }
@@ -245,10 +248,10 @@ $base-color   : #03A9F4;
 
 /* -- slideUp -- */
 @keyframes rodal-slideUp-enter {
-    0% {
+    from {
         transform: translate3d(0, 100px, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, 0, 0);
     }
 }
@@ -257,10 +260,10 @@ $base-color   : #03A9F4;
 }
 
 @keyframes rodal-slideUp-leave {
-    0% {
+    from {
         transform: translate3d(0, 0, 0);
     }
-    100% {
+    to {
         transform: translate3d(0, 100px, 0);
     }
 }

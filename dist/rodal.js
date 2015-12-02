@@ -53,26 +53,49 @@ var _extends = Object.assign || function (target) {
 var Rodal = (function (_React$Component) {
     _inherits(Rodal, _React$Component);
 
-    function Rodal(props) {
+    function Rodal() {
+        var _Object$getPrototypeO;
+
+        var _this;
+
         _classCallCheck(this, Rodal);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Rodal).call(this, props));
+        var _temp;
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _possibleConstructorReturn(_this, (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Rodal)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+            isShow: false,
+            animationType: 'leave'
+        }, _temp));
     }
+
+    /**
+     * add animation event listener
+     */
 
     _createClass(Rodal, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.transitionEnd = this.transitionEnd.bind(this);
-            _animationEvents2.default.addEndEventListener(_reactDom2.default.findDOMNode(this), this.transitionEnd);
+            this.animationEvents = (0, _animationEvents2.default)(_reactDom2.default.findDOMNode(this), this.transitionEnd.bind(this));
 
             if (this.props.visible) {
                 this.enter();
             }
         }
+
+        /**
+         * remove animation event listener
+         */
+
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            _animationEvents2.default.removeEndEventListener(_reactDom2.default.findDOMNode(this), this.transitionEnd);
+            if (this.animationEvents) {
+                this.animationEvents.remove();
+            }
         }
     }, {
         key: 'componentWillReceiveProps',
@@ -94,9 +117,15 @@ var Rodal = (function (_React$Component) {
     }, {
         key: 'leave',
         value: function leave() {
-            this.setState({
-                animationType: 'leave'
-            });
+            if (this.animationEvents) {
+                this.setState({
+                    animationType: 'leave'
+                });
+            } else {
+                this.setState({
+                    isShow: false
+                });
+            }
         }
     }, {
         key: 'transitionEnd',
@@ -151,9 +180,5 @@ Rodal.defaultProps = {
     duration: 300,
     showMask: true,
     showCloseButton: true
-};
-Rodal.state = {
-    isShow: false,
-    animationType: 'leave'
 };
 exports.default = Rodal;

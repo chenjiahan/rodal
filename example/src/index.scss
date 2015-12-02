@@ -180,6 +180,7 @@ input::-moz-focus-inner {
             transform: rotate(45deg);
             transition: all 0.3s ease-in-out;
             box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            background: #ff6138;
             background: linear-gradient(top, #FF6138, #FF7551);
         }
     }

@@ -24,24 +24,21 @@ for (let styleName in EVENT_NAME_MAP) {
     }
 }
 
-let animationEvents = {
-    addEndEventListener: (node, eventListener) => {
-        if (endEvents.length === 0) {
-            window.setTimeout(eventListener, 0);
-            return;
+export default function addEndEventListener(node, eventListener) {
+    if (endEvents.length === 0) {
+        window.setTimeout(eventListener, 0);
+        return;
+    }
+
+    endEvents.forEach(event => {
+        node.addEventListener(event, eventListener, false);
+    });
+
+    return {
+        remove() {
+            endEvents.forEach(event => {
+                node.removeEventListener(event, eventListener, false);
+            });
         }
-        endEvents.forEach(endEvent => {
-            node.addEventListener(endEvent, eventListener, false);
-        });
-    },
-    removeEndEventListener: (node, eventListener) => {
-        if (endEvents.length === 0) {
-            return;
-        }
-        endEvents.forEach(endEvent => {
-            node.removeEventListener(endEvent, eventListener, false);
-        });
     }
 };
-
-export default animationEvents;

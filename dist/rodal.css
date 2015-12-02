@@ -1,30 +1,35 @@
+/* -- container -- */
 .rodal,
 .rodal-mask {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  z-index: 100; }
 
 .rodal {
   position: fixed; }
 
+/* -- mask -- */
 .rodal-mask {
   position: absolute;
   background: rgba(0, 0, 0, 0.3); }
 
-.rodal-box {
+/* -- dialog -- */
+.rodal-dialog {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 420px;
   height: 240px;
-  padding: 16px;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 101;
   margin-top: -140px;
   margin-left: -210px;
-  background: #fff;
-  border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
+/* -- close button -- */
 .rodal-close {
   position: absolute;
   cursor: pointer;
@@ -42,43 +47,33 @@
     margin-top: -1px;
     background: #999;
     border-radius: 100%;
-    transition-duration: .2s;
-    transition-property: -webkit-transform, background;
-    transition-property: transform, background; }
+    transition: background .2s; }
   .rodal-close:before {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg); }
   .rodal-close:after {
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg); }
-  .rodal-close:hover:before {
-    background: #333;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg); }
-  .rodal-close:hover:after {
-    background: #333;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg); }
+  .rodal-close:hover:before, .rodal-close:hover:after {
+    background: #333; }
 
-.rodal-title {
-  color: #555;
-  margin: 0 -16px;
+/* -- title -- */
+.rodal-header {
   font-size: 16px;
-  line-height: 16px;
-  padding: 0 0 16px 16px;
+  padding: 16px;
   border-bottom: 1px solid #e9e9e9; }
 
+/* -- body -- */
 .rodal-body {
-  color: #555;
-  padding-top: 16px; }
+  padding: 16px; }
 
+/* -- button -- */
 .rodal-confirm-btn,
 .rodal-cancel-btn {
   position: absolute;
   width: 70px;
   bottom: 16px;
-  padding: 0;
-  line-height: 30px;
+  padding: 4px 0;
   border: 1px solid #03A9F4;
   border-radius: 3px;
   transition: background .2s; }
@@ -97,23 +92,21 @@
   right: 16px;
   background: #fff; }
   .rodal-cancel-btn:hover {
-    color: #0087d2;
     background: #fafafa; }
   .rodal-cancel-btn:active {
-    color: #0087d2;
     background: #fafafa;
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px transparent; }
 
+/* -- fade -- */
 @-webkit-keyframes rodal-fade-enter {
-  0% {
+  from {
     opacity: 0; }
-  100% {
+  to {
     opacity: 1; } }
-
 @keyframes rodal-fade-enter {
-  0% {
+  from {
     opacity: 0; }
-  100% {
+  to {
     opacity: 1; } }
 
 .rodal-fade-enter {
@@ -121,34 +114,34 @@
   animation: rodal-fade-enter both ease-in; }
 
 @-webkit-keyframes rodal-fade-leave {
-  0% {
+  from {
     opacity: 1; }
-  100% {
+  to {
     opacity: 0; } }
 
 @keyframes rodal-fade-leave {
-  0% {
+  from {
     opacity: 1; }
-  100% {
+  to {
     opacity: 0; } }
 
 .rodal-fade-leave {
   -webkit-animation: rodal-fade-leave both ease-out;
   animation: rodal-fade-leave both ease-out; }
 
+/* -- zoom -- */
 @-webkit-keyframes rodal-zoom-enter {
-  0% {
+  from {
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
     transform: scale3d(0.3, 0.3, 0.3); }
-  100% {
+  to {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1); } }
-
 @keyframes rodal-zoom-enter {
-  0% {
+  from {
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
     transform: scale3d(0.3, 0.3, 0.3); }
-  100% {
+  to {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1); } }
 
@@ -157,38 +150,38 @@
   animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5); }
 
 @-webkit-keyframes rodal-zoom-leave {
-  0% {
+  from {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1); }
-  100% {
+  to {
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
     transform: scale3d(0.3, 0.3, 0.3); } }
 
 @keyframes rodal-zoom-leave {
-  0% {
+  from {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1); }
-  100% {
+  to {
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
     transform: scale3d(0.3, 0.3, 0.3); } }
 
 .rodal-zoom-leave {
-  -webkit-animation: rodal-zoom-leave both ease;
-  animation: rodal-zoom-leave both ease; }
+  -webkit-animation: rodal-zoom-leave both;
+  animation: rodal-zoom-leave both; }
 
+/* -- slideDown -- */
 @-webkit-keyframes rodal-slideDown-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(0, -100px, 0);
     transform: translate3d(0, -100px, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-
 @keyframes rodal-slideDown-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(0, -100px, 0);
     transform: translate3d(0, -100px, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
@@ -197,38 +190,38 @@
   animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5); }
 
 @-webkit-keyframes rodal-slideDown-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, -100px, 0);
     transform: translate3d(0, -100px, 0); } }
 
 @keyframes rodal-slideDown-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, -100px, 0);
     transform: translate3d(0, -100px, 0); } }
 
 .rodal-slideDown-leave {
-  -webkit-animation: rodal-slideDown-leave both ease;
-  animation: rodal-slideDown-leave both ease; }
+  -webkit-animation: rodal-slideDown-leave both;
+  animation: rodal-slideDown-leave both; }
 
+/* -- slideLeft -- */
 @-webkit-keyframes rodal-slideLeft-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(-150px, 0, 0);
     transform: translate3d(-150px, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-
 @keyframes rodal-slideLeft-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(-150px, 0, 0);
     transform: translate3d(-150px, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
@@ -237,38 +230,38 @@
   animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5); }
 
 @-webkit-keyframes rodal-slideLeft-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(-150px, 0, 0);
     transform: translate3d(-150px, 0, 0); } }
 
 @keyframes rodal-slideLeft-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(-150px, 0, 0);
     transform: translate3d(-150px, 0, 0); } }
 
 .rodal-slideLeft-leave {
-  -webkit-animation: rodal-slideLeft-leave both ease;
-  animation: rodal-slideLeft-leave both ease; }
+  -webkit-animation: rodal-slideLeft-leave both;
+  animation: rodal-slideLeft-leave both; }
 
+/* -- slideRight -- */
 @-webkit-keyframes rodal-slideRight-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(150px, 0, 0);
     transform: translate3d(150px, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-
 @keyframes rodal-slideRight-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(150px, 0, 0);
     transform: translate3d(150px, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
@@ -277,38 +270,38 @@
   animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5); }
 
 @-webkit-keyframes rodal-slideRight-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(150px, 0, 0);
     transform: translate3d(150px, 0, 0); } }
 
 @keyframes rodal-slideRight-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(150px, 0, 0);
     transform: translate3d(150px, 0, 0); } }
 
 .rodal-slideRight-leave {
-  -webkit-animation: rodal-slideRight-leave both ease;
-  animation: rodal-slideRight-leave both ease; }
+  -webkit-animation: rodal-slideRight-leave both;
+  animation: rodal-slideRight-leave both; }
 
+/* -- slideUp -- */
 @-webkit-keyframes rodal-slideUp-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 100px, 0);
     transform: translate3d(0, 100px, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-
 @keyframes rodal-slideUp-enter {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 100px, 0);
     transform: translate3d(0, 100px, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
@@ -317,25 +310,26 @@
   animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5); }
 
 @-webkit-keyframes rodal-slideUp-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 100px, 0);
     transform: translate3d(0, 100px, 0); } }
 
 @keyframes rodal-slideUp-leave {
-  0% {
+  from {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
-  100% {
+  to {
     -webkit-transform: translate3d(0, 100px, 0);
     transform: translate3d(0, 100px, 0); } }
 
 .rodal-slideUp-leave {
-  -webkit-animation: rodal-slideUp-leave both ease;
-  animation: rodal-slideUp-leave both ease; }
+  -webkit-animation: rodal-slideUp-leave both;
+  animation: rodal-slideUp-leave both; }
 
+/* -- flip -- */
 @-webkit-keyframes rodal-flip-enter {
   from {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
@@ -346,7 +340,6 @@
   to {
     -webkit-transform: perspective(400px);
     transform: perspective(400px); } }
-
 @keyframes rodal-flip-enter {
   from {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
@@ -359,10 +352,10 @@
     transform: perspective(400px); } }
 
 .rodal-flip-enter {
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
   -webkit-animation: rodal-flip-enter both ease-in;
-  animation: rodal-flip-enter both ease-in; }
+  animation: rodal-flip-enter both ease-in;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important; }
 
 @-webkit-keyframes rodal-flip-leave {
   from {
@@ -392,6 +385,7 @@
   -webkit-backface-visibility: visible !important;
   backface-visibility: visible !important; }
 
+/* -- rotate -- */
 @-webkit-keyframes rodal-rotate-enter {
   from {
     -webkit-transform-origin: center;
@@ -403,7 +397,6 @@
     transform-origin: center;
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1); } }
-
 @keyframes rodal-rotate-enter {
   from {
     -webkit-transform-origin: center;
@@ -441,9 +434,10 @@
     transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3); } }
 
 .rodal-rotate-leave {
-  -webkit-animation: rodal-rotate-leave;
-  animation: rodal-rotate-leave; }
+  -webkit-animation: rodal-rotate-leave both;
+  animation: rodal-rotate-leave both; }
 
+/* -- door -- */
 @-webkit-keyframes rodal-door-enter {
   from {
     -webkit-transform: scale3d(0, 1, 1);
@@ -451,7 +445,6 @@
   to {
     -webkit-transform: scale3d(1, 1, 0.1);
     transform: scale3d(1, 1, 0.1); } }
-
 @keyframes rodal-door-enter {
   from {
     -webkit-transform: scale3d(0, 1, 1);

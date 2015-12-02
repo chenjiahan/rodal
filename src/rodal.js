@@ -3,7 +3,7 @@
  * =============================== */
 import React, { PropTypes } from 'react';
 import ReactDOM             from 'react-dom';
-import transitionEvents     from './animationEvents';
+import addEndEventListener  from './animationEvents';
 import Dialog               from './dialog';
 import './rodal.scss';
 
@@ -34,15 +34,13 @@ class Rodal extends React.Component {
         animationType : 'leave'
     };
 
-    constructor (props) {
-        super(props);
-    }
-
-    componentDidMount () {
-        this.transitionEnd = this.transitionEnd.bind(this);
-        transitionEvents.addEndEventListener(
+    /**
+     * add animation event listener
+     */
+    componentDidMount() {
+        this.animationEvents = addEndEventListener(
             ReactDOM.findDOMNode(this),
-            this.transitionEnd
+            this.transitionEnd.bind(this)
         );
 
         if (this.props.visible) {
@@ -50,14 +48,16 @@ class Rodal extends React.Component {
         }
     }
 
-    componentWillUnmount () {
-        transitionEvents.removeEndEventListener(
-            ReactDOM.findDOMNode(this),
-            this.transitionEnd
-        );
+    /**
+     * remove animation event listener
+     */
+    componentWillUnmount() {
+        if (this.animationEvents) {
+            this.animationEvents.remove();
+        }
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!this.props.visible && nextProps.visible) {
             this.enter();
         } else if (this.props.visible && !nextProps.visible) {
@@ -65,20 +65,26 @@ class Rodal extends React.Component {
         }
     }
 
-    enter () {
+    enter() {
         this.setState({
             isShow: true,
             animationType: 'enter'
         });
     }
 
-    leave () {
-        this.setState({ 
-            animationType: 'leave'
-        });
+    leave() {
+        if (this.animationEvents) {
+            this.setState({
+                animationType: 'leave'
+            });
+        } else {
+            this.setState({
+                isShow: false
+            })
+        }
     }
 
-    transitionEnd (e) {
+    transitionEnd(e) {
         let node = ReactDOM.findDOMNode(this);
         if (e && e.target !== node) {
             return;
@@ -89,8 +95,7 @@ class Rodal extends React.Component {
         }
     }
 
-    render () {
-
+    render() {
         let { duration, showMask, onClose, children } = this.props;
         let { isShow, animationType } = this.state;
 
