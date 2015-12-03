@@ -8,6 +8,8 @@ import Dialog               from './dialog';
 import './rodal.css';
 
 const propTypes = {
+    width           : PropTypes.number,
+    height          : PropTypes.number,
     onClose         : PropTypes.func.isRequired,
     visible         : PropTypes.bool,
     showMask        : PropTypes.bool,
@@ -17,6 +19,8 @@ const propTypes = {
 };
 
 const defaultProps = {
+    width           : 400,
+    height          : 240,
     visible         : false,
     showMask        : true,
     showCloseButton : true,

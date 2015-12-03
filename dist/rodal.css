@@ -20,13 +20,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 420px;
-  height: 240px;
+  z-index: 101;
   background: #fff;
   border-radius: 3px;
-  z-index: 101;
-  margin-top: -140px;
-  margin-left: -210px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
 
 /* -- close button -- */

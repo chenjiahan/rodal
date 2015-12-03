@@ -65,10 +65,12 @@ function _inherits(subClass, superClass) {
         throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 } /* ===============================
-   * Rodal v1.2.2 http://rodal.cn
+   * Rodal v1.2.5 http://rodal.cn
    * =============================== */
 
 var propTypes = {
+    width: _react.PropTypes.number,
+    height: _react.PropTypes.number,
     onClose: _react.PropTypes.func.isRequired,
     visible: _react.PropTypes.bool,
     showMask: _react.PropTypes.bool,
@@ -78,6 +80,8 @@ var propTypes = {
 };
 
 var defaultProps = {
+    width: 400,
+    height: 240,
     visible: false,
     showMask: true,
     showCloseButton: true,

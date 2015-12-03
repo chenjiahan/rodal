@@ -17,6 +17,10 @@ var Dialog = function Dialog(props) {
     var className = 'rodal-dialog rodal-' + props.animation + '-' + props.animationType;
     var CloseButton = props.showCloseButton ? _react2.default.createElement('span', { className: 'rodal-close', onClick: props.onClose }) : null;
     var style = {
+        width: props.width,
+        height: props.height,
+        marginTop: -props.height / 2 - 20,
+        marginLeft: -props.width / 2,
         animationDuration: props.duration + 'ms',
         WebkitAnimationDuration: props.duration + 'ms'
     };
