@@ -39,30 +39,24 @@ class App extends React.Component {
                 </button>
             )
         });
-        let wrapStyle = {
-            paddingTop: (window.innerHeight  - 430) / 2,
-            height: window.innerHeight
-        };
 
         return (
-            <div>
-                <div className="wrap" style={wrapStyle}>
-                    <div className="container">
-                        <h1 className="title scale">Rodal</h1>
-                        <h3 className="intro scale">A React modal with animations.</h3>
-                        <div className="btn-area">{buttons}</div>
-
-                        <Rodal visible={this.state.visible}
-                               onClose={this.hide.bind(this)}
-                               animation={this.state.animation}
-                         >
-                            <div className="rodal-header">Rodal</div>
-                            <div className="rodal-body">A React modal with animations.</div>
-                            <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
-                            <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
-                        </Rodal>
-                    </div>
+            <div className="wrap">
+                <div className="container" style={{ paddingTop: (window.innerHeight - 480) / 2 }}>
+                    <h1 className="title scale">Rodal</h1>
+                    <h3 className="intro scale">A React modal with animations.</h3>
+                    <div className="btn-area">{buttons}</div>
                 </div>
+
+                <Rodal visible={this.state.visible}
+                       onClose={this.hide.bind(this)}
+                       animation={this.state.animation}
+                >
+                    <div className="rodal-header">Rodal</div>
+                    <div className="rodal-body">A React modal with animations.</div>
+                    <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
+                    <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
+                </Rodal>
 
                 <span className="fork-btn">
                     <a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a>

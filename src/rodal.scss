@@ -36,7 +36,7 @@ $z-index      : 100;
     z-index: $z-index + 1;
     margin-top: - ($box-height / 2 + 20);
     margin-left: - $box-width / 2;
-    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
 }
 
 /* -- close button -- */
@@ -90,12 +90,16 @@ $z-index      : 100;
 .rodal-confirm-btn,
 .rodal-cancel-btn {
     position: absolute;
-    width: $button-width;
+    font: inherit;
     bottom: $base-size;
-    padding: 4px 0;
-    border: 1px solid $base-color;
+    width: $button-width;
+    padding: 4px 15px;
     border-radius: 3px;
     transition: background .2s;
+    border: 1px solid $base-color;
+    &:focus {
+        outline: none;
+    }
 }
 .rodal-confirm-btn {
     color: #fff;

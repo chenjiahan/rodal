@@ -27,7 +27,7 @@
   z-index: 101;
   margin-top: -140px;
   margin-left: -210px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
 
 /* -- close button -- */
 .rodal-close {
@@ -71,12 +71,16 @@
 .rodal-confirm-btn,
 .rodal-cancel-btn {
   position: absolute;
-  width: 70px;
+  font: inherit;
   bottom: 16px;
-  padding: 4px 0;
-  border: 1px solid #03A9F4;
+  width: 70px;
+  padding: 4px 15px;
   border-radius: 3px;
-  transition: background .2s; }
+  transition: background .2s;
+  border: 1px solid #03A9F4; }
+  .rodal-confirm-btn:focus,
+  .rodal-cancel-btn:focus {
+    outline: none; }
 
 .rodal-confirm-btn {
   color: #fff;

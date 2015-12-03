@@ -6,14 +6,20 @@ $baseColor: #03A9F4;
 *:after {
     box-sizing: border-box;
 }
+html,
+body,
+#app,
+.wrap {
+    height: 100%;
+}
 html {
-    overflow-y: hidden;
-    text-size-adjust: 100%;
     font-family: "Open Sans",sans-serif;
 }
 body {
     margin: 0;
+    color: #555;
     font-size: 14px;
+    overflow: hidden;
     line-height: 1.42857143;
     background: $baseColor;
     background:
@@ -39,15 +45,6 @@ a:focus {
     outline: none;
     text-decoration: none;
 }
-a:active {
-    outline: 0;
-}
-p {
-    margin: 0 0 10px 0;
-}
-h1,h2,h3,h4,h5,h6 {
-    font-weight: normal;
-}
 button {
     color: inherit;
     font: inherit;
@@ -55,24 +52,12 @@ button {
 }
 button {
     overflow: visible;
-}
-button:focus {
-    outline: none!important;
-}
-button,
-select {
     text-transform: none;
-}
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
     -webkit-appearance: button;
     cursor: pointer;
 }
-button[disabled],
-html input[disabled] {
-    cursor: default;
+button:focus {
+    outline: none;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -82,12 +67,9 @@ input::-moz-focus-inner {
 
 /* -- container -- */
 .container {
-    color: #555;
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    @media (max-width: 480px) {
-        width: 100%;
+    width: 100%;
+    @media (max-width: 600px) {
+        padding-top: 30px!important;
     }
 }
 .title,
@@ -99,15 +81,21 @@ input::-moz-focus-inner {
 .title {
     font-size: 70px;
     margin: 0;
+    @media (max-width: 600px) {
+        font-size: 40px;
+    }
 }
 .intro {
     font-size: 30px;
-    margin: 15px 0 20px;
+    margin: 15px 10px 20px;
+    @media (max-width: 600px) {
+        font-size: 20px;
+    }
 }
 .btn-area {
     width: 600px;
     margin: 0 auto;
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
         width: 100%;
     }
 }
@@ -142,9 +130,11 @@ input::-moz-focus-inner {
     text-align: center;
     border: none;
     border-radius: 4px;
-    @media (max-width: 480px) {
-        width: 40%;
-        margin: 15px 5%;
+    @media (max-width: 600px) {
+        width: 35%;
+        font-size: 16px;
+        line-height: 34px;
+        margin: 10px 0 10px 10%;
     }
     &:hover {
         box-shadow: 0 0 50px rgba(255,255,255,.3);
@@ -156,12 +146,17 @@ input::-moz-focus-inner {
 
 /* -- fork -- */
 .fork-btn {
-    display: none;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    a {
+        color: #fff;
+    }
 }
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
     .fork-btn {
-        position: absolute;
-        display: block;
         top: 0;
         right: 0;
         width: 200px;
@@ -172,9 +167,6 @@ input::-moz-focus-inner {
             width: 280px;
             top: 50px;
             right: -70px;
-            color: #fff;
-            font-size: 16px;
-            text-align: center;
             font-weight: bold;
             padding: 10px 40px;
             transform: rotate(45deg);
