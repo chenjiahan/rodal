@@ -6,12 +6,6 @@ $baseColor: #03A9F4;
 *:after {
     box-sizing: border-box;
 }
-html,
-body,
-#app,
-.wrap {
-    height: 100%;
-}
 html {
     font-family: "Open Sans",sans-serif;
 }
@@ -66,6 +60,10 @@ input::-moz-focus-inner {
 }
 
 /* -- container -- */
+#app,
+.wrap {
+    height: 100%;
+}
 .container {
     width: 100%;
     @media (max-width: 600px) {

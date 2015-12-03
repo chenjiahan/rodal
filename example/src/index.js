@@ -42,7 +42,7 @@ class App extends React.Component {
 
         return (
             <div className="wrap">
-                <div className="container" style={{ paddingTop: (window.innerHeight - 480) / 2 }}>
+                <div className="container" style={{ paddingTop: (window.innerHeight - 440) / 2 }}>
                     <h1 className="title scale">Rodal</h1>
                     <h3 className="intro scale">A React modal with animations.</h3>
                     <div className="btn-area">{buttons}</div>
