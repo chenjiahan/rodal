@@ -1,28 +1,20 @@
 {
   "name": "rodal",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "description": "A React modal with animations.",
-  "main": "src/rodal.js",
-  "dependencies": {
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3"
-  },
+  "main": "dist/index.js",
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
     "babel": "^6.1.18",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
-    "babel-preset-stage-0": "^6.1.18",
     "css-loader": "^0.22.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.1",
     "gulp-changed": "^1.3.0",
-    "gulp-csso": "^1.0.1",
-    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.0",
-    "gulp-uglify": "^1.5.1",
     "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
@@ -41,8 +33,8 @@
     "react",
     "modal",
     "animation",
-    "react-component",
-    "react-modal"
+    "react-modal",
+    "react-component"
   ],
   "author": "chenjiahan",
   "license": "ISC",

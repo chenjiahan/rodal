@@ -6,7 +6,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, loader: "babel", query: {stage: 0} },
+            { test: /\.js$/, loader: "babel"},
+            { test: /\.css$/, loader: "style!css" },
             { test: /\.scss$/, loader: "style!css!autoprefixer!sass" }
         ]
     }

@@ -1,38 +1,42 @@
 /* ===============================
- * Rodal v1.2.0 http://rodal.cn
+ * Rodal v1.2.5 http://rodal.cn
  * =============================== */
 import React, { PropTypes } from 'react';
 import ReactDOM             from 'react-dom';
 import addEndEventListener  from './animationEvents';
 import Dialog               from './dialog';
-import './rodal.scss';
+import './rodal.css';
+
+const propTypes = {
+    onClose         : PropTypes.func.isRequired,
+    visible         : PropTypes.bool,
+    showMask        : PropTypes.bool,
+    showCloseButton : PropTypes.bool,
+    animation       : PropTypes.string,
+    duration        : PropTypes.number
+};
+
+const defaultProps = {
+    visible         : false,
+    showMask        : true,
+    showCloseButton : true,
+    animation       : 'zoom',
+    duration        : 300
+};
 
 /**
  * Rodal Component
  */
 class Rodal extends React.Component {
 
-    static propTypes = {
-        visible         : PropTypes.bool,
-        onClose         : PropTypes.func.isRequired,
-        animation       : PropTypes.string,
-        duration        : PropTypes.number,
-        showMask        : PropTypes.bool,
-        showCloseButton : PropTypes.bool
-    };
+    constructor(props) {
+        super(props);
 
-    static defaultProps = {
-        visible         : false,
-        animation       : 'zoom',
-        duration        : 300,
-        showMask        : true,
-        showCloseButton : true
-    };
-
-    state = {
-        isShow        : false,
-        animationType : 'leave'
-    };
+        this.state = {
+            isShow        : false,
+            animationType : 'leave'
+        };
+    }
 
     /**
      * add animation event listener
@@ -40,7 +44,7 @@ class Rodal extends React.Component {
     componentDidMount() {
         this.animationEvents = addEndEventListener(
             ReactDOM.findDOMNode(this),
-            this.transitionEnd.bind(this)
+            this.animationEnd.bind(this)
         );
 
         if (this.props.visible) {
@@ -84,7 +88,7 @@ class Rodal extends React.Component {
         }
     }
 
-    transitionEnd(e) {
+    animationEnd(e) {
         let node = ReactDOM.findDOMNode(this);
         if (e && e.target !== node) {
             return;
@@ -117,5 +121,8 @@ class Rodal extends React.Component {
         )
     }
 }
+
+Rodal.propTypes = propTypes;
+Rodal.defaultProps = defaultProps;
 
 export default Rodal;

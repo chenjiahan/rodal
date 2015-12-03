@@ -1,6 +1,26 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
+var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+            }
+        }
+    }return target;
+};
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -22,29 +42,48 @@ var _dialog = require('./dialog');
 
 var _dialog2 = _interopRequireDefault(_dialog);
 
-require('./rodal.scss');
+require('./rodal.css');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+} /* ===============================
+   * Rodal v1.2.2 http://rodal.cn
+   * =============================== */
 
-var _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-                target[key] = source[key];
-            }
-        }
-    }return target;
+var propTypes = {
+    onClose: _react.PropTypes.func.isRequired,
+    visible: _react.PropTypes.bool,
+    showMask: _react.PropTypes.bool,
+    showCloseButton: _react.PropTypes.bool,
+    animation: _react.PropTypes.string,
+    duration: _react.PropTypes.number
 };
 
-/* ===============================
- * Rodal v1.2.0 http://rodal.cn
- * =============================== */
+var defaultProps = {
+    visible: false,
+    showMask: true,
+    showCloseButton: true,
+    animation: 'zoom',
+    duration: 300
+};
 
 /**
  * Rodal Component
@@ -53,23 +92,16 @@ var _extends = Object.assign || function (target) {
 var Rodal = (function (_React$Component) {
     _inherits(Rodal, _React$Component);
 
-    function Rodal() {
-        var _Object$getPrototypeO;
-
-        var _this;
-
+    function Rodal(props) {
         _classCallCheck(this, Rodal);
 
-        var _temp;
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Rodal).call(this, props));
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _possibleConstructorReturn(_this, (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Rodal)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+        _this.state = {
             isShow: false,
             animationType: 'leave'
-        }, _temp));
+        };
+        return _this;
     }
 
     /**
@@ -79,7 +111,7 @@ var Rodal = (function (_React$Component) {
     _createClass(Rodal, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.animationEvents = (0, _animationEvents2.default)(_reactDom2.default.findDOMNode(this), this.transitionEnd.bind(this));
+            this.animationEvents = (0, _animationEvents2.default)(_reactDom2.default.findDOMNode(this), this.animationEnd.bind(this));
 
             if (this.props.visible) {
                 this.enter();
@@ -128,8 +160,8 @@ var Rodal = (function (_React$Component) {
             }
         }
     }, {
-        key: 'transitionEnd',
-        value: function transitionEnd(e) {
+        key: 'animationEnd',
+        value: function animationEnd(e) {
             var node = _reactDom2.default.findDOMNode(this);
             if (e && e.target !== node) {
                 return;
@@ -166,19 +198,7 @@ var Rodal = (function (_React$Component) {
     return Rodal;
 })(_react2.default.Component);
 
-Rodal.propTypes = {
-    visible: _react.PropTypes.bool,
-    onClose: _react.PropTypes.func.isRequired,
-    animation: _react.PropTypes.string,
-    duration: _react.PropTypes.number,
-    showMask: _react.PropTypes.bool,
-    showCloseButton: _react.PropTypes.bool
-};
-Rodal.defaultProps = {
-    visible: false,
-    animation: 'zoom',
-    duration: 300,
-    showMask: true,
-    showCloseButton: true
-};
+Rodal.propTypes = propTypes;
+Rodal.defaultProps = defaultProps;
+
 exports.default = Rodal;
