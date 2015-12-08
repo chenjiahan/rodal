@@ -57,10 +57,6 @@ class App extends React.Component {
                     <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
                     <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
                 </Rodal>
-
-                <span className="fork-btn">
-                    <a target="_blank" href="https://github.com/chenjiahan/rodal">View on GitHub</a>
-                </span>
             </div>
         )
     }

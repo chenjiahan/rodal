@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A React modal with animations.",
   "main": "dist/index.js",
   "devDependencies": {
@@ -23,7 +23,8 @@
     "webpack": "^1.12.2"
   },
   "scripts": {
-    "build": "webpack --watch"
+    "dev": "webpack --watch",
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -36,7 +37,7 @@
     "react-modal",
     "react-component"
   ],
-  "author": "chenjiahan",
+  "author": "neverland",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/chenjiahan/rodal/issues"
