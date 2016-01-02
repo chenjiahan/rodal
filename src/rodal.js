@@ -93,7 +93,7 @@ class Rodal extends React.Component {
     }
 
     animationEnd(e) {
-        let node = ReactDOM.findDOMNode(this);
+        const node = ReactDOM.findDOMNode(this);
         if (e && e.target !== node) {
             return;
         }
@@ -104,15 +104,15 @@ class Rodal extends React.Component {
     }
 
     render() {
-        let { duration, showMask, onClose, children } = this.props;
-        let { isShow, animationType } = this.state;
+        const { duration, showMask, onClose, children } = this.props;
+        const { isShow, animationType } = this.state;
 
-        let mask = showMask ? <div className="rodal-mask" onClick={onClose} /> : null;
+        const mask = showMask ? <div className="rodal-mask" onClick={onClose} /> : null;
 
-        let style = {
+        const style = {
             display                 : isShow ? 'block' : 'none',
+            WebkitAnimationDuration : duration + 'ms',
             animationDuration       : duration + 'ms',
-            WebkitAnimationDuration : duration + 'ms'
         };
 
         return (

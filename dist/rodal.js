@@ -65,7 +65,7 @@ function _inherits(subClass, superClass) {
         throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 } /* ===============================
-   * Rodal v1.2.5 http://rodal.cn
+   * Rodal v1.2.6 http://rodal.cn
    * =============================== */
 
 var propTypes = {
@@ -191,8 +191,8 @@ var Rodal = (function (_React$Component) {
 
             var style = {
                 display: isShow ? 'block' : 'none',
-                animationDuration: duration + 'ms',
-                WebkitAnimationDuration: duration + 'ms'
+                WebkitAnimationDuration: duration + 'ms',
+                animationDuration: duration + 'ms'
             };
 
             return _react2.default.createElement('div', { style: style, className: "rodal rodal-fade-" + animationType }, mask, _react2.default.createElement(_dialog2.default, _extends({}, this.props, { animationType: animationType }), children));
