@@ -2,7 +2,7 @@
  * detect animation events
  */
 
-let EVENT_NAME_MAP = {
+const EVENT_NAME_MAP = {
           'animation' :       'animationend',
          'OAnimation' :      'oAnimationEnd',
         'msAnimation' :     'MSAnimationEnd',
@@ -10,8 +10,8 @@ let EVENT_NAME_MAP = {
     'WebkitAnimation' : 'webkitAnimationEnd'
 };
 
-let endEvents = [];
-let testStyle = document.createElement('div').style;
+const endEvents = [];
+const testStyle = document.createElement('div').style;
 
 if (!('AnimationEvent' in window)) {
     delete EVENT_NAME_MAP.animation;

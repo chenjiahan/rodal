@@ -1,5 +1,3 @@
-$baseColor: #03A9F4;
-
 /* -- normalize -- */
 *,
 *:before,
@@ -8,24 +6,6 @@ $baseColor: #03A9F4;
 }
 html {
     font-family: "Open Sans",sans-serif;
-}
-body {
-    margin: 0;
-    color: #555;
-    font-size: 14px;
-    overflow: hidden;
-    line-height: 1.42857143;
-    background: $baseColor;
-    background:
-            -webkit-linear-gradient(45deg,  hsla(190, 100%, 50%, 1) 0%,   hsla(190, 100%, 50%, 0) 70%),
-            -webkit-linear-gradient(315deg, hsla(199,  98%, 48%, 1) 10%,  hsla(199,  98%, 48%, 0) 80%),
-            -webkit-linear-gradient(225deg, hsla(190, 100%, 50%, 1) 10%,  hsla(190, 100%, 50%, 0) 80%),
-            -webkit-linear-gradient(135deg, hsla(199,  98%, 48%, 1) 100%, hsla(199,  98%, 48%, 0) 70%);
-    background:
-            linear-gradient(45deg,  hsla(190, 100%, 50%, 1) 0%,   hsla(190, 100%, 50%, 0) 70%),
-            linear-gradient(135deg, hsla(199,  98%, 48%, 1) 10%,  hsla(199,  98%, 48%, 0) 80%),
-            linear-gradient(225deg, hsla(190, 100%, 50%, 1) 10%,  hsla(190, 100%, 50%, 0) 80%),
-            linear-gradient(315deg, hsla(199,  98%, 48%, 1) 100%, hsla(199,  98%, 48%, 0) 70%);
 }
 a {
     text-decoration: none;
@@ -66,9 +46,6 @@ input::-moz-focus-inner {
 }
 .container {
     width: 100%;
-    @media (max-width: 600px) {
-        padding-top: 30px!important;
-    }
 }
 .title,
 .intro {
@@ -79,23 +56,14 @@ input::-moz-focus-inner {
 .title {
     font-size: 70px;
     margin: 0;
-    @media (max-width: 600px) {
-        font-size: 40px;
-    }
 }
 .intro {
     font-size: 30px;
     margin: 15px 10px 20px;
-    @media (max-width: 600px) {
-        font-size: 20px;
-    }
 }
 .btn-area {
     width: 600px;
     margin: 0 auto;
-    @media (max-width: 600px) {
-        width: 100%;
-    }
 }
 
 /* -- scale animation -- */
@@ -113,7 +81,6 @@ input::-moz-focus-inner {
     animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);
 }
 
-
 /* -- btn -- */
 .btn {
     display: inline-block;
@@ -128,16 +95,30 @@ input::-moz-focus-inner {
     text-align: center;
     border: none;
     border-radius: 4px;
-    @media (max-width: 600px) {
+}
+.btn:hover {
+    box-shadow: 0 0 50px rgba(255,255,255,.3);
+}
+.btn:active {
+    box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
+}
+@media (max-width: 600px) {
+    .container {
+        padding-top: 30px!important;
+    }
+    .title {
+        font-size: 40px;
+    }
+    .intro {
+        font-size: 20px;
+    }
+    .btn {
         width: 35%;
         font-size: 16px;
         line-height: 34px;
         margin: 10px 0 10px 10%;
     }
-    &:hover {
-        box-shadow: 0 0 50px rgba(255,255,255,.3);
-    }
-    &:active {
-        box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
+    .btn-area {
+        width: 100%;
     }
 }

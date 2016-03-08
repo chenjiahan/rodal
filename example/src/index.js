@@ -1,7 +1,7 @@
 import React    from 'react';
 import ReactDOM from 'react-dom';
-import Rodal    from '../../dist';
-import './index.scss';
+import Rodal    from '../../src/rodal';
+import './index.css';
 
 class App extends React.Component {
 
@@ -54,8 +54,6 @@ class App extends React.Component {
                 >
                     <div className="rodal-header">Rodal</div>
                     <div className="rodal-body">A React modal with animations.</div>
-                    <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
-                    <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
                 </Rodal>
             </div>
         )

@@ -13,8 +13,10 @@ module.exports = {
                     presets: ['es2015', 'react'],
                 }
             },
-            { test: /\.css$/, loader: "style!css" },
-            { test: /\.scss$/, loader: "style!css!autoprefixer!sass" }
+            {
+                test: /\.css$/,
+                loaders: ['style', 'css', 'autoprefixer']
+            }
         ]
     }
 };

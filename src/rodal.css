@@ -1,8 +1,3 @@
-/* -- config -- */
-$base-size    : 16px;
-$base-color   : #03A9F4;
-$z-index      : 100;
-
 /* -- container -- */
 .rodal,
 .rodal-mask {
@@ -10,8 +5,9 @@ $z-index      : 100;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: $z-index;
+    z-index: 100;
 }
+
 .rodal {
     position: fixed;
 }
@@ -19,7 +15,7 @@ $z-index      : 100;
 /* -- mask -- */
 .rodal-mask {
     position: absolute;
-    background: rgba(0,0,0,.3);
+    background: rgba(0, 0, 0, .3);
 }
 
 /* -- dialog -- */
@@ -30,93 +26,56 @@ $z-index      : 100;
     z-index: 101;
     background: #fff;
     border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
 }
 
 /* -- close button -- */
 .rodal-close {
     position: absolute;
     cursor: pointer;
-    top: $base-size;
-    right: $base-size;
-    width: $base-size;
-    height: $base-size;
-    &:before,
-    &:after {
-        position: absolute;
-        content: '';
-        height: 2px;
-        width: 100%;
-        top: 50%;
-        left: 0;
-        margin-top: -1px;
-        background: #999;
-        border-radius: 100%;
-        transition: background .2s;
-    }
-    &:before {
-        transform: rotate(45deg);
-    }
-    &:after {
-        transform: rotate(-45deg);
-    }
-    &:hover {
-        &:before,
-        &:after {
-            background: #333;
-        }
-    }
+    top: 16px;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.rodal-close:before,
+.rodal-close:after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #999;
+    border-radius: 100%;
+    transition: background .2s;
+}
+
+.rodal-close:before {
+    transform: rotate(45deg);
+}
+
+.rodal-close:after {
+    transform: rotate(-45deg);
+}
+
+.rodal-close:hover:before,
+.rodal-close:hover:after {
+    background: #333;
 }
 
 /* -- title -- */
 .rodal-header {
-    font-size: $base-size;
-    padding: $base-size;
+    font-size: 16px;
+    padding: 16px;
     border-bottom: 1px solid #e9e9e9;
 }
 
 /* -- body -- */
 .rodal-body {
-    padding: $base-size;
-}
-
-/* -- button -- */
-.rodal-confirm-btn,
-.rodal-cancel-btn {
-    position: absolute;
-    font: inherit;
-    bottom: $base-size;
-    width: 70px;
-    padding: 4px 15px;
-    border-radius: 3px;
-    transition: background .2s;
-    border: 1px solid $base-color;
-    &:focus {
-        outline: none;
-    }
-}
-.rodal-confirm-btn {
-    color: #fff;
-    right: $base-size * 2 + 70px;
-    background: $base-color;
-    &:hover {
-        background: $base-color - #111;
-    }
-    &:active {
-        background: $base-color - #222;
-    }
-}
-.rodal-cancel-btn {
-    color: $base-color;
-    right: $base-size;
-    background: #fff;
-    &:hover {
-        background: #fafafa;
-    }
-    &:active {
-        background: #fafafa;
-        box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);
-    }
+    padding: 16px;
 }
 
 /* -- fade -- */
@@ -128,6 +87,7 @@ $z-index      : 100;
         opacity: 1;
     }
 }
+
 .rodal-fade-enter {
     animation: rodal-fade-enter both ease-in;
 }
@@ -140,6 +100,7 @@ $z-index      : 100;
         opacity: 0
     }
 }
+
 .rodal-fade-leave {
     animation: rodal-fade-leave both ease-out;
 }
@@ -153,6 +114,7 @@ $z-index      : 100;
         transform: scale3d(1, 1, 1);
     }
 }
+
 .rodal-zoom-enter {
     animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -165,6 +127,7 @@ $z-index      : 100;
         transform: scale3d(.3, .3, .3);
     }
 }
+
 .rodal-zoom-leave {
     animation: rodal-zoom-leave both;
 }
@@ -178,6 +141,7 @@ $z-index      : 100;
         transform: translate3d(0, 0, 0);
     }
 }
+
 .rodal-slideDown-enter {
     animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -190,6 +154,7 @@ $z-index      : 100;
         transform: translate3d(0, -100px, 0);
     }
 }
+
 .rodal-slideDown-leave {
     animation: rodal-slideDown-leave both;
 }
@@ -203,6 +168,7 @@ $z-index      : 100;
         transform: translate3d(0, 0, 0);
     }
 }
+
 .rodal-slideLeft-enter {
     animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -215,6 +181,7 @@ $z-index      : 100;
         transform: translate3d(-150px, 0, 0);
     }
 }
+
 .rodal-slideLeft-leave {
     animation: rodal-slideLeft-leave both;
 }
@@ -228,6 +195,7 @@ $z-index      : 100;
         transform: translate3d(0, 0, 0);
     }
 }
+
 .rodal-slideRight-enter {
     animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -240,6 +208,7 @@ $z-index      : 100;
         transform: translate3d(150px, 0, 0);
     }
 }
+
 .rodal-slideRight-leave {
     animation: rodal-slideRight-leave both;
 }
@@ -253,6 +222,7 @@ $z-index      : 100;
         transform: translate3d(0, 0, 0);
     }
 }
+
 .rodal-slideUp-enter {
     animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -265,6 +235,7 @@ $z-index      : 100;
         transform: translate3d(0, 100px, 0);
     }
 }
+
 .rodal-slideUp-leave {
     animation: rodal-slideUp-leave both;
 }
@@ -281,6 +252,7 @@ $z-index      : 100;
         transform: perspective(400px);
     }
 }
+
 .rodal-flip-enter {
     animation: rodal-flip-enter both ease-in;
     backface-visibility: visible !important;
@@ -297,6 +269,7 @@ $z-index      : 100;
         transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
     }
 }
+
 .rodal-flip-leave {
     animation: rodal-flip-leave both;
     backface-visibility: visible !important;
@@ -313,6 +286,7 @@ $z-index      : 100;
         transform: scale3d(1, 1, 1);
     }
 }
+
 .rodal-rotate-enter {
     animation: rodal-rotate-enter both;
 }
@@ -326,6 +300,7 @@ $z-index      : 100;
         transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
     }
 }
+
 .rodal-rotate-leave {
     animation: rodal-rotate-leave both;
 }
@@ -339,6 +314,7 @@ $z-index      : 100;
         transform: scale3d(1, 1, .1);
     }
 }
+
 .rodal-door-enter {
     animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
 }
@@ -354,6 +330,7 @@ $z-index      : 100;
         transform: scale3d(0, 1, .1);
     }
 }
+
 .rodal-door-leave {
     animation: rodal-door-leave both;
 }
