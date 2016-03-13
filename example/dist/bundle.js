@@ -60,7 +60,7 @@
 
 	var _rodal2 = _interopRequireDefault(_rodal);
 
-	__webpack_require__(179);
+	__webpack_require__(174);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -146,12 +146,12 @@
 	                    },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'rodal-header' },
+	                        { className: 'header' },
 	                        'Rodal'
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'rodal-body' },
+	                        { className: 'body' },
 	                        'A React modal with animations.'
 	                    )
 	                )
@@ -20179,275 +20179,259 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(171);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _animationEvents = __webpack_require__(173);
-
-	var _animationEvents2 = _interopRequireDefault(_animationEvents);
-
-	__webpack_require__(175);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* ===============================
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Rodal v1.2.6 http://rodal.cn
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * =============================== */
-
-	var PropTypes = _react2.default.PropTypes;
-	var Component = _react2.default.Component;
-
-	var propTypes = {
-	    width: PropTypes.number,
-	    height: PropTypes.number,
-	    onClose: PropTypes.func.isRequired,
-	    visible: PropTypes.bool,
-	    showMask: PropTypes.bool,
-	    showCloseButton: PropTypes.bool,
-	    animation: PropTypes.string,
-	    duration: PropTypes.number
-	};
-
-	var defaultProps = {
-	    width: 400,
-	    height: 240,
-	    visible: false,
-	    showMask: true,
-	    showCloseButton: true,
-	    animation: 'zoom',
-	    duration: 300
-	};
-
-	var Dialog = function Dialog(props) {
-
-	    var className = 'rodal-dialog rodal-' + props.animation + '-' + props.animationType;
-	    var CloseButton = props.showCloseButton ? _react2.default.createElement('span', { className: 'rodal-close', onClick: props.onClose }) : null;
-	    var style = {
-	        width: props.width,
-	        height: props.height,
-	        marginTop: -props.height / 2 - 20,
-	        marginLeft: -props.width / 2,
-	        animationDuration: props.duration + 'ms',
-	        WebkitAnimationDuration: props.duration + 'ms'
-	    };
-
-	    return _react2.default.createElement(
-	        'div',
-	        { style: style, className: className },
-	        CloseButton,
-	        props.children
-	    );
-	};
-
-	var Rodal = function (_Component) {
-	    _inherits(Rodal, _Component);
-
-	    function Rodal(props) {
-	        _classCallCheck(this, Rodal);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Rodal).call(this, props));
-
-	        _this.state = {
-	            isShow: false,
-	            animationType: 'leave'
-	        };
-	        return _this;
+	!function (e, t) {
+	  if ("object" == ( false ? "undefined" : _typeof(exports)) && "object" == ( false ? "undefined" : _typeof(module))) module.exports = t(__webpack_require__(1), __webpack_require__(171));else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(171)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else {
+	    var r = "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? t(require("react"), require("react-dom")) : t(e.react, e["react-dom"]);for (var a in r) {
+	      ("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? exports : e)[a] = r[a];
 	    }
-
-	    /**
-	     * add animation event listener
-	     */
-
-
-	    _createClass(Rodal, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.animationEvents = (0, _animationEvents2.default)(_reactDom2.default.findDOMNode(this), this.animationEnd.bind(this));
-
-	            if (this.props.visible) {
-	                this.enter();
-	            }
+	  }
+	}(undefined, function (e, t) {
+	  return function (e) {
+	    function t(a) {
+	      if (r[a]) return r[a].exports;var o = r[a] = { exports: {}, id: a, loaded: !1 };return e[a].call(o.exports, o, o.exports, t), o.loaded = !0, o.exports;
+	    }var r = {};return t.m = e, t.c = r, t.p = "", t(0);
+	  }([function (e, t, r) {
+	    "use strict";
+	    function a(e) {
+	      return e && e.__esModule ? e : { "default": e };
+	    }function o(e, t) {
+	      if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+	    }function n(e, t) {
+	      if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
+	    }function i(e, t) {
+	      if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+	    }Object.defineProperty(t, "__esModule", { value: !0 });var s = Object.assign || function (e) {
+	      for (var t = 1; t < arguments.length; t++) {
+	        var r = arguments[t];for (var a in r) {
+	          Object.prototype.hasOwnProperty.call(r, a) && (e[a] = r[a]);
 	        }
-
-	        /**
-	         * remove animation event listener
-	         */
-
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            if (this.animationEvents) {
-	                this.animationEvents.remove();
-	            }
+	      }return e;
+	    },
+	        l = function () {
+	      function e(e, t) {
+	        for (var r = 0; r < t.length; r++) {
+	          var a = t[r];a.enumerable = a.enumerable || !1, a.configurable = !0, "value" in a && (a.writable = !0), Object.defineProperty(e, a.key, a);
 	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            if (!this.props.visible && nextProps.visible) {
-	                this.enter();
-	            } else if (this.props.visible && !nextProps.visible) {
-	                this.leave();
-	            }
+	      }return function (t, r, a) {
+	        return r && e(t.prototype, r), a && e(t, a), t;
+	      };
+	    }(),
+	        f = r(6),
+	        d = a(f),
+	        m = r(7),
+	        c = a(m),
+	        p = r(2),
+	        b = a(p);r(5);var u = d["default"].PropTypes,
+	        k = d["default"].Component,
+	        h = { width: u.number, height: u.number, onClose: u.func.isRequired, visible: u.bool, showMask: u.bool, showCloseButton: u.bool, animation: u.string, duration: u.number },
+	        v = { width: 400, height: 240, visible: !1, showMask: !0, showCloseButton: !0, animation: "zoom", duration: 300 },
+	        w = function w(e) {
+	      var t = "rodal-dialog rodal-" + e.animation + "-" + e.animationType,
+	          r = e.showCloseButton ? d["default"].createElement("span", { className: "rodal-close", onClick: e.onClose }) : null,
+	          a = { width: e.width, height: e.height, marginTop: -e.height / 2 - 20, marginLeft: -e.width / 2, animationDuration: e.duration + "ms", WebkitAnimationDuration: e.duration + "ms" };return d["default"].createElement("div", { style: a, className: t }, r, e.children);
+	    },
+	        y = function (e) {
+	      function t(e) {
+	        o(this, t);var r = n(this, Object.getPrototypeOf(t).call(this, e));return r.state = { isShow: !1, animationType: "leave" }, r;
+	      }return i(t, e), l(t, [{ key: "componentDidMount", value: function value() {
+	          this.animationEvents = (0, b["default"])(c["default"].findDOMNode(this), this.animationEnd.bind(this)), this.props.visible && this.enter();
+	        } }, { key: "componentWillUnmount", value: function value() {
+	          this.animationEvents && this.animationEvents.remove();
+	        } }, { key: "componentWillReceiveProps", value: function value(e) {
+	          !this.props.visible && e.visible ? this.enter() : this.props.visible && !e.visible && this.leave();
+	        } }, { key: "enter", value: function value() {
+	          this.setState({ isShow: !0, animationType: "enter" });
+	        } }, { key: "leave", value: function value() {
+	          this.animationEvents ? this.setState({ animationType: "leave" }) : this.setState({ isShow: !1 });
+	        } }, { key: "animationEnd", value: function value(e) {
+	          var t = c["default"].findDOMNode(this);e && e.target !== t || "leave" === this.state.animationType && this.setState({ isShow: !1 });
+	        } }, { key: "render", value: function value() {
+	          var e = this.props.showMask ? d["default"].createElement("div", { className: "rodal-mask", onClick: this.props.onClose }) : null,
+	              t = { display: this.state.isShow ? "block" : "none", WebkitAnimationDuration: this.props.duration + "ms", animationDuration: this.props.duration + "ms" };return d["default"].createElement("div", { style: t, className: "rodal rodal-fade-" + this.state.animationType }, e, d["default"].createElement(w, s({}, this.props, { animationType: this.state.animationType }), this.props.children));
+	        } }]), t;
+	    }(k);y.propTypes = h, y.defaultProps = v, t["default"] = y;
+	  }, function (e, t) {
+	    "use strict";
+	    e.exports = function () {
+	      var e = [];return e.toString = function () {
+	        for (var e = [], t = 0; t < this.length; t++) {
+	          var r = this[t];r[2] ? e.push("@media " + r[2] + "{" + r[1] + "}") : e.push(r[1]);
+	        }return e.join("");
+	      }, e.i = function (t, r) {
+	        "string" == typeof t && (t = [[null, t, ""]]);for (var a = {}, o = 0; o < this.length; o++) {
+	          var n = this[o][0];"number" == typeof n && (a[n] = !0);
+	        }for (o = 0; o < t.length; o++) {
+	          var i = t[o];"number" == typeof i[0] && a[i[0]] || (r && !i[2] ? i[2] = r : r && (i[2] = "(" + i[2] + ") and (" + r + ")"), e.push(i));
 	        }
-	    }, {
-	        key: 'enter',
-	        value: function enter() {
-	            this.setState({
-	                isShow: true,
-	                animationType: 'enter'
-	            });
+	      }, e;
+	    };
+	  }, function (e, t) {
+	    "use strict";
+	    function r(e, t) {
+	      return 0 === o.length ? void window.setTimeout(t, 0) : (o.forEach(function (r) {
+	        e.addEventListener(r, t, !1);
+	      }), { remove: function remove() {
+	          o.forEach(function (r) {
+	            e.removeEventListener(r, t, !1);
+	          });
+	        } });
+	    }Object.defineProperty(t, "__esModule", { value: !0 }), t["default"] = r;var a = { animation: "animationend", OAnimation: "oAnimationEnd", msAnimation: "MSAnimationEnd", MozAnimation: "mozAnimationEnd", WebkitAnimation: "webkitAnimationEnd" },
+	        o = [],
+	        n = document.createElement("div").style;"AnimationEvent" in window || delete a.animation;for (var i in a) {
+	      if (i in n) {
+	        o.push(a[i]);break;
+	      }
+	    }
+	  }, function (e, t, r) {
+	    t = e.exports = r(1)(), t.push([e.id, ".rodal,.rodal-mask{top:0;left:0;width:100%;height:100%;z-index:100}.rodal{position:fixed}.rodal-mask{position:absolute;background:rgba(0,0,0,.3)}.rodal-dialog{position:absolute;top:50%;left:50%;z-index:101;padding:15px;background:#fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.2)}.rodal-close{position:absolute;cursor:pointer;top:15px;right:15px;width:15px;height:15px}.rodal-close:after,.rodal-close:before{position:absolute;content:'';height:2px;width:100%;top:50%;left:0;margin-top:-1px;background:#999;border-radius:100%;-webkit-transition:background .2s;transition:background .2s}.rodal-close:before{-webkit-transform:rotate(45deg);transform:rotate(45deg)}.rodal-close:after{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.rodal-close:hover:after,.rodal-close:hover:before{background:#333}@-webkit-keyframes rodal-fade-enter{0%{opacity:0}to{opacity:1}}@keyframes rodal-fade-enter{0%{opacity:0}to{opacity:1}}.rodal-fade-enter{-webkit-animation:rodal-fade-enter both ease-in;animation:rodal-fade-enter both ease-in}@-webkit-keyframes rodal-fade-leave{0%{opacity:1}to{opacity:0}}@keyframes rodal-fade-leave{0%{opacity:1}to{opacity:0}}.rodal-fade-leave{-webkit-animation:rodal-fade-leave both ease-out;animation:rodal-fade-leave both ease-out}@-webkit-keyframes rodal-zoom-enter{0%{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}to{-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes rodal-zoom-enter{0%{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}to{-webkit-transform:scaleX(1);transform:scaleX(1)}}.rodal-zoom-enter{-webkit-animation:rodal-zoom-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-zoom-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-zoom-leave{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}to{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}}@keyframes rodal-zoom-leave{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}to{-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}}.rodal-zoom-leave{-webkit-animation:rodal-zoom-leave both;animation:rodal-zoom-leave both}@-webkit-keyframes rodal-slideDown-enter{0%{-webkit-transform:translate3d(0,-100px,0);transform:translate3d(0,-100px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes rodal-slideDown-enter{0%{-webkit-transform:translate3d(0,-100px,0);transform:translate3d(0,-100px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}.rodal-slideDown-enter{-webkit-animation:rodal-slideDown-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-slideDown-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-slideDown-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(0,-100px,0);transform:translate3d(0,-100px,0)}}@keyframes rodal-slideDown-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(0,-100px,0);transform:translate3d(0,-100px,0)}}.rodal-slideDown-leave{-webkit-animation:rodal-slideDown-leave both;animation:rodal-slideDown-leave both}@-webkit-keyframes rodal-slideLeft-enter{0%{-webkit-transform:translate3d(-150px,0,0);transform:translate3d(-150px,0,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes rodal-slideLeft-enter{0%{-webkit-transform:translate3d(-150px,0,0);transform:translate3d(-150px,0,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}.rodal-slideLeft-enter{-webkit-animation:rodal-slideLeft-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-slideLeft-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-slideLeft-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(-150px,0,0);transform:translate3d(-150px,0,0)}}@keyframes rodal-slideLeft-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(-150px,0,0);transform:translate3d(-150px,0,0)}}.rodal-slideLeft-leave{-webkit-animation:rodal-slideLeft-leave both;animation:rodal-slideLeft-leave both}@-webkit-keyframes rodal-slideRight-enter{0%{-webkit-transform:translate3d(150px,0,0);transform:translate3d(150px,0,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes rodal-slideRight-enter{0%{-webkit-transform:translate3d(150px,0,0);transform:translate3d(150px,0,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}.rodal-slideRight-enter{-webkit-animation:rodal-slideRight-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-slideRight-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-slideRight-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(150px,0,0);transform:translate3d(150px,0,0)}}@keyframes rodal-slideRight-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(150px,0,0);transform:translate3d(150px,0,0)}}.rodal-slideRight-leave{-webkit-animation:rodal-slideRight-leave both;animation:rodal-slideRight-leave both}@-webkit-keyframes rodal-slideUp-enter{0%{-webkit-transform:translate3d(0,100px,0);transform:translate3d(0,100px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes rodal-slideUp-enter{0%{-webkit-transform:translate3d(0,100px,0);transform:translate3d(0,100px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}.rodal-slideUp-enter{-webkit-animation:rodal-slideUp-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-slideUp-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-slideUp-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(0,100px,0);transform:translate3d(0,100px,0)}}@keyframes rodal-slideUp-leave{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}to{-webkit-transform:translate3d(0,100px,0);transform:translate3d(0,100px,0)}}.rodal-slideUp-leave{-webkit-animation:rodal-slideUp-leave both;animation:rodal-slideUp-leave both}@-webkit-keyframes rodal-flip-enter{0%{-webkit-transform:perspective(400px) rotateX(60deg);transform:perspective(400px) rotateX(60deg)}70%{-webkit-transform:perspective(400px) rotateX(-15deg);transform:perspective(400px) rotateX(-15deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@keyframes rodal-flip-enter{0%{-webkit-transform:perspective(400px) rotateX(60deg);transform:perspective(400px) rotateX(60deg)}70%{-webkit-transform:perspective(400px) rotateX(-15deg);transform:perspective(400px) rotateX(-15deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}.rodal-flip-enter{-webkit-animation:rodal-flip-enter both ease-in;animation:rodal-flip-enter both ease-in;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}@-webkit-keyframes rodal-flip-leave{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotateX(-15deg);transform:perspective(400px) rotateX(-15deg)}to{-webkit-transform:perspective(400px) rotateX(45deg);transform:perspective(400px) rotateX(45deg)}}@keyframes rodal-flip-leave{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotateX(-15deg);transform:perspective(400px) rotateX(-15deg)}to{-webkit-transform:perspective(400px) rotateX(45deg);transform:perspective(400px) rotateX(45deg)}}.rodal-flip-leave{-webkit-animation:rodal-flip-leave both;animation:rodal-flip-leave both;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}@-webkit-keyframes rodal-rotate-enter{0%{transform-origin:center;-webkit-transform:rotate(-180deg) scale3d(.3,.3,.3);transform:rotate(-180deg) scale3d(.3,.3,.3)}0%,to{-webkit-transform-origin:center}to{transform-origin:center;-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes rodal-rotate-enter{0%{transform-origin:center;-webkit-transform:rotate(-180deg) scale3d(.3,.3,.3);transform:rotate(-180deg) scale3d(.3,.3,.3)}0%,to{-webkit-transform-origin:center}to{transform-origin:center;-webkit-transform:scaleX(1);transform:scaleX(1)}}.rodal-rotate-enter{-webkit-animation:rodal-rotate-enter both;animation:rodal-rotate-enter both}@-webkit-keyframes rodal-rotate-leave{0%{transform-origin:center}0%,to{-webkit-transform-origin:center}to{transform-origin:center;-webkit-transform:rotate(180deg) scale3d(.3,.3,.3);transform:rotate(180deg) scale3d(.3,.3,.3)}}@keyframes rodal-rotate-leave{0%{transform-origin:center}0%,to{-webkit-transform-origin:center}to{transform-origin:center;-webkit-transform:rotate(180deg) scale3d(.3,.3,.3);transform:rotate(180deg) scale3d(.3,.3,.3)}}.rodal-rotate-leave{-webkit-animation:rodal-rotate-leave both;animation:rodal-rotate-leave both}@-webkit-keyframes rodal-door-enter{0%{-webkit-transform:scaleX(0);transform:scaleX(0)}to{-webkit-transform:scaleZ(.1);transform:scaleZ(.1)}}@keyframes rodal-door-enter{0%{-webkit-transform:scaleX(0);transform:scaleX(0)}to{-webkit-transform:scaleZ(.1);transform:scaleZ(.1)}}.rodal-door-enter{-webkit-animation:rodal-door-enter both cubic-bezier(.4,0,0,1.5);animation:rodal-door-enter both cubic-bezier(.4,0,0,1.5)}@-webkit-keyframes rodal-door-leave{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}60%{-webkit-transform:scaleX(.01);transform:scaleX(.01)}to{-webkit-transform:scale3d(0,1,.1);transform:scale3d(0,1,.1)}}@keyframes rodal-door-leave{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}60%{-webkit-transform:scaleX(.01);transform:scaleX(.01)}to{-webkit-transform:scale3d(0,1,.1);transform:scale3d(0,1,.1)}}.rodal-door-leave{-webkit-animation:rodal-door-leave both;animation:rodal-door-leave both}", ""]);
+	  }, function (e, t, r) {
+	    function a(e, t) {
+	      for (var r = 0; r < e.length; r++) {
+	        var a = e[r],
+	            o = p[a.id];if (o) {
+	          o.refs++;for (var n = 0; n < o.parts.length; n++) {
+	            o.parts[n](a.parts[n]);
+	          }for (; n < a.parts.length; n++) {
+	            o.parts.push(f(a.parts[n], t));
+	          }
+	        } else {
+	          for (var i = [], n = 0; n < a.parts.length; n++) {
+	            i.push(f(a.parts[n], t));
+	          }p[a.id] = { id: a.id, refs: 1, parts: i };
 	        }
-	    }, {
-	        key: 'leave',
-	        value: function leave() {
-	            if (this.animationEvents) {
-	                this.setState({
-	                    animationType: 'leave'
-	                });
-	            } else {
-	                this.setState({
-	                    isShow: false
-	                });
-	            }
+	      }
+	    }function o(e) {
+	      for (var t = [], r = {}, a = 0; a < e.length; a++) {
+	        var o = e[a],
+	            n = o[0],
+	            i = o[1],
+	            s = o[2],
+	            l = o[3],
+	            f = { css: i, media: s, sourceMap: l };r[n] ? r[n].parts.push(f) : t.push(r[n] = { id: n, parts: [f] });
+	      }return t;
+	    }function n(e, t) {
+	      var r = k(),
+	          a = w[w.length - 1];if ("top" === e.insertAt) a ? a.nextSibling ? r.insertBefore(t, a.nextSibling) : r.appendChild(t) : r.insertBefore(t, r.firstChild), w.push(t);else {
+	        if ("bottom" !== e.insertAt) throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");r.appendChild(t);
+	      }
+	    }function i(e) {
+	      e.parentNode.removeChild(e);var t = w.indexOf(e);t >= 0 && w.splice(t, 1);
+	    }function s(e) {
+	      var t = document.createElement("style");return t.type = "text/css", n(e, t), t;
+	    }function l(e) {
+	      var t = document.createElement("link");return t.rel = "stylesheet", n(e, t), t;
+	    }function f(e, t) {
+	      var r, a, o;if (t.singleton) {
+	        var n = v++;r = h || (h = s(t)), a = d.bind(null, r, n, !1), o = d.bind(null, r, n, !0);
+	      } else e.sourceMap && "function" == typeof URL && "function" == typeof URL.createObjectURL && "function" == typeof URL.revokeObjectURL && "function" == typeof Blob && "function" == typeof btoa ? (r = l(t), a = c.bind(null, r), o = function o() {
+	        i(r), r.href && URL.revokeObjectURL(r.href);
+	      }) : (r = s(t), a = m.bind(null, r), o = function o() {
+	        i(r);
+	      });return a(e), function (t) {
+	        if (t) {
+	          if (t.css === e.css && t.media === e.media && t.sourceMap === e.sourceMap) return;a(e = t);
+	        } else o();
+	      };
+	    }function d(e, t, r, a) {
+	      var o = r ? "" : a.css;if (e.styleSheet) e.styleSheet.cssText = y(t, o);else {
+	        var n = document.createTextNode(o),
+	            i = e.childNodes;i[t] && e.removeChild(i[t]), i.length ? e.insertBefore(n, i[t]) : e.appendChild(n);
+	      }
+	    }function m(e, t) {
+	      var r = t.css,
+	          a = t.media;t.sourceMap;if (a && e.setAttribute("media", a), e.styleSheet) e.styleSheet.cssText = r;else {
+	        for (; e.firstChild;) {
+	          e.removeChild(e.firstChild);
+	        }e.appendChild(document.createTextNode(r));
+	      }
+	    }function c(e, t) {
+	      var r = t.css,
+	          a = (t.media, t.sourceMap);a && (r += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(a)))) + " */");var o = new Blob([r], { type: "text/css" }),
+	          n = e.href;e.href = URL.createObjectURL(o), n && URL.revokeObjectURL(n);
+	    }var p = {},
+	        b = function b(e) {
+	      var t;return function () {
+	        return "undefined" == typeof t && (t = e.apply(this, arguments)), t;
+	      };
+	    },
+	        u = b(function () {
+	      return (/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())
+	      );
+	    }),
+	        k = b(function () {
+	      return document.head || document.getElementsByTagName("head")[0];
+	    }),
+	        h = null,
+	        v = 0,
+	        w = [];e.exports = function (e, t) {
+	      t = t || {}, "undefined" == typeof t.singleton && (t.singleton = u()), "undefined" == typeof t.insertAt && (t.insertAt = "bottom");var r = o(e);return a(r, t), function (e) {
+	        for (var n = [], i = 0; i < r.length; i++) {
+	          var s = r[i],
+	              l = p[s.id];l.refs--, n.push(l);
+	        }if (e) {
+	          var f = o(e);a(f, t);
+	        }for (var i = 0; i < n.length; i++) {
+	          var l = n[i];if (0 === l.refs) {
+	            for (var d = 0; d < l.parts.length; d++) {
+	              l.parts[d]();
+	            }delete p[l.id];
+	          }
 	        }
-	    }, {
-	        key: 'animationEnd',
-	        value: function animationEnd(e) {
-	            var node = _reactDom2.default.findDOMNode(this);
-	            if (e && e.target !== node) {
-	                return;
-	            }
-
-	            if (this.state.animationType === 'leave') {
-	                this.setState({
-	                    isShow: false
-	                });
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var mask = this.props.showMask ? _react2.default.createElement('div', { className: 'rodal-mask', onClick: this.props.onClose }) : null;
-	            var style = {
-	                display: this.state.isShow ? 'block' : 'none',
-	                WebkitAnimationDuration: this.props.duration + 'ms',
-	                animationDuration: this.props.duration + 'ms'
-	            };
-
-	            return _react2.default.createElement(
-	                'div',
-	                { style: style, className: "rodal rodal-fade-" + this.state.animationType },
-	                mask,
-	                _react2.default.createElement(
-	                    Dialog,
-	                    _extends({}, this.props, { animationType: this.state.animationType }),
-	                    this.props.children
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Rodal;
-	}(Component);
-
-	Rodal.propTypes = propTypes;
-	Rodal.defaultProps = defaultProps;
-
-	exports.default = Rodal;
+	      };
+	    };var y = function () {
+	      var e = [];return function (t, r) {
+	        return e[t] = r, e.filter(Boolean).join("\n");
+	      };
+	    }();
+	  }, function (e, t, r) {
+	    var a = r(3);"string" == typeof a && (a = [[e.id, a, ""]]);r(4)(a, {});a.locals && (e.exports = a.locals);
+	  }, function (t, r) {
+	    t.exports = e;
+	  }, function (e, r) {
+	    e.exports = t;
+	  }]);
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(173)(module)))
 
 /***/ },
 /* 173 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = addEndEventListener;
-	/**
-	 * detect animation events
-	 */
-
-	var EVENT_NAME_MAP = {
-	    'animation': 'animationend',
-	    'OAnimation': 'oAnimationEnd',
-	    'msAnimation': 'MSAnimationEnd',
-	    'MozAnimation': 'mozAnimationEnd',
-	    'WebkitAnimation': 'webkitAnimationEnd'
-	};
-
-	var endEvents = [];
-	var testStyle = document.createElement('div').style;
-
-	if (!('AnimationEvent' in window)) {
-	    delete EVENT_NAME_MAP.animation;
-	}
-
-	for (var styleName in EVENT_NAME_MAP) {
-	    if (styleName in testStyle) {
-	        endEvents.push(EVENT_NAME_MAP[styleName]);
-	        break;
-	    }
-	}
-
-	function addEndEventListener(node, eventListener) {
-	    if (endEvents.length === 0) {
-	        window.setTimeout(eventListener, 0);
-	        return;
-	    }
-
-	    endEvents.forEach(function (event) {
-	        node.addEventListener(event, eventListener, false);
-	    });
-
-	    return {
-	        remove: function remove() {
-	            endEvents.forEach(function (event) {
-	                node.removeEventListener(event, eventListener, false);
-	            });
-	        }
-	    };
+	module.exports = function (module) {
+		if (!module.webpackPolyfill) {
+			module.deprecate = function () {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
 	};
 
 /***/ },
-/* 174 */,
-/* 175 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(175);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
+	var update = __webpack_require__(177)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./rodal.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./rodal.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./index.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./index.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -20457,21 +20441,21 @@
 	}
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(177)();
+	exports = module.exports = __webpack_require__(176)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "/* -- container -- */\n.rodal,\n.rodal-mask {\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 100;\n}\n\n.rodal {\n    position: fixed;\n}\n\n/* -- mask -- */\n.rodal-mask {\n    position: absolute;\n    background: rgba(0, 0, 0, .3);\n}\n\n/* -- dialog -- */\n.rodal-dialog {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    z-index: 101;\n    background: #fff;\n    border-radius: 3px;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);\n}\n\n/* -- close button -- */\n.rodal-close {\n    position: absolute;\n    cursor: pointer;\n    top: 16px;\n    right: 16px;\n    width: 16px;\n    height: 16px;\n}\n\n.rodal-close:before,\n.rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: background .2s;\n    transition: background .2s;\n}\n\n.rodal-close:before {\n    -webkit-transform: rotate(45deg);\n            transform: rotate(45deg);\n}\n\n.rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n            transform: rotate(-45deg);\n}\n\n.rodal-close:hover:before,\n.rodal-close:hover:after {\n    background: #333;\n}\n\n/* -- title -- */\n.rodal-header {\n    font-size: 16px;\n    padding: 16px;\n    border-bottom: 1px solid #e9e9e9;\n}\n\n/* -- body -- */\n.rodal-body {\n    padding: 16px;\n}\n\n/* -- fade -- */\n@-webkit-keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n    to {\n        opacity: 1;\n    }\n}\n@keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n    to {\n        opacity: 1;\n    }\n}\n\n.rodal-fade-enter {\n    -webkit-animation: rodal-fade-enter both ease-in;\n            animation: rodal-fade-enter both ease-in;\n}\n\n@-webkit-keyframes rodal-fade-leave {\n    from {\n        opacity: 1;\n    }\n    to {\n        opacity: 0\n    }\n}\n\n@keyframes rodal-fade-leave {\n    from {\n        opacity: 1;\n    }\n    to {\n        opacity: 0\n    }\n}\n\n.rodal-fade-leave {\n    -webkit-animation: rodal-fade-leave both ease-out;\n            animation: rodal-fade-leave both ease-out;\n}\n\n/* -- zoom -- */\n@-webkit-keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n@keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n\n.rodal-zoom-enter {\n    -webkit-animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-zoom-leave {\n    from {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-zoom-leave {\n    from {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-zoom-leave {\n    -webkit-animation: rodal-zoom-leave both;\n            animation: rodal-zoom-leave both;\n}\n\n/* -- slideDown -- */\n@-webkit-keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n                transform: translate3d(0, -100px, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n@keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n                transform: translate3d(0, -100px, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n\n.rodal-slideDown-enter {\n    -webkit-animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideDown-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n                transform: translate3d(0, -100px, 0);\n    }\n}\n\n@keyframes rodal-slideDown-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n                transform: translate3d(0, -100px, 0);\n    }\n}\n\n.rodal-slideDown-leave {\n    -webkit-animation: rodal-slideDown-leave both;\n            animation: rodal-slideDown-leave both;\n}\n\n/* -- slideLeft -- */\n@-webkit-keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n                transform: translate3d(-150px, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n@keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n                transform: translate3d(-150px, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n\n.rodal-slideLeft-enter {\n    -webkit-animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideLeft-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n                transform: translate3d(-150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideLeft-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n                transform: translate3d(-150px, 0, 0);\n    }\n}\n\n.rodal-slideLeft-leave {\n    -webkit-animation: rodal-slideLeft-leave both;\n            animation: rodal-slideLeft-leave both;\n}\n\n/* -- slideRight -- */\n@-webkit-keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n                transform: translate3d(150px, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n@keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n                transform: translate3d(150px, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n\n.rodal-slideRight-enter {\n    -webkit-animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideRight-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n                transform: translate3d(150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideRight-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n                transform: translate3d(150px, 0, 0);\n    }\n}\n\n.rodal-slideRight-leave {\n    -webkit-animation: rodal-slideRight-leave both;\n            animation: rodal-slideRight-leave both;\n}\n\n/* -- slideUp -- */\n@-webkit-keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n                transform: translate3d(0, 100px, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n@keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n                transform: translate3d(0, 100px, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n}\n\n.rodal-slideUp-enter {\n    -webkit-animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideUp-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n                transform: translate3d(0, 100px, 0);\n    }\n}\n\n@keyframes rodal-slideUp-leave {\n    from {\n        -webkit-transform: translate3d(0, 0, 0);\n                transform: translate3d(0, 0, 0);\n    }\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n                transform: translate3d(0, 100px, 0);\n    }\n}\n\n.rodal-slideUp-leave {\n    -webkit-animation: rodal-slideUp-leave both;\n            animation: rodal-slideUp-leave both;\n}\n\n/* -- flip -- */\n@-webkit-keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n                transform: perspective(400px);\n    }\n}\n@keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n                transform: perspective(400px);\n    }\n}\n\n.rodal-flip-enter {\n    -webkit-animation: rodal-flip-enter both ease-in;\n            animation: rodal-flip-enter both ease-in;\n    -webkit-backface-visibility: visible !important;\n            backface-visibility: visible !important;\n}\n\n@-webkit-keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n                transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n@keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n                transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n                transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n.rodal-flip-leave {\n    -webkit-animation: rodal-flip-leave both;\n            animation: rodal-flip-leave both;\n    -webkit-backface-visibility: visible !important;\n            backface-visibility: visible !important;\n}\n\n/* -- rotate -- */\n@-webkit-keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n                transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n    to {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n@keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n                transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n    to {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n\n.rodal-rotate-enter {\n    -webkit-animation: rodal-rotate-enter both;\n            animation: rodal-rotate-enter both;\n}\n\n@-webkit-keyframes rodal-rotate-leave {\n    from {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n    }\n    to {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n                transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-rotate-leave {\n    from {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n    }\n    to {\n        -webkit-transform-origin: center;\n                transform-origin: center;\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n                transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-rotate-leave {\n    -webkit-animation: rodal-rotate-leave both;\n            animation: rodal-rotate-leave both;\n}\n\n/* -- door -- */\n@-webkit-keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n                transform: scale3d(0, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(1, 1, .1);\n                transform: scale3d(1, 1, .1);\n    }\n}\n@keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n                transform: scale3d(0, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(1, 1, .1);\n                transform: scale3d(1, 1, .1);\n    }\n}\n\n.rodal-door-enter {\n    -webkit-animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n            animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-door-leave {\n    from {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n                transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n                transform: scale3d(0, 1, .1);\n    }\n}\n\n@keyframes rodal-door-leave {\n    from {\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n                transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n                transform: scale3d(0, 1, .1);\n    }\n}\n\n.rodal-door-leave {\n    -webkit-animation: rodal-door-leave both;\n            animation: rodal-door-leave both;\n}", ""]);
+	exports.push([module.id, "/* -- normalize -- */\n*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\nhtml {\n    font-family: \"Open Sans\",sans-serif;\n}\na {\n    text-decoration: none;\n    background-color: transparent;\n}\na:hover {\n    outline: 0;\n    text-decoration: none;\n}\na:focus {\n    outline: none;\n    text-decoration: none;\n}\nbutton {\n    color: inherit;\n    font: inherit;\n    margin: 0;\n}\nbutton {\n    overflow: visible;\n    text-transform: none;\n    -webkit-appearance: button;\n    cursor: pointer;\n}\nbutton:focus {\n    outline: none;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n    border: 0;\n    padding: 0;\n}\n\n/* -- container -- */\n#app,\n.wrap {\n    height: 100%;\n}\n.container {\n    width: 100%;\n}\n.title,\n.intro {\n    color: #fff;\n    text-align: center;\n    text-shadow: 0 1px 2px rgba(0,0,0,0.2);\n}\n.title {\n    font-size: 70px;\n    margin: 0;\n}\n.intro {\n    font-size: 30px;\n    margin: 15px 10px 20px;\n}\n.btn-area {\n    width: 600px;\n    margin: 0 auto;\n}\n\n/* -- scale animation -- */\n@-webkit-keyframes scale {\n    from {\n        opacity: 0;\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        opacity: 1;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n@keyframes scale {\n    from {\n        opacity: 0;\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        opacity: 1;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n.scale {\n    -webkit-animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);\n            animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n/* -- btn -- */\n.btn {\n    display: inline-block;\n    color: #0a1855;\n    width: 140px;\n    padding: 0;\n    font-size: 18px;\n    background: #fff;\n    margin: 20px 30px;\n    line-height: 42px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    text-align: center;\n    border: none;\n    border-radius: 4px;\n}\n.btn:hover {\n    box-shadow: 0 0 50px rgba(255,255,255,.3);\n}\n.btn:active {\n    box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);\n}\n@media (max-width: 600px) {\n    .container {\n        padding-top: 30px!important;\n    }\n    .title {\n        font-size: 40px;\n    }\n    .intro {\n        font-size: 20px;\n    }\n    .btn {\n        width: 35%;\n        font-size: 16px;\n        line-height: 34px;\n        margin: 10px 0 10px 10%;\n    }\n    .btn-area {\n        width: 100%;\n    }\n}\n\n/* -- title -- */\n.header {\n    font-size: 16px;\n    padding-bottom: 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n\n/* -- body -- */\n.body {\n    padding-top: 10px;\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20526,7 +20510,7 @@
 	};
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20777,46 +20761,6 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
-
-
-/***/ },
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(180);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./index.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./index.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(177)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "/* -- normalize -- */\n*,\n*:before,\n*:after {\n    box-sizing: border-box;\n}\nhtml {\n    font-family: \"Open Sans\",sans-serif;\n}\na {\n    text-decoration: none;\n    background-color: transparent;\n}\na:hover {\n    outline: 0;\n    text-decoration: none;\n}\na:focus {\n    outline: none;\n    text-decoration: none;\n}\nbutton {\n    color: inherit;\n    font: inherit;\n    margin: 0;\n}\nbutton {\n    overflow: visible;\n    text-transform: none;\n    -webkit-appearance: button;\n    cursor: pointer;\n}\nbutton:focus {\n    outline: none;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n    border: 0;\n    padding: 0;\n}\n\n/* -- container -- */\n#app,\n.wrap {\n    height: 100%;\n}\n.container {\n    width: 100%;\n}\n.title,\n.intro {\n    color: #fff;\n    text-align: center;\n    text-shadow: 0 1px 2px rgba(0,0,0,0.2);\n}\n.title {\n    font-size: 70px;\n    margin: 0;\n}\n.intro {\n    font-size: 30px;\n    margin: 15px 10px 20px;\n}\n.btn-area {\n    width: 600px;\n    margin: 0 auto;\n}\n\n/* -- scale animation -- */\n@-webkit-keyframes scale {\n    from {\n        opacity: 0;\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        opacity: 1;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n@keyframes scale {\n    from {\n        opacity: 0;\n        -webkit-transform: scale3d(.3, .3, .3);\n                transform: scale3d(.3, .3, .3);\n    }\n    to {\n        opacity: 1;\n        -webkit-transform: scale3d(1, 1, 1);\n                transform: scale3d(1, 1, 1);\n    }\n}\n.scale {\n    -webkit-animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);\n            animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n/* -- btn -- */\n.btn {\n    display: inline-block;\n    color: #0a1855;\n    width: 140px;\n    padding: 0;\n    font-size: 18px;\n    background: #fff;\n    margin: 20px 30px;\n    line-height: 42px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    text-align: center;\n    border: none;\n    border-radius: 4px;\n}\n.btn:hover {\n    box-shadow: 0 0 50px rgba(255,255,255,.3);\n}\n.btn:active {\n    box-shadow: 0 0 50px rgba(255,255,255,.3), inset 2px 2px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0);\n}\n@media (max-width: 600px) {\n    .container {\n        padding-top: 30px!important;\n    }\n    .title {\n        font-size: 40px;\n    }\n    .intro {\n        font-size: 20px;\n    }\n    .btn {\n        width: 35%;\n        font-size: 16px;\n        line-height: 34px;\n        margin: 10px 0 10px 10%;\n    }\n    .btn-area {\n        width: 100%;\n    }\n}", ""]);
-
-	// exports
 
 
 /***/ }

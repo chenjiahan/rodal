@@ -19,7 +19,7 @@
   },
   "scripts": {
     "dev": "webpack --watch",
-    "build": "webpack --config webpack.config.lib.js"
+    "build": "webpack --config webpack.config.lib.js -p"
   },
   "repository": {
     "type": "git",

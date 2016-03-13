@@ -122,3 +122,15 @@ input::-moz-focus-inner {
         width: 100%;
     }
 }
+
+/* -- title -- */
+.header {
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+/* -- body -- */
+.body {
+    padding-top: 10px;
+}

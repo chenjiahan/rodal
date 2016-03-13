@@ -47,13 +47,12 @@ class App extends React.Component {
                     <h3 className="intro scale">A React modal with animations.</h3>
                     <div className="btn-area">{buttons}</div>
                 </div>
-
                 <Rodal visible={this.state.visible}
                        onClose={this.hide.bind(this)}
                        animation={this.state.animation}
                 >
-                    <div className="rodal-header">Rodal</div>
-                    <div className="rodal-body">A React modal with animations.</div>
+                    <div className="header">Rodal</div>
+                    <div className="body">A React modal with animations.</div>
                 </Rodal>
             </div>
         )
