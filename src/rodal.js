@@ -16,12 +16,14 @@ const propTypes = {
     showMask        : PropTypes.bool,
     showCloseButton : PropTypes.bool,
     animation       : PropTypes.string,
-    duration        : PropTypes.number
+    duration        : PropTypes.number,
+    measure         : PropTypes.string
 };
 
 const defaultProps = {
     width           : 400,
     height          : 240,
+    measure         : 'px',
     visible         : false,
     showMask        : true,
     showCloseButton : true,
@@ -34,10 +36,10 @@ const Dialog = props => {
     const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
     const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
     const style = {
-        width                   : props.width,
-        height                  : props.height,
-        marginTop               : - props.height / 2 - 20,
-        marginLeft              : - props.width / 2,
+        width                   : (props.width) + measure,
+        height                  : (props.height) + measure,
+        marginTop               : (- props.height / 2) + measure,
+        marginLeft              : (- props.width / 2) + measure,
         animationDuration       : props.duration + 'ms',
         WebkitAnimationDuration : props.duration + 'ms'
     };
