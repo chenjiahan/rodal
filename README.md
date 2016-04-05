@@ -45,6 +45,7 @@ Property|Type|Default|Description
 ---|---|---|---
 width|number|400|width of dialog
 height|number|240|height of dialog
+measure|string|px|measure of width and height
 onClose|func|/|onClose handler function
 visible|bool|false|whether to show dialog
 showMask|bool|true|whether to show mask
