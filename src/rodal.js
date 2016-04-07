@@ -36,10 +36,10 @@ const Dialog = props => {
     const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
     const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
     const style = {
-        width                   : (props.width) + measure,
-        height                  : (props.height) + measure,
-        marginTop               : (- props.height / 2) + measure,
-        marginLeft              : (- props.width / 2) + measure,
+        width                   : (props.width) + props.measure,
+        height                  : (props.height) + props.measure,
+        marginTop               : (- props.height / 2) + props.measure,
+        marginLeft              : (- props.width / 2) + props.measure,
         animationDuration       : props.duration + 'ms',
         WebkitAnimationDuration : props.duration + 'ms'
     };

@@ -1,8 +1,8 @@
 {
   "name": "rodal",
-  "version": "1.2.6",
+  "version": "1.2.9",
   "description": "A React modal with animations.",
-  "main": "dist/index.js",
+  "main": "dist/rodal.js",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel": "^6.5.2",

@@ -4,3 +4,4 @@ webpack.config.js
 example
 .npmignore
 .idea
+webpack.config.lib.js
