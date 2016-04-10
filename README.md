@@ -7,7 +7,7 @@ A React modal with animations.
     npm install rodal
 
 ## Usage
-
+``` javascript
     import React from 'react';
     import Rodal from 'rodal';
     
@@ -38,7 +38,7 @@ A React modal with animations.
             )
         }
     }
-
+```
 ## Props
 
 Property|Type|Default|Description
