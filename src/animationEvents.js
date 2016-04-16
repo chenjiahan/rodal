@@ -1,8 +1,11 @@
 /**
- * detect animation events
+ * Detect animation events
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ * Github: https://github.com/facebook/react/blob/master/src/addons/transitions/ReactTransitionEvents.js
  */
 
-const EVENT_NAME_MAP = {
+const EVENT_MAP = {
           'animation' :       'animationend',
          'OAnimation' :      'oAnimationEnd',
         'msAnimation' :     'MSAnimationEnd',
@@ -11,22 +14,37 @@ const EVENT_NAME_MAP = {
 };
 
 const endEvents = [];
-const testStyle = document.createElement('div').style;
 
-if (!('AnimationEvent' in window)) {
-    delete EVENT_NAME_MAP.animation;
-}
-
-for (let styleName in EVENT_NAME_MAP) {
-    if (styleName in testStyle) {
-        endEvents.push(EVENT_NAME_MAP[styleName]);
-        break;
+function detectEvents() {
+    const testStyle = document.createElement('div').style;
+    if (!('AnimationEvent' in window)) {
+        delete EVENT_MAP.animation;
+    }
+    for (let styleName in EVENT_MAP) {
+        if (styleName in testStyle) {
+            endEvents.push(EVENT_MAP[styleName]);
+            break;
+        }
     }
 }
 
+const canUseDOM = !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+);
+
+if (canUseDOM) {
+    detectEvents();
+}
+
 export default function addEndEventListener(node, eventListener) {
+    // If CSS transitions are not supported, trigger an "end animation"
+    // event immediately.
     if (endEvents.length === 0) {
-        window.setTimeout(eventListener, 0);
+        if (typeof window !== 'undefined' && 'setTimeout' in window) {
+            window.setTimeout(eventListener, 0);
+        }
         return;
     }
 

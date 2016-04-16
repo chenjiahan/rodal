@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.2.9 http://rodal.cn
+ * Rodal v1.2.10 http://rodal.cn
  * =============================== */
 
 import React                from 'react';
@@ -131,7 +131,7 @@ class Rodal extends Component {
         const style = {
             display                 : this.state.isShow ? 'block' : 'none',
             WebkitAnimationDuration : this.props.duration + 'ms',
-            animationDuration       : this.props.duration + 'ms',
+            animationDuration       : this.props.duration + 'ms'
         };
 
         return (
