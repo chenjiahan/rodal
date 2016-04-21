@@ -87,15 +87,9 @@ class Rodal extends Component {
     }
 
     leave() {
-        if (this.animationEvents) {
-            this.setState({
-                animationType: 'leave'
-            });
-        } else {
-            this.setState({
-                isShow: false
-            })
-        }
+        this.setState({
+            animationType: 'leave'
+        });
     }
 
     animationEnd() {
