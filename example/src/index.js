@@ -53,6 +53,8 @@ class App extends React.Component {
                 >
                     <div className="header">Rodal</div>
                     <div className="body">A React modal with animations.</div>
+                    <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
+                    <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
                 </Rodal>
             </div>
         )

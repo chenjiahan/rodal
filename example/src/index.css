@@ -23,8 +23,6 @@ button {
     color: inherit;
     font: inherit;
     margin: 0;
-}
-button {
     overflow: visible;
     text-transform: none;
     -webkit-appearance: button;
@@ -132,5 +130,43 @@ input::-moz-focus-inner {
 
 /* -- body -- */
 .body {
-    padding-top: 10px;
+    padding-top: 15px;
+}
+
+/* -- button -- */
+.rodal-cancel-btn, .rodal-confirm-btn {
+    position: absolute;
+    font: inherit;
+    bottom: 16px;
+    width: 70px;
+    padding: 4px 15px;
+    border-radius: 3px;
+    transition: background .2s;
+    border: 1px solid #03a9f4;
+}
+.rodal-confirm-btn {
+    color: #fff;
+    right: 102px;
+    background: #03a9f4;
+}
+.rodal-confirm-btn:hover {
+    background: #0098e3;
+}
+.rodal-cancel-btn {
+    color: #03a9f4;
+    right: 16px;
+    background: #fff;
+}
+.rodal-cancel-btn:hover {
+    background: #fafafa;
+}
+.rodal-cancel-btn:focus, .rodal-confirm-btn:focus {
+    outline: none;
+}
+.rodal-confirm-btn:active {
+    background: #0087d2;
+}
+.rodal-cancel-btn:active {
+    background: #fafafa;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,.2),0 0 1px transparent;
 }
