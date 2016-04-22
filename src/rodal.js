@@ -3,8 +3,6 @@
  * =============================== */
 
 import React                from 'react';
-import ReactDOM             from 'react-dom';
-import addEndEventListener  from './animationEvents';
 import './rodal.css';
 
 const { PropTypes, Component } = React;
@@ -57,6 +55,7 @@ class Rodal extends Component {
     constructor(props) {
         super(props);
 
+        this.animationEnd = this.animationEnd.bind(this);
         this.state = {
             isShow        : false,
             animationType : 'leave'
@@ -67,22 +66,8 @@ class Rodal extends Component {
      * add animation event listener
      */
     componentDidMount() {
-        this.animationEvents = addEndEventListener(
-            ReactDOM.findDOMNode(this),
-            this.animationEnd.bind(this)
-        );
-
         if (this.props.visible) {
             this.enter();
-        }
-    }
-
-    /**
-     * remove animation event listener
-     */
-    componentWillUnmount() {
-        if (this.animationEvents) {
-            this.animationEvents.remove();
         }
     }
 
@@ -102,23 +87,12 @@ class Rodal extends Component {
     }
 
     leave() {
-        if (this.animationEvents) {
-            this.setState({
-                animationType: 'leave'
-            });
-        } else {
-            this.setState({
-                isShow: false
-            })
-        }
+        this.setState({
+            animationType: 'leave'
+        });
     }
 
-    animationEnd(e) {
-        const node = ReactDOM.findDOMNode(this);
-        if (e && e.target !== node) {
-            return;
-        }
-
+    animationEnd() {
         if (this.state.animationType === 'leave') {
             this.setState({
                 isShow: false
@@ -135,7 +109,7 @@ class Rodal extends Component {
         };
 
         return (
-            <div style={style} className={"rodal rodal-fade-" + this.state.animationType}>
+            <div style={style} className={"rodal rodal-fade-" + this.state.animationType} onAnimationEnd={ this.animationEnd }>
                 {mask}
                 <Dialog {...this.props} animationType={this.state.animationType}>
                     {this.props.children}
