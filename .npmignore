@@ -1,7 +1,7 @@
-Gulpfile.js
-webpack.config.js
-.gitignore
-example
-.npmignore
+src
 .idea
+example
+.gitignore
+.npmignore
+webpack.config.js
 webpack.config.lib.js

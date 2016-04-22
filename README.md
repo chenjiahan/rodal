@@ -2,9 +2,14 @@
 A React modal with animations.  
 [Example](http://rodal.cn)
 
-## Install
+## Installation    
+React 15
 
-    npm install rodal
+    npm i rodal --save-dev
+
+React 0.14
+
+    npm i rodal@1.2.10 --save-dev
 
 ## Usage
 ``` javascript
@@ -39,6 +44,12 @@ class App extends React.Component {
     }
 }
 ```
+
+## Dependencies
+* React
+* css-loader
+* style-loader
+
 ## Props
 
 Property|Type|Default|Description

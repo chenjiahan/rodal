@@ -1,8 +1,8 @@
 /* ===============================
- * Rodal v1.2.10 http://rodal.cn
+ * Rodal v1.3.0 http://rodal.cn
  * =============================== */
 
-import React                from 'react';
+import React from 'react';
 import './rodal.css';
 
 const { PropTypes, Component } = React;
@@ -33,13 +33,14 @@ const Dialog = props => {
 
     const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
     const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
+    const { width, height, measure, duration } = props;
     const style = {
-        width                   : (props.width) + props.measure,
-        height                  : (props.height) + props.measure,
-        marginTop               : (- props.height / 2) + props.measure,
-        marginLeft              : (- props.width / 2) + props.measure,
-        animationDuration       : props.duration + 'ms',
-        WebkitAnimationDuration : props.duration + 'ms'
+        width                   : width + measure,
+        height                  : height + measure,
+        marginTop               : - height / 2 + measure,
+        marginLeft              : - width / 2 + measure,
+        animationDuration       : duration + 'ms',
+        WebkitAnimationDuration : duration + 'ms'
     };
 
     return (
@@ -62,9 +63,6 @@ class Rodal extends Component {
         };
     }
 
-    /**
-     * add animation event listener
-     */
     componentDidMount() {
         if (this.props.visible) {
             this.enter();
@@ -109,7 +107,7 @@ class Rodal extends Component {
         };
 
         return (
-            <div style={style} className={"rodal rodal-fade-" + this.state.animationType} onAnimationEnd={ this.animationEnd }>
+            <div style={style} className={"rodal rodal-fade-" + this.state.animationType} onAnimationEnd={this.animationEnd}>
                 {mask}
                 <Dialog {...this.props} animationType={this.state.animationType}>
                     {this.props.children}

@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     entry: "./src/rodal.js",
     output: {
@@ -24,5 +26,12 @@ module.exports = {
                 loaders: ['style', 'css', 'autoprefixer']
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+    ]
 };
