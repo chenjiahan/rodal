@@ -21,7 +21,8 @@
   "scripts": {
     "dev": "webpack --watch",
     "build": "webpack --config webpack.config.lib.js -p",
-    "lib": "babel src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib"
+    "lib": "babel src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
+    "test": "npm run build && npm run lib"
   },
   "repository": {
     "type": "git",
