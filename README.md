@@ -1,4 +1,4 @@
-# Rodal
+# Rodal [![NPM downloads](http://img.shields.io/npm/dm/rodal.svg?style=flat-square)](https://npmjs.org/package/rodal)
 A React modal with animations.  
 [Example](http://rodal.cn)
 
