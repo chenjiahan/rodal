@@ -5,11 +5,11 @@ A React modal with animations.
 ## Installation    
 React 15
 
-    npm i rodal --save-dev
+    npm i rodal --save
 
 React 0.14
 
-    npm i rodal@1.2.10 --save-dev
+    npm i rodal@1.2.10 --save
 
 ## Usage
 ``` javascript
