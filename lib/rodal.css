@@ -75,17 +75,11 @@
     from {
         opacity: 0;
     }
-    to {
-        opacity: 1;
-    }
 }
 
 @keyframes rodal-fade-enter {
     from {
         opacity: 0;
-    }
-    to {
-        opacity: 1;
     }
 }
 
@@ -95,18 +89,12 @@
 }
 
 @-webkit-keyframes rodal-fade-leave {
-    from {
-        opacity: 1;
-    }
     to {
         opacity: 0
     }
 }
 
 @keyframes rodal-fade-leave {
-    from {
-        opacity: 1;
-    }
     to {
         opacity: 0
     }
@@ -123,20 +111,12 @@
         -webkit-transform: scale3d(.3, .3, .3);
         transform: scale3d(.3, .3, .3);
     }
-    to {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
 }
 
 @keyframes rodal-zoom-enter {
     from {
         -webkit-transform: scale3d(.3, .3, .3);
         transform: scale3d(.3, .3, .3);
-    }
-    to {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
     }
 }
 
@@ -146,10 +126,6 @@
 }
 
 @-webkit-keyframes rodal-zoom-leave {
-    from {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
     to {
         -webkit-transform: scale3d(.3, .3, .3);
         transform: scale3d(.3, .3, .3);
@@ -157,10 +133,6 @@
 }
 
 @keyframes rodal-zoom-leave {
-    from {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
     to {
         -webkit-transform: scale3d(.3, .3, .3);
         transform: scale3d(.3, .3, .3);
@@ -178,20 +150,12 @@
         -webkit-transform: translate3d(0, -100px, 0);
         transform: translate3d(0, -100px, 0);
     }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
 }
 
 @keyframes rodal-slideDown-enter {
     from {
         -webkit-transform: translate3d(0, -100px, 0);
         transform: translate3d(0, -100px, 0);
-    }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -201,10 +165,6 @@
 }
 
 @-webkit-keyframes rodal-slideDown-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(0, -100px, 0);
         transform: translate3d(0, -100px, 0);
@@ -212,10 +172,6 @@
 }
 
 @keyframes rodal-slideDown-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(0, -100px, 0);
         transform: translate3d(0, -100px, 0);
@@ -233,20 +189,12 @@
         -webkit-transform: translate3d(-150px, 0, 0);
         transform: translate3d(-150px, 0, 0);
     }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
 }
 
 @keyframes rodal-slideLeft-enter {
     from {
         -webkit-transform: translate3d(-150px, 0, 0);
         transform: translate3d(-150px, 0, 0);
-    }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -256,10 +204,6 @@
 }
 
 @-webkit-keyframes rodal-slideLeft-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(-150px, 0, 0);
         transform: translate3d(-150px, 0, 0);
@@ -267,10 +211,6 @@
 }
 
 @keyframes rodal-slideLeft-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(-150px, 0, 0);
         transform: translate3d(-150px, 0, 0);
@@ -288,20 +228,12 @@
         -webkit-transform: translate3d(150px, 0, 0);
         transform: translate3d(150px, 0, 0);
     }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
 }
 
 @keyframes rodal-slideRight-enter {
     from {
         -webkit-transform: translate3d(150px, 0, 0);
         transform: translate3d(150px, 0, 0);
-    }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -311,10 +243,6 @@
 }
 
 @-webkit-keyframes rodal-slideRight-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(150px, 0, 0);
         transform: translate3d(150px, 0, 0);
@@ -322,10 +250,6 @@
 }
 
 @keyframes rodal-slideRight-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(150px, 0, 0);
         transform: translate3d(150px, 0, 0);
@@ -343,20 +267,12 @@
         -webkit-transform: translate3d(0, 100px, 0);
         transform: translate3d(0, 100px, 0);
     }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
 }
 
 @keyframes rodal-slideUp-enter {
     from {
         -webkit-transform: translate3d(0, 100px, 0);
         transform: translate3d(0, 100px, 0);
-    }
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -366,10 +282,6 @@
 }
 
 @-webkit-keyframes rodal-slideUp-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(0, 100px, 0);
         transform: translate3d(0, 100px, 0);
@@ -377,10 +289,6 @@
 }
 
 @keyframes rodal-slideUp-leave {
-    from {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
     to {
         -webkit-transform: translate3d(0, 100px, 0);
         transform: translate3d(0, 100px, 0);
@@ -470,60 +378,34 @@
 /* -- rotate -- */
 @-webkit-keyframes rodal-rotate-enter {
     from {
-        -webkit-transform-origin: center;
-        transform-origin: center;
         -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
         transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
-    }
-    to {
-        -webkit-transform-origin: center;
-        transform-origin: center;
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
     }
 }
 
 @keyframes rodal-rotate-enter {
     from {
-        -webkit-transform-origin: center;
-        transform-origin: center;
         -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
         transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);
-    }
-    to {
-        -webkit-transform-origin: center;
-        transform-origin: center;
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
     }
 }
 
 .rodal-rotate-enter {
     -webkit-animation: rodal-rotate-enter both;
     animation: rodal-rotate-enter both;
+    -webkit-transform-origin: center;
+    transform-origin: center;
 }
 
 @-webkit-keyframes rodal-rotate-leave {
-    from {
-        -webkit-transform-origin: center;
-        transform-origin: center;
-    }
     to {
-        -webkit-transform-origin: center;
-        transform-origin: center;
         -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
         transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
     }
 }
 
 @keyframes rodal-rotate-leave {
-    from {
-        -webkit-transform-origin: center;
-        transform-origin: center;
-    }
     to {
-        -webkit-transform-origin: center;
-        transform-origin: center;
         -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
         transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);
     }
@@ -532,6 +414,8 @@
 .rodal-rotate-leave {
     -webkit-animation: rodal-rotate-leave both;
     animation: rodal-rotate-leave both;
+    -webkit-transform-origin: center;
+    transform-origin: center;
 }
 
 /* -- door -- */
@@ -540,20 +424,12 @@
         -webkit-transform: scale3d(0, 1, 1);
         transform: scale3d(0, 1, 1);
     }
-    to {
-        -webkit-transform: scale3d(1, 1, .1);
-        transform: scale3d(1, 1, .1);
-    }
 }
 
 @keyframes rodal-door-enter {
     from {
         -webkit-transform: scale3d(0, 1, 1);
         transform: scale3d(0, 1, 1);
-    }
-    to {
-        -webkit-transform: scale3d(1, 1, .1);
-        transform: scale3d(1, 1, .1);
     }
 }
 
@@ -563,10 +439,6 @@
 }
 
 @-webkit-keyframes rodal-door-leave {
-    from {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
     60% {
         -webkit-transform: scale3d(.01, 1, 1);
         transform: scale3d(.01, 1, 1);
@@ -578,10 +450,6 @@
 }
 
 @keyframes rodal-door-leave {
-    from {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
     60% {
         -webkit-transform: scale3d(.01, 1, 1);
         transform: scale3d(.01, 1, 1);
