@@ -1,15 +1,15 @@
-# Rodal [![Dependency Status](https://david-dm.org/chenjiahan/rodal.svg?style=flat-square)](https://david-dm.org/chenjiahan/rodal)[![NPM downloads](http://img.shields.io/npm/dm/rodal.svg?style=flat-square)](https://npmjs.org/package/rodal)
+# Rodal [![Build Status](https://img.shields.io/travis/chenjiahan/rodal.svg?style=flat-square)](https://travis-ci.org/chenjiahan/rodal) [![Dependency Status](https://david-dm.org/chenjiahan/rodal.svg?style=flat-square)](https://david-dm.org/chenjiahan/rodal) [![NPM downloads](http://img.shields.io/npm/dm/rodal.svg?style=flat-square)](https://npmjs.org/package/rodal)
 A React modal with animations.  
 [Example](http://rodal.cn)
 
 ## Installation    
 React 15
 
-    npm i rodal --save-dev
+    npm i rodal --save
 
 React 0.14
 
-    npm i rodal@1.2.10 --save-dev
+    npm i rodal@1.2.10 --save
 
 ## Usage
 ``` javascript
