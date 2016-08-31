@@ -1,9 +1,8 @@
 /* ===============================
- * Rodal v1.3.0 http://rodal.cn
+ * Rodal v1.3.2 http://rodal.cn
  * =============================== */
 
 import React from 'react';
-import './rodal.css';
 
 const { PropTypes, Component } = React;
 const propTypes = {

@@ -16,6 +16,9 @@ React 0.14
 import React from 'react';
 import Rodal from 'rodal';
 
+// include styles
+import 'rodal/lib/rodal.css';
+
 class App extends React.Component {
 
     constructor(props) {
@@ -44,11 +47,6 @@ class App extends React.Component {
     }
 }
 ```
-
-## Dependencies
-* React
-* css-loader
-* style-loader
 
 ## Props
 
