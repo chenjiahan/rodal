@@ -6,29 +6,33 @@ import React from 'react';
 
 const { PropTypes, Component } = React;
 const propTypes = {
-    width           : PropTypes.number,
-    height          : PropTypes.number,
-    onClose         : PropTypes.func.isRequired,
-    visible         : PropTypes.bool,
-    showMask        : PropTypes.bool,
-    showCloseButton : PropTypes.bool,
-    animation       : PropTypes.string,
-    duration        : PropTypes.number,
-    measure         : PropTypes.string,
-    customStyles    : PropTypes.object
+    width            : PropTypes.number,
+    height           : PropTypes.number,
+    onClose          : PropTypes.func.isRequired,
+    visible          : PropTypes.bool,
+    showMask         : PropTypes.bool,
+    showCloseButton  : PropTypes.bool,
+    animation        : PropTypes.string,
+    duration         : PropTypes.number,
+    measure          : PropTypes.string,
+    customStyles     : PropTypes.object,
+    customMaskStyles : PropTypes.object,
 };
 
 const defaultProps = {
-    width           : 400,
-    height          : 240,
-    measure         : 'px',
-    visible         : false,
-    showMask        : true,
-    showCloseButton : true,
-    animation       : 'zoom',
-    duration        : 300,
-    customStyles    : {},
+    width            : 400,
+    height           : 240,
+    measure          : 'px',
+    visible          : false,
+    showMask         : true,
+    showCloseButton  : true,
+    animation        : 'zoom',
+    duration         : 300,
+    customStyles     : {},
+    customMaskStyles : {},
 };
+
+
 
 const Dialog = props => {
 
@@ -102,7 +106,7 @@ class Rodal extends Component {
     }
 
     render() {
-        const mask = this.props.showMask ? <div className="rodal-mask" onClick={this.props.onClose} /> : null;
+        const mask = this.props.showMask ? <div className="rodal-mask" style={this.props.customMaskStyles} onClick={this.props.onClose} /> : null;
         const style = {
             display                 : this.state.isShow ? 'block' : 'none',
             WebkitAnimationDuration : this.props.duration + 'ms',
