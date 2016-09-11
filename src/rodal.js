@@ -14,7 +14,8 @@ const propTypes = {
     showCloseButton : PropTypes.bool,
     animation       : PropTypes.string,
     duration        : PropTypes.number,
-    measure         : PropTypes.string
+    measure         : PropTypes.string,
+    customStyles    : PropTypes.object
 };
 
 const defaultProps = {
@@ -25,14 +26,15 @@ const defaultProps = {
     showMask        : true,
     showCloseButton : true,
     animation       : 'zoom',
-    duration        : 300
+    duration        : 300,
+    customStyles    : {},
 };
 
 const Dialog = props => {
 
     const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
     const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
-    const { width, height, measure, duration } = props;
+    const { width, height, measure, duration, customStyles } = props;
     const style = {
         width                   : width + measure,
         height                  : height + measure,
@@ -42,8 +44,10 @@ const Dialog = props => {
         WebkitAnimationDuration : duration + 'ms'
     };
 
+    const mergedStyles = Object.assign(style, customStyles)
+
     return (
-        <div style={style} className={className}>
+        <div style={mergedStyles} className={className}>
             {CloseButton}
             {props.children}
         </div>
