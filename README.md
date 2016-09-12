@@ -61,6 +61,8 @@ showMask|bool|true|whether to show mask
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation type
 duration|number|300|animation duration
+customStyles|object|/|custom styles
+customMaskStyles|object|/|custom mask styles
 
 ## Animation Types
 * zoom
