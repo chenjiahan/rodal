@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.3.2 http://rodal.cn
+ * Rodal v1.3.4 http://rodal.cn
  * =============================== */
 
 import React from 'react';
@@ -8,15 +8,16 @@ const { PropTypes, Component } = React;
 const propTypes = {
     width            : PropTypes.number,
     height           : PropTypes.number,
-    onClose          : PropTypes.func.isRequired,
+    measure          : PropTypes.string,
     visible          : PropTypes.bool,
     showMask         : PropTypes.bool,
     showCloseButton  : PropTypes.bool,
     animation        : PropTypes.string,
     duration         : PropTypes.number,
-    measure          : PropTypes.string,
+    className        : PropTypes.string,
     customStyles     : PropTypes.object,
     customMaskStyles : PropTypes.object,
+    onClose          : PropTypes.func.isRequired
 };
 
 const defaultProps = {
@@ -28,11 +29,10 @@ const defaultProps = {
     showCloseButton  : true,
     animation        : 'zoom',
     duration         : 300,
+    className        : '',
     customStyles     : {},
     customMaskStyles : {},
 };
-
-
 
 const Dialog = props => {
 
@@ -114,7 +114,10 @@ class Rodal extends Component {
         };
 
         return (
-            <div style={style} className={"rodal rodal-fade-" + this.state.animationType} onAnimationEnd={this.animationEnd}>
+            <div style={style} 
+                 className={"rodal rodal-fade-" + this.state.animationType + ' ' + this.props.className} 
+                 onAnimationEnd={this.animationEnd}
+            >
                 {mask}
                 <Dialog {...this.props} animationType={this.state.animationType}>
                     {this.props.children}
