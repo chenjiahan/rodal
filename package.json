@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "devDependencies": {
@@ -8,6 +8,7 @@
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.25.0",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "dev": "webpack --watch",
-    "lib": "babel src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
+    "lib": "babel --plugins transform-object-assign src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
     "test": "npm run lib"
   },
   "repository": {
