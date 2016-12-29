@@ -21,8 +21,11 @@
 /* -- dialog -- */
 .rodal-dialog {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     z-index: 101;
     padding: 15px;
     background: #fff;

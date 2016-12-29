@@ -759,12 +759,18 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 
-	function invariant(condition, format, a, b, c, d, e, f) {
-	  if (false) {
+	var validateFormat = function validateFormat(format) {};
+
+	if (false) {
+	  validateFormat = function validateFormat(format) {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
 	    }
-	  }
+	  };
+	}
+
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
 
 	  if (!condition) {
 	    var error;
@@ -3323,7 +3329,7 @@
 
 	'use strict';
 
-	module.exports = '15.4.0';
+	module.exports = '15.4.1';
 
 /***/ },
 /* 27 */
@@ -4726,6 +4732,28 @@
 	  return '.' + inst._rootNodeID;
 	};
 
+	function isInteractive(tag) {
+	  return tag === 'button' || tag === 'input' || tag === 'select' || tag === 'textarea';
+	}
+
+	function shouldPreventMouseEvent(name, type, props) {
+	  switch (name) {
+	    case 'onClick':
+	    case 'onClickCapture':
+	    case 'onDoubleClick':
+	    case 'onDoubleClickCapture':
+	    case 'onMouseDown':
+	    case 'onMouseDownCapture':
+	    case 'onMouseMove':
+	    case 'onMouseMoveCapture':
+	    case 'onMouseUp':
+	    case 'onMouseUpCapture':
+	      return !!(props.disabled && isInteractive(type));
+	    default:
+	      return false;
+	  }
+	}
+
 	/**
 	 * This is a unified interface for event plugins to be installed and configured.
 	 *
@@ -4794,7 +4822,12 @@
 	   * @return {?function} The stored callback.
 	   */
 	  getListener: function getListener(inst, registrationName) {
+	    // TODO: shouldPreventMouseEvent is DOM-specific and definitely should not
+	    // live here; needs to be moved to a better place soon
 	    var bankForRegistrationName = listenerBank[registrationName];
+	    if (shouldPreventMouseEvent(registrationName, inst._currentElement.type, inst._currentElement.props)) {
+	      return null;
+	    }
 	    var key = getDictionaryKey(inst);
 	    return bankForRegistrationName && bankForRegistrationName[key];
 	  },
@@ -15432,30 +15465,38 @@
 	// Set.prototype.keys
 	Set.prototype != null && typeof Set.prototype.keys === 'function' && isNative(Set.prototype.keys);
 
+	var setItem;
+	var getItem;
+	var removeItem;
+	var getItemIDs;
+	var addRoot;
+	var removeRoot;
+	var getRootIDs;
+
 	if (canUseCollections) {
 	  var itemMap = new Map();
 	  var rootIDSet = new Set();
 
-	  var setItem = function setItem(id, item) {
+	  setItem = function setItem(id, item) {
 	    itemMap.set(id, item);
 	  };
-	  var getItem = function getItem(id) {
+	  getItem = function getItem(id) {
 	    return itemMap.get(id);
 	  };
-	  var removeItem = function removeItem(id) {
+	  removeItem = function removeItem(id) {
 	    itemMap['delete'](id);
 	  };
-	  var getItemIDs = function getItemIDs() {
+	  getItemIDs = function getItemIDs() {
 	    return Array.from(itemMap.keys());
 	  };
 
-	  var addRoot = function addRoot(id) {
+	  addRoot = function addRoot(id) {
 	    rootIDSet.add(id);
 	  };
-	  var removeRoot = function removeRoot(id) {
+	  removeRoot = function removeRoot(id) {
 	    rootIDSet['delete'](id);
 	  };
-	  var getRootIDs = function getRootIDs() {
+	  getRootIDs = function getRootIDs() {
 	    return Array.from(rootIDSet.keys());
 	  };
 	} else {
@@ -15471,31 +15512,31 @@
 	    return parseInt(key.substr(1), 10);
 	  };
 
-	  var setItem = function setItem(id, item) {
+	  setItem = function setItem(id, item) {
 	    var key = getKeyFromID(id);
 	    itemByKey[key] = item;
 	  };
-	  var getItem = function getItem(id) {
+	  getItem = function getItem(id) {
 	    var key = getKeyFromID(id);
 	    return itemByKey[key];
 	  };
-	  var removeItem = function removeItem(id) {
+	  removeItem = function removeItem(id) {
 	    var key = getKeyFromID(id);
 	    delete itemByKey[key];
 	  };
-	  var getItemIDs = function getItemIDs() {
+	  getItemIDs = function getItemIDs() {
 	    return Object.keys(itemByKey).map(getIDFromKey);
 	  };
 
-	  var addRoot = function addRoot(id) {
+	  addRoot = function addRoot(id) {
 	    var key = getKeyFromID(id);
 	    rootByKey[key] = true;
 	  };
-	  var removeRoot = function removeRoot(id) {
+	  removeRoot = function removeRoot(id) {
 	    var key = getKeyFromID(id);
 	    delete rootByKey[key];
 	  };
-	  var getRootIDs = function getRootIDs() {
+	  getRootIDs = function getRootIDs() {
 	    return Object.keys(rootByKey).map(getIDFromKey);
 	  };
 	}
@@ -18749,18 +18790,6 @@
 	  return tag === 'button' || tag === 'input' || tag === 'select' || tag === 'textarea';
 	}
 
-	function shouldPreventMouseEvent(inst) {
-	  if (inst) {
-	    var disabled = inst._currentElement && inst._currentElement.props.disabled;
-
-	    if (disabled) {
-	      return isInteractive(inst._tag);
-	    }
-	  }
-
-	  return false;
-	}
-
 	var SimpleEventPlugin = {
 
 	  eventTypes: eventTypes,
@@ -18831,10 +18860,7 @@
 	      case 'topMouseDown':
 	      case 'topMouseMove':
 	      case 'topMouseUp':
-	        // Disabled elements should not respond to mouse events
-	        if (shouldPreventMouseEvent(targetInst)) {
-	          return null;
-	        }
+	      // TODO: Disabled elements should not respond to mouse events
 	      /* falls through */
 	      case 'topMouseOut':
 	      case 'topMouseOver':
@@ -20193,7 +20219,7 @@
 
 	'use strict';
 
-	module.exports = '15.4.0';
+	module.exports = '15.4.1';
 
 /***/ },
 /* 163 */
@@ -20418,8 +20444,6 @@
 	    var style = {
 	        width: width + measure,
 	        height: height + measure,
-	        marginTop: -height / 2 + measure,
-	        marginLeft: -width / 2 + measure,
 	        animationDuration: duration + 'ms',
 	        WebkitAnimationDuration: duration + 'ms'
 	    };
@@ -20892,7 +20916,7 @@
 
 
 	// module
-	exports.push([module.id, "/* -- container -- */\n.rodal,\n.rodal-mask {\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 100;\n}\n\n.rodal {\n    position: fixed;\n}\n\n/* -- mask -- */\n.rodal-mask {\n    position: absolute;\n    background: rgba(0, 0, 0, .3);\n}\n\n/* -- dialog -- */\n.rodal-dialog {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    z-index: 101;\n    padding: 15px;\n    background: #fff;\n    border-radius: 3px;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);\n}\n\n/* -- close button -- */\n.rodal-close {\n    position: absolute;\n    cursor: pointer;\n    top: 16px;\n    right: 16px;\n    width: 16px;\n    height: 16px;\n}\n\n.rodal-close:before,\n.rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: background .2s;\n    transition: background .2s;\n}\n\n.rodal-close:before {\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n\n.rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n    transform: rotate(-45deg);\n}\n\n.rodal-close:hover:before,\n.rodal-close:hover:after {\n    background: #333;\n}\n\n/* -- fade -- */\n@-webkit-keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n}\n\n@keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n}\n\n.rodal-fade-enter {\n    -webkit-animation: rodal-fade-enter both ease-in;\n    animation: rodal-fade-enter both ease-in;\n}\n\n@-webkit-keyframes rodal-fade-leave {\n    to {\n        opacity: 0\n    }\n}\n\n@keyframes rodal-fade-leave {\n    to {\n        opacity: 0\n    }\n}\n\n.rodal-fade-leave {\n    -webkit-animation: rodal-fade-leave both ease-out;\n    animation: rodal-fade-leave both ease-out;\n}\n\n/* -- zoom -- */\n@-webkit-keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-zoom-enter {\n    -webkit-animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-zoom-leave {\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-zoom-leave {\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-zoom-leave {\n    -webkit-animation: rodal-zoom-leave both;\n    animation: rodal-zoom-leave both;\n}\n\n/* -- slideDown -- */\n@-webkit-keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n@keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n.rodal-slideDown-enter {\n    -webkit-animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideDown-leave {\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n@keyframes rodal-slideDown-leave {\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n.rodal-slideDown-leave {\n    -webkit-animation: rodal-slideDown-leave both;\n    animation: rodal-slideDown-leave both;\n}\n\n/* -- slideLeft -- */\n@-webkit-keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n.rodal-slideLeft-enter {\n    -webkit-animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideLeft-leave {\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideLeft-leave {\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n.rodal-slideLeft-leave {\n    -webkit-animation: rodal-slideLeft-leave both;\n    animation: rodal-slideLeft-leave both;\n}\n\n/* -- slideRight -- */\n@-webkit-keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n.rodal-slideRight-enter {\n    -webkit-animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideRight-leave {\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideRight-leave {\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n.rodal-slideRight-leave {\n    -webkit-animation: rodal-slideRight-leave both;\n    animation: rodal-slideRight-leave both;\n}\n\n/* -- slideUp -- */\n@-webkit-keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n@keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n.rodal-slideUp-enter {\n    -webkit-animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideUp-leave {\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n@keyframes rodal-slideUp-leave {\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n.rodal-slideUp-leave {\n    -webkit-animation: rodal-slideUp-leave both;\n    animation: rodal-slideUp-leave both;\n}\n\n/* -- flip -- */\n@-webkit-keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n}\n\n@keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n}\n\n.rodal-flip-enter {\n    -webkit-animation: rodal-flip-enter both ease-in;\n    animation: rodal-flip-enter both ease-in;\n    -webkit-backface-visibility: visible !important;\n    backface-visibility: visible !important;\n}\n\n@-webkit-keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n@keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n.rodal-flip-leave {\n    -webkit-animation: rodal-flip-leave both;\n    animation: rodal-flip-leave both;\n    -webkit-backface-visibility: visible !important;\n    backface-visibility: visible !important;\n}\n\n/* -- rotate -- */\n@-webkit-keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-rotate-enter {\n    -webkit-animation: rodal-rotate-enter both;\n    animation: rodal-rotate-enter both;\n    -webkit-transform-origin: center;\n    transform-origin: center;\n}\n\n@-webkit-keyframes rodal-rotate-leave {\n    to {\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-rotate-leave {\n    to {\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-rotate-leave {\n    -webkit-animation: rodal-rotate-leave both;\n    animation: rodal-rotate-leave both;\n    -webkit-transform-origin: center;\n    transform-origin: center;\n}\n\n/* -- door -- */\n@-webkit-keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n        transform: scale3d(0, 1, 1);\n    }\n}\n\n@keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n        transform: scale3d(0, 1, 1);\n    }\n}\n\n.rodal-door-enter {\n    -webkit-animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-door-leave {\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n        transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n        transform: scale3d(0, 1, .1);\n    }\n}\n\n@keyframes rodal-door-leave {\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n        transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n        transform: scale3d(0, 1, .1);\n    }\n}\n\n.rodal-door-leave {\n    -webkit-animation: rodal-door-leave both;\n    animation: rodal-door-leave both;\n}", ""]);
+	exports.push([module.id, "/* -- container -- */\n.rodal,\n.rodal-mask {\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 100;\n}\n\n.rodal {\n    position: fixed;\n}\n\n/* -- mask -- */\n.rodal-mask {\n    position: absolute;\n    background: rgba(0, 0, 0, .3);\n}\n\n/* -- dialog -- */\n.rodal-dialog {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    margin: auto;\n    z-index: 101;\n    padding: 15px;\n    background: #fff;\n    border-radius: 3px;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);\n}\n\n/* -- close button -- */\n.rodal-close {\n    position: absolute;\n    cursor: pointer;\n    top: 16px;\n    right: 16px;\n    width: 16px;\n    height: 16px;\n}\n\n.rodal-close:before,\n.rodal-close:after {\n    position: absolute;\n    content: '';\n    height: 2px;\n    width: 100%;\n    top: 50%;\n    left: 0;\n    margin-top: -1px;\n    background: #999;\n    border-radius: 100%;\n    -webkit-transition: background .2s;\n    transition: background .2s;\n}\n\n.rodal-close:before {\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n\n.rodal-close:after {\n    -webkit-transform: rotate(-45deg);\n    transform: rotate(-45deg);\n}\n\n.rodal-close:hover:before,\n.rodal-close:hover:after {\n    background: #333;\n}\n\n/* -- fade -- */\n@-webkit-keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n}\n\n@keyframes rodal-fade-enter {\n    from {\n        opacity: 0;\n    }\n}\n\n.rodal-fade-enter {\n    -webkit-animation: rodal-fade-enter both ease-in;\n    animation: rodal-fade-enter both ease-in;\n}\n\n@-webkit-keyframes rodal-fade-leave {\n    to {\n        opacity: 0\n    }\n}\n\n@keyframes rodal-fade-leave {\n    to {\n        opacity: 0\n    }\n}\n\n.rodal-fade-leave {\n    -webkit-animation: rodal-fade-leave both ease-out;\n    animation: rodal-fade-leave both ease-out;\n}\n\n/* -- zoom -- */\n@-webkit-keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-zoom-enter {\n    from {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-zoom-enter {\n    -webkit-animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-zoom-leave {\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-zoom-leave {\n    to {\n        -webkit-transform: scale3d(.3, .3, .3);\n        transform: scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-zoom-leave {\n    -webkit-animation: rodal-zoom-leave both;\n    animation: rodal-zoom-leave both;\n}\n\n/* -- slideDown -- */\n@-webkit-keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n@keyframes rodal-slideDown-enter {\n    from {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n.rodal-slideDown-enter {\n    -webkit-animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideDown-leave {\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n@keyframes rodal-slideDown-leave {\n    to {\n        -webkit-transform: translate3d(0, -100px, 0);\n        transform: translate3d(0, -100px, 0);\n    }\n}\n\n.rodal-slideDown-leave {\n    -webkit-animation: rodal-slideDown-leave both;\n    animation: rodal-slideDown-leave both;\n}\n\n/* -- slideLeft -- */\n@-webkit-keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideLeft-enter {\n    from {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n.rodal-slideLeft-enter {\n    -webkit-animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideLeft-leave {\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideLeft-leave {\n    to {\n        -webkit-transform: translate3d(-150px, 0, 0);\n        transform: translate3d(-150px, 0, 0);\n    }\n}\n\n.rodal-slideLeft-leave {\n    -webkit-animation: rodal-slideLeft-leave both;\n    animation: rodal-slideLeft-leave both;\n}\n\n/* -- slideRight -- */\n@-webkit-keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideRight-enter {\n    from {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n.rodal-slideRight-enter {\n    -webkit-animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideRight-leave {\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n@keyframes rodal-slideRight-leave {\n    to {\n        -webkit-transform: translate3d(150px, 0, 0);\n        transform: translate3d(150px, 0, 0);\n    }\n}\n\n.rodal-slideRight-leave {\n    -webkit-animation: rodal-slideRight-leave both;\n    animation: rodal-slideRight-leave both;\n}\n\n/* -- slideUp -- */\n@-webkit-keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n@keyframes rodal-slideUp-enter {\n    from {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n.rodal-slideUp-enter {\n    -webkit-animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-slideUp-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-slideUp-leave {\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n@keyframes rodal-slideUp-leave {\n    to {\n        -webkit-transform: translate3d(0, 100px, 0);\n        transform: translate3d(0, 100px, 0);\n    }\n}\n\n.rodal-slideUp-leave {\n    -webkit-animation: rodal-slideUp-leave both;\n    animation: rodal-slideUp-leave both;\n}\n\n/* -- flip -- */\n@-webkit-keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n}\n\n@keyframes rodal-flip-enter {\n    from {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);\n    }\n    70% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n}\n\n.rodal-flip-enter {\n    -webkit-animation: rodal-flip-enter both ease-in;\n    animation: rodal-flip-enter both ease-in;\n    -webkit-backface-visibility: visible !important;\n    backface-visibility: visible !important;\n}\n\n@-webkit-keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n@keyframes rodal-flip-leave {\n    from {\n        -webkit-transform: perspective(400px);\n        transform: perspective(400px);\n    }\n    30% {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);\n    }\n    to {\n        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);\n    }\n}\n\n.rodal-flip-leave {\n    -webkit-animation: rodal-flip-leave both;\n    animation: rodal-flip-leave both;\n    -webkit-backface-visibility: visible !important;\n    backface-visibility: visible !important;\n}\n\n/* -- rotate -- */\n@-webkit-keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-rotate-enter {\n    from {\n        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, -180deg) scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-rotate-enter {\n    -webkit-animation: rodal-rotate-enter both;\n    animation: rodal-rotate-enter both;\n    -webkit-transform-origin: center;\n    transform-origin: center;\n}\n\n@-webkit-keyframes rodal-rotate-leave {\n    to {\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n@keyframes rodal-rotate-leave {\n    to {\n        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n        transform: rotate3d(0, 0, 1, 180deg) scale3d(.3, .3, .3);\n    }\n}\n\n.rodal-rotate-leave {\n    -webkit-animation: rodal-rotate-leave both;\n    animation: rodal-rotate-leave both;\n    -webkit-transform-origin: center;\n    transform-origin: center;\n}\n\n/* -- door -- */\n@-webkit-keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n        transform: scale3d(0, 1, 1);\n    }\n}\n\n@keyframes rodal-door-enter {\n    from {\n        -webkit-transform: scale3d(0, 1, 1);\n        transform: scale3d(0, 1, 1);\n    }\n}\n\n.rodal-door-enter {\n    -webkit-animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n    animation: rodal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);\n}\n\n@-webkit-keyframes rodal-door-leave {\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n        transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n        transform: scale3d(0, 1, .1);\n    }\n}\n\n@keyframes rodal-door-leave {\n    60% {\n        -webkit-transform: scale3d(.01, 1, 1);\n        transform: scale3d(.01, 1, 1);\n    }\n    to {\n        -webkit-transform: scale3d(0, 1, .1);\n        transform: scale3d(0, 1, .1);\n    }\n}\n\n.rodal-door-leave {\n    -webkit-animation: rodal-door-leave both;\n    animation: rodal-door-leave both;\n}", ""]);
 
 	// exports
 
