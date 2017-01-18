@@ -42,8 +42,6 @@ const Dialog = props => {
     const style = {
         width                   : width + measure,
         height                  : height + measure,
-        marginTop               : - height / 2 + measure,
-        marginLeft              : - width / 2 + measure,
         animationDuration       : duration + 'ms',
         WebkitAnimationDuration : duration + 'ms'
     };
