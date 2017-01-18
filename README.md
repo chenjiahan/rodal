@@ -75,3 +75,6 @@ customMaskStyles|object|/|custom mask styles
 * slideDown
 * slideLeft
 * slideRight
+
+## Other
+[Vue version](https://github.com/chenjiahan/vodal)
