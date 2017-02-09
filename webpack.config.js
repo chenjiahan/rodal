@@ -10,7 +10,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: "babel",
+                loader: "babel-loader",
                 query: {
                     presets: ['es2015', 'react'],
                     plugins: ["transform-object-assign"]
@@ -18,7 +18,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css']
+                loaders: ['style-loader', 'css-loader']
             }
         ]
     },

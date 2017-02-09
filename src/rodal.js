@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.3.5 http://rodal.cn
+ * Rodal v1.4.0 http://rodal.cn
  * =============================== */
 
 import React from 'react';
@@ -106,7 +106,7 @@ class Rodal extends Component {
     render() {
         const mask = this.props.showMask ? <div className="rodal-mask" style={this.props.customMaskStyles} onClick={this.props.onClose} /> : null;
         const style = {
-            display                 : this.state.isShow ? 'block' : 'none',
+            display                 : this.state.isShow ? '' : 'none',
             WebkitAnimationDuration : this.props.duration + 'ms',
             animationDuration       : this.props.duration + 'ms'
         };
