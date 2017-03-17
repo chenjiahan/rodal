@@ -1,24 +1,30 @@
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: "./example/src/index.js",
+    entry: {
+        bundle: './example/src/index.js'   
+    },
     output: {
-        path: "example/dist",
-        filename: "bundle.js"
+        path: path.resolve(__dirname, 'example/dist'),
+        publicPath: '/example/dist/',
+        filename: '[name].js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: "babel-loader",
-                query: {
-                    presets: ['es2015', 'react'],
-                    plugins: ["transform-object-assign"]
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015', 'react'],
+                        plugins: ['transform-object-assign']
+                    }
                 }
             },
             {
                 test: /\.css$/,
-                loaders: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
@@ -28,5 +34,24 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
             }
         })
-    ]
+    ],
+    devServer: {
+        contentBase: './example',
+        compress: true,
+        port: 2345,
+        stats: {
+            assets: true,
+            children: false,
+            chunks: false,
+            hash: false,
+            modules: false,
+            publicPath: false,
+            timings: false,
+            version: false,
+            warnings: true,
+            colors: {
+                green: '\u001b[32m',
+            }
+        }
+    }
 };

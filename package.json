@@ -15,13 +15,15 @@
     "postcss-loader": "^1.3.3",
     "react-dom": "^15.4.2",
     "style-loader": "^0.14.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "react": "^15.4.2"
   },
   "scripts": {
-    "dev": "webpack --watch",
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "build": "webpack -p --hide-modules",
     "lib": "babel --plugins transform-object-assign src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
     "test": "npm run lib"
   },
