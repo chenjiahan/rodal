@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.4.0 http://rodal.cn
+ * Rodal v1.4.1 http://rodal.cn
  * =============================== */
 
 import React from 'react';
@@ -34,6 +34,11 @@ const defaultProps = {
     customMaskStyles : {},
 };
 
+// env
+const inBrowser = typeof window !== 'undefined';
+const UA = inBrowser && window.navigator.userAgent.toLowerCase();
+const isIE9 = UA && UA.indexOf('msie 9.0') > 0;
+
 const Dialog = props => {
 
     const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
@@ -63,8 +68,8 @@ class Rodal extends Component {
 
         this.animationEnd = this.animationEnd.bind(this);
         this.state = {
-            isShow        : false,
-            animationType : 'leave'
+            isShow: false,
+            animationType: 'leave'
         };
     }
 
@@ -90,35 +95,35 @@ class Rodal extends Component {
     }
 
     leave() {
-        this.setState({
-            animationType: 'leave'
-        });
+        const state = isIE9 
+            ? { isShow: false } 
+            : { animationType: 'leave' }
+        this.setState(state);
     }
 
     animationEnd() {
         if (this.state.animationType === 'leave') {
-            this.setState({
-                isShow: false
-            });
+            this.setState({ isShow: false });
         }
     }
 
     render() {
-        const mask = this.props.showMask ? <div className="rodal-mask" style={this.props.customMaskStyles} onClick={this.props.onClose} /> : null;
+        const { props, state } = this;
+        const mask = props.showMask ? <div className="rodal-mask" style={props.customMaskStyles} onClick={props.onClose} /> : null;
         const style = {
-            display                 : this.state.isShow ? '' : 'none',
-            WebkitAnimationDuration : this.props.duration + 'ms',
-            animationDuration       : this.props.duration + 'ms'
+            display                 : state.isShow ? '' : 'none',
+            WebkitAnimationDuration : props.duration + 'ms',
+            animationDuration       : props.duration + 'ms'
         };
 
         return (
             <div style={style} 
-                 className={"rodal rodal-fade-" + this.state.animationType + ' ' + this.props.className} 
+                 className={"rodal rodal-fade-" + state.animationType + ' ' + props.className} 
                  onAnimationEnd={this.animationEnd}
             >
                 {mask}
-                <Dialog {...this.props} animationType={this.state.animationType}>
-                    {this.props.children}
+                <Dialog {...props} animationType={state.animationType}>
+                    {props.children}
                 </Dialog>
             </div>
         )
