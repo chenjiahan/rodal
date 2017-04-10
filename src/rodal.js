@@ -3,8 +3,9 @@
  * =============================== */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const { PropTypes, Component } = React;
+const { Component } = React;
 const propTypes = {
     width            : PropTypes.number,
     height           : PropTypes.number,

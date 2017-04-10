@@ -36,7 +36,7 @@ module.exports = {
         })
     ],
     devServer: {
-        contentBase: './example',
+        contentBase: './',
         compress: true,
         port: 2345,
         stats: {
