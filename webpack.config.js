@@ -17,8 +17,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'react'],
-                        plugins: ['transform-object-assign']
+                        presets: ['es2015', 'stage-0', 'react']
                     }
                 }
             },
