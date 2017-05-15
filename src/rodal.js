@@ -38,6 +38,7 @@ class Rodal extends React.Component {
         measure          : PropTypes.string,
         visible          : PropTypes.bool,
         showMask         : PropTypes.bool,
+        closeMaskOnClick : PropTypes.bool,
         showCloseButton  : PropTypes.bool,
         animation        : PropTypes.string,
         duration         : PropTypes.number,
@@ -53,6 +54,7 @@ class Rodal extends React.Component {
         measure          : 'px',
         visible          : false,
         showMask         : true,
+        closeMaskOnClick : true,
         showCloseButton  : true,
         animation        : 'zoom',
         duration         : 300,
@@ -88,8 +90,8 @@ class Rodal extends React.Component {
     }
 
     leave() {
-        this.setState(isIE9 
-            ? { isShow: false } 
+        this.setState(isIE9
+            ? { isShow: false }
             : { animationType: 'leave' }
         );
     }
@@ -102,7 +104,8 @@ class Rodal extends React.Component {
 
     render() {
         const { props, state } = this;
-        const mask = props.showMask ? <div className="rodal-mask" style={props.customMaskStyles} onClick={props.onClose} /> : null;
+        const onClick = props.closeMaskOnClick ? props.onClose : null;
+        const mask = props.showMask ? <div className="rodal-mask" style={props.customMaskStyles} onClick={onClick} /> : null;
         const style = {
             display: state.isShow ? '' : 'none',
             animationDuration: props.duration + 'ms',
@@ -110,8 +113,8 @@ class Rodal extends React.Component {
         };
 
         return (
-            <div style={style} 
-                 className={"rodal rodal-fade-" + state.animationType + ' ' + props.className} 
+            <div style={style}
+                 className={"rodal rodal-fade-" + state.animationType + ' ' + props.className}
                  onAnimationEnd={this.animationEnd}
             >
                 {mask}
