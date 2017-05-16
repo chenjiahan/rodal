@@ -58,6 +58,7 @@ measure|string|px|measure of width and height
 onClose|func|/|onClose handler function
 visible|bool|false|whether to show dialog
 showMask|bool|true|whether to show mask
+closeMaskOnClick|bool|true|wether clicking the mask closes the modal
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation type
 duration|number|300|animation duration
