@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.5.0 http://rodal.cn
+ * Rodal v1.5.1 http://rodal.cn
  * =============================== */
 
 import React from 'react';
