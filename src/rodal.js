@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.5.1 http://rodal.cn
+ * Rodal v1.5.2 http://rodal.cn
  * =============================== */
 
 import React from 'react';
@@ -45,7 +45,8 @@ class Rodal extends React.Component {
         className        : PropTypes.string,
         customStyles     : PropTypes.object,
         customMaskStyles : PropTypes.object,
-        onClose          : PropTypes.func.isRequired
+        onClose          : PropTypes.func.isRequired,
+        onAnimationEnd   : PropTypes.func
     };
 
     static defaultProps = {
@@ -100,7 +101,9 @@ class Rodal extends React.Component {
         if (this.state.animationType === 'leave') {
             this.setState({ isShow: false });
         }
-        this.props.onAnimationEnd();
+
+        const { onAnimationEnd } = this.props;
+        onAnimationEnd && onAnimationEnd();
     }
 
     render() {
