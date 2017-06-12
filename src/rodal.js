@@ -100,6 +100,7 @@ class Rodal extends React.Component {
         if (this.state.animationType === 'leave') {
             this.setState({ isShow: false });
         }
+        this.props.onAnimationEnd();
     }
 
     render() {
