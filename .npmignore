@@ -5,3 +5,6 @@ example
 .npmignore
 webpack.config.js
 webpack.config.lib.js
+.babelrc
+.travis.yml
+yarn.lock
