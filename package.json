@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "devDependencies": {
@@ -45,12 +45,5 @@
   "bugs": {
     "url": "https://github.com/chenjiahan/rodal/issues"
   },
-  "homepage": "https://github.com/chenjiahan/rodal#readme",
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ]
-  }
+  "homepage": "https://github.com/chenjiahan/rodal#readme"
 }
