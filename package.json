@@ -4,7 +4,6 @@
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
