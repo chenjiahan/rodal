@@ -13,8 +13,8 @@
     "css-loader": "^0.28.1",
     "postcss-loader": "^2.0.5",
     "react-dom": "^15.5.4",
-    "style-loader": "^0.17.0",
-    "webpack": "^2.5.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.3.0",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
