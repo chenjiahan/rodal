@@ -2,7 +2,7 @@ import React    from 'react';
 import ReactDOM from 'react-dom';
 import Rodal    from '../../src/rodal';
 import './index.css';
-import '../../lib/rodal.css';
+import '../../src/rodal.css';
 
 class App extends React.Component {
 

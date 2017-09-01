@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.5.4 http://rodal.cn
+ * Rodal v1.5.5 http://rodal.cn
  * =============================== */
 
 import React from 'react';
@@ -38,6 +38,7 @@ class Rodal extends React.Component {
         measure          : PropTypes.string,
         visible          : PropTypes.bool,
         showMask         : PropTypes.bool,
+        closeOnEsc       : PropTypes.bool,
         closeMaskOnClick : PropTypes.bool,
         showCloseButton  : PropTypes.bool,
         animation        : PropTypes.string,
@@ -55,6 +56,7 @@ class Rodal extends React.Component {
         measure          : 'px',
         visible          : false,
         showMask         : true,
+        closeOnEsc       : false,
         closeMaskOnClick : true,
         showCloseButton  : true,
         animation        : 'zoom',
@@ -97,9 +99,17 @@ class Rodal extends React.Component {
         );
     }
 
+    onKeyUp = event => {
+        if (this.props.closeOnEsc && event.keyCode === 27) {
+            this.props.onClose();
+        }
+    }
+
     animationEnd = () => {
         if (this.state.animationType === 'leave') {
             this.setState({ isShow: false });
+        } else if (this.props.closeOnEsc) {
+            this.el.focus();
         }
 
         const { onAnimationEnd } = this.props;
@@ -117,9 +127,13 @@ class Rodal extends React.Component {
         };
 
         return (
-            <div style={style}
-                 className={"rodal rodal-fade-" + state.animationType + ' ' + props.className}
-                 onAnimationEnd={this.animationEnd}
+            <div 
+                style={style}
+                className={"rodal rodal-fade-" + state.animationType + ' ' + props.className}
+                onAnimationEnd={this.animationEnd}
+                tabIndex="-1"
+                ref={el => { this.el = el; }}
+                onKeyUp={this.onKeyUp}
             >
                 {mask}
                 <Dialog {...props} animationType={state.animationType}>
