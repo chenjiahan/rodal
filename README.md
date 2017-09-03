@@ -59,8 +59,8 @@ onClose|func|/|handler called onClose of modal
 onAnimationEnd|func|/|handler called onEnd of animation
 visible|bool|false|whether to show dialog
 showMask|bool|true|whether to show mask
-closeOnEsc|bool|false|close dialog when esc pressed
-closeMaskOnClick|bool|true|wether clicking the mask closes the modal
+closeOnEsc|bool|false|whether close dialog when esc pressed
+closeMaskOnClick|bool|true|whether closes dialog when mask clicked
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation type
 duration|number|300|animation duration
