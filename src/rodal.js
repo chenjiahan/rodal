@@ -105,7 +105,7 @@ class Rodal extends React.Component {
         }
     }
 
-    animationEnd = () => {
+    animationEnd = event => {
         if (this.state.animationType === 'leave') {
             this.setState({ isShow: false });
         } else if (this.props.closeOnEsc) {
@@ -113,7 +113,10 @@ class Rodal extends React.Component {
         }
 
         const { onAnimationEnd } = this.props;
-        onAnimationEnd && onAnimationEnd();
+
+        if (event.target == this.el) {
+            onAnimationEnd && onAnimationEnd();
+        }
     }
 
     render() {
@@ -127,7 +130,7 @@ class Rodal extends React.Component {
         };
 
         return (
-            <div 
+            <div
                 style={style}
                 className={"rodal rodal-fade-" + state.animationType + ' ' + props.className}
                 onAnimationEnd={this.animationEnd}
