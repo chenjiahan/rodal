@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.5.5 http://rodal.cn
+ * Rodal v1.5.6 https://chenjiahan.github.com/rodal
  * =============================== */
 
 import React from 'react';
@@ -112,9 +112,8 @@ class Rodal extends React.Component {
             this.el.focus();
         }
 
-        const { onAnimationEnd } = this.props;
-
-        if (event.target == this.el) {
+        if (event.target === this.el) {
+            const { onAnimationEnd } = this.props;
             onAnimationEnd && onAnimationEnd();
         }
     }
