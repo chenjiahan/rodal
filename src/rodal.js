@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.5.6 https://chenjiahan.github.com/rodal
+ * Rodal v1.6.0 https://chenjiahan.github.com/rodal
  * =============================== */
 
 import React from 'react';
@@ -11,7 +11,8 @@ const UA = inBrowser && window.navigator.userAgent.toLowerCase();
 const isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 
 const Dialog = props => {
-    const className = `rodal-dialog rodal-${props.animation}-${props.animationType}`;
+    const animation = (props.animationType === 'enter' ? props.enterAnimation : props.leaveAnimation) || props.animation;
+    const className = `rodal-dialog rodal-${animation}-${props.animationType}`;
     const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
     const { width, height, measure, duration, customStyles } = props;
     const style = {
@@ -42,6 +43,8 @@ class Rodal extends React.Component {
         closeMaskOnClick : PropTypes.bool,
         showCloseButton  : PropTypes.bool,
         animation        : PropTypes.string,
+        enterAnimation   : PropTypes.string,
+        leaveAnimation   : PropTypes.string,
         duration         : PropTypes.number,
         className        : PropTypes.string,
         customStyles     : PropTypes.object,
@@ -60,6 +63,8 @@ class Rodal extends React.Component {
         closeMaskOnClick : true,
         showCloseButton  : true,
         animation        : 'zoom',
+        enterAnimation   : '',
+        leaveAnimation   : '',
         duration         : 300,
         className        : '',
         customStyles     : {},
