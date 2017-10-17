@@ -36,7 +36,7 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin()
     ],
     devServer: {
-        contentBase: './',
+        contentBase: './example',
         compress: true,
         port: 2345,
         stats: {
