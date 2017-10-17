@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.5.6",
+  "version": "1.6.0",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "devDependencies": {

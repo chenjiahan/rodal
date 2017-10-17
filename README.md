@@ -3,7 +3,7 @@ A React modal with animations.
 [Example](http://rodal.cn)
 
 ## Installation    
-React 15
+React 15/16
 
     npm i rodal --save
 
@@ -63,6 +63,8 @@ closeOnEsc|bool|false|whether close dialog when esc pressed
 closeMaskOnClick|bool|true|whether close dialog when mask clicked
 showCloseButton|bool|true|whether to show close button
 animation|string|zoom|animation type
+enterAnimation|string|/|enter animation type (higher order than 'animation')
+leaveAnimation|string||leave animation type (higher order than 'animation')
 duration|number|300|animation duration
 className|string|/|className for the container
 customStyles|object|/|custom styles
