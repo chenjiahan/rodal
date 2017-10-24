@@ -3,11 +3,11 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        bundle: './example/src/index.js'   
+        bundle: './docs/src/index.js'   
     },
     output: {
-        path: path.resolve(__dirname, 'example/dist'),
-        publicPath: '/example/dist/',
+        path: path.resolve(__dirname, 'docs/dist'),
+        publicPath: '/docs/dist/',
         filename: '[name].js'
     },
     module: {
