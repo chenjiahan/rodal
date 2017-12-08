@@ -18,9 +18,11 @@
     "webpack-dev-server": "^2.9.2"
   },
   "dependencies": {
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0"
+    "prop-types": "^15.6.0"
   },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  },  
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server",
     "build": "webpack -p --hide-modules",
