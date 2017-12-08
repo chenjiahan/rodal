@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "devDependencies": {
@@ -11,18 +11,18 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
-    "postcss-loader": "^2.0.8",
-    "react-dom": "^16.0.0",
+    "postcss-loader": "^2.0.9",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "style-loader": "^0.19.0",
-    "webpack": "^3.7.1",
-    "webpack-dev-server": "^2.9.2"
-  },
-  "dependencies": {
-    "prop-types": "^15.6.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "peerDependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.0.0"
-  },  
+  },
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server",
     "build": "webpack -p --hide-modules",
