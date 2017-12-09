@@ -25,8 +25,8 @@ const Dialog = props => {
 
     return (
         <div style={mergedStyles} className={className}>
-            {CloseButton}
             {props.children}
+            {CloseButton}
         </div>
     )
 };
