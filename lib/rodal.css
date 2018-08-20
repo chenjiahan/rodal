@@ -50,7 +50,6 @@
 .rodal-close.left {
     right: initial !important;
     left: 16px;
-    display: block;
 }
 
 .rodal-close:before,
