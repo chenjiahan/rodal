@@ -47,6 +47,12 @@
     height: 16px;
 }
 
+.rodal-close.left {
+    right: initial !important;
+    left: 16px;
+    display: block;
+}
+
 .rodal-close:before,
 .rodal-close:after {
     position: absolute;

@@ -51,6 +51,7 @@ class App extends React.Component {
                 <Rodal visible={this.state.visible}
                        onClose={this.hide.bind(this)}
                        animation={this.state.animation}
+                       closeButtonSide={"left"}
                 >
                     <div className="header">Rodal</div>
                     <div className="body">A React modal with animations.</div>

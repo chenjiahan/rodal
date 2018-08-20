@@ -13,7 +13,7 @@ const isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 const Dialog = props => {
     const animation = (props.animationType === 'enter' ? props.enterAnimation : props.leaveAnimation) || props.animation;
     const className = `rodal-dialog rodal-${animation}-${props.animationType}`;
-    const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null;
+    const CloseButton = props.showCloseButton ? <span className={`rodal-close${props.closeButtonSide === "left" ? " left" : ""}`} onClick={props.onClose} /> : null;
     const { width, height, measure, duration, customStyles } = props;
     const style = {
         width: width + measure,
@@ -42,6 +42,7 @@ class Rodal extends React.Component {
         closeOnEsc       : PropTypes.bool,
         closeMaskOnClick : PropTypes.bool,
         showCloseButton  : PropTypes.bool,
+        closeButtonSide  : PropTypes.string,
         animation        : PropTypes.string,
         enterAnimation   : PropTypes.string,
         leaveAnimation   : PropTypes.string,
@@ -62,6 +63,7 @@ class Rodal extends React.Component {
         closeOnEsc       : false,
         closeMaskOnClick : true,
         showCloseButton  : true,
+        closeButtonSide  : "right",
         animation        : 'zoom',
         enterAnimation   : '',
         leaveAnimation   : '',
