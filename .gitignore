@@ -4,3 +4,5 @@ example/dist
 .DS_Store
 yarn.lock
 *.log
+package-lock.json
+yarn-lock.json
