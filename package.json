@@ -28,7 +28,8 @@
     "build": "webpack -p --hide-modules",
     "lib": "babel src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
     "test": "npm run lib",
-    "release": "npm run build && npm run lib && npm publish"
+    "release": "npm run build && npm run lib && npm publish",
+    "postinstall": "opencollective-postinstall"
   },
   "repository": {
     "type": "git",
@@ -46,5 +47,13 @@
   "bugs": {
     "url": "https://github.com/chenjiahan/rodal/issues"
   },
-  "homepage": "https://github.com/chenjiahan/rodal#readme"
+  "homepage": "https://github.com/chenjiahan/rodal#readme",
+  "dependencies": {
+    "opencollective-postinstall": "^2.0.1",
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/rodal"
+  }
 }
