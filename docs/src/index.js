@@ -15,22 +15,22 @@ class App extends React.Component {
         }
     }
 
-    show (animation) {
+    show = (animation) => {
         this.setState({
             animation,
             visible: true
         });
     }
 
-    hide () {
+    hide = () => {
         this.setState({ visible: false });
     }
 
     render () {
-
-        let types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
-        let buttons = types.map((value, index) => {
-            let style = {
+        const { visible, animation } = this.state;
+        const types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];
+        const buttons = types.map((value, index) => {
+            const style = {
                 animationDelay       : index * 100 + 'ms',
                 WebkitAnimationDelay : index * 100 + 'ms'
             };
@@ -48,14 +48,15 @@ class App extends React.Component {
                     <h3 className="intro scale">A React modal with animations.</h3>
                     <div className="btn-area">{buttons}</div>
                 </div>
-                <Rodal visible={this.state.visible}
-                       onClose={this.hide.bind(this)}
-                       animation={this.state.animation}
+                <Rodal visible={visible}
+                       onClose={this.hide}
+                       animation={animation}
+                       closeOnEsc
                 >
                     <div className="header">Rodal</div>
                     <div className="body">A React modal with animations.</div>
-                    <button className="rodal-confirm-btn" onClick={this.hide.bind(this)}>ok</button>
-                    <button className="rodal-cancel-btn" onClick={this.hide.bind(this)}>close</button>
+                    <button className="rodal-confirm-btn" onClick={this.hide}>ok</button>
+                    <button className="rodal-cancel-btn" onClick={this.hide}>close</button>
                 </Rodal>
             </div>
         )

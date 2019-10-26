@@ -110,15 +110,17 @@ class Rodal extends React.Component {
     }
 
     animationEnd = event => {
-        if (this.state.animationType === 'leave') {
+        const { animationType } = this.state;
+        const { closeOnEsc, onAnimationEnd } = this.props;
+
+        if (animationType === 'leave') {
             this.setState({ isShow: false });
-        } else if (this.props.closeOnEsc) {
+        } else if (closeOnEsc) {
             this.el.focus();
         }
 
-        if (event.target === this.el) {
-            const { onAnimationEnd } = this.props;
-            onAnimationEnd && onAnimationEnd();
+        if (event.target === this.el && onAnimationEnd) {
+          onAnimationEnd();
         }
     }
 
@@ -129,9 +131,10 @@ class Rodal extends React.Component {
           customMaskStyles,
           showMask,
           duration,
-          className
+          className,
+          children
         } = this.props;
-        const { isShow, animationType} = this.state;
+        const { isShow, animationType } = this.state;
         const mask = showMask
           ? (
             <div
@@ -150,15 +153,15 @@ class Rodal extends React.Component {
         return (
             <div
                 style={style}
-                className={cx('rodal', `rodal-fade-${state.animationType}`, className)}
+                className={cx('rodal', `rodal-fade-${animationType}`, className)}
                 onAnimationEnd={this.animationEnd}
                 tabIndex="-1"
                 ref={el => { this.el = el; }}
                 onKeyUp={this.onKeyUp}
             >
                 {mask}
-                <Dialog {...props} animationType={animationType}>
-                    {props.children}
+                <Dialog {...this.props} animationType={animationType}>
+                    {children}
                 </Dialog>
             </div>
         )
