@@ -1,8 +1,11 @@
 {
   "name": "rodal",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
+  "dependencies": {
+    "classnames": "^2.2.6"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

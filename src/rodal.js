@@ -1,14 +1,15 @@
 /* ===============================
- * Rodal v1.6.1 https://chenjiahan.github.com/rodal
+ * Rodal v1.7.0 https://chenjiahan.github.com/rodal
  * =============================== */
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // env
-const inBrowser = typeof window !== 'undefined';
-const UA = inBrowser && window.navigator.userAgent.toLowerCase();
-const isIE9 = UA && UA.indexOf('msie 9.0') > 0;
+const IN_BROWSER = typeof window !== 'undefined';
+const UA = IN_BROWSER && window.navigator.userAgent.toLowerCase();
+const IS_IE_9 = UA && UA.indexOf('msie 9.0') > 0;
 
 const Dialog = props => {
     const animation = (props.animationType === 'enter' ? props.enterAnimation : props.leaveAnimation) || props.animation;
@@ -82,69 +83,85 @@ class Rodal extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.visible && nextProps.visible) {
-            this.enter();
-        } else if (this.props.visible && !nextProps.visible) {
-            this.leave();
-        }
+    componentDidUpdate(prevProps) {
+      if (this.props.visible && !prevProps.visible) {
+        this.enter();
+      }
+
+      if (!this.props.visible && prevProps.visible) {
+        this.leave();
+      }
     }
 
     enter() {
-        this.setState({
-            isShow: true,
-            animationType: 'enter'
-        });
+        this.setState({ isShow: true, animationType: 'enter' });
     }
 
     leave() {
-        this.setState(isIE9
-            ? { isShow: false }
-            : { animationType: 'leave' }
-        );
+        this.setState(IS_IE_9 ? { isShow: false } : { animationType: 'leave' });
     }
 
     onKeyUp = event => {
-        if (this.props.closeOnEsc && event.keyCode === 27) {
-            this.props.onClose();
+        if (!this.props.closeOnEsc || event.keyCode !== 27) {
+          return;
         }
+
+        this.props.onClose();
     }
 
     animationEnd = event => {
-        if (this.state.animationType === 'leave') {
+        const { animationType } = this.state;
+        const { closeOnEsc, onAnimationEnd } = this.props;
+
+        if (animationType === 'leave') {
             this.setState({ isShow: false });
-        } else if (this.props.closeOnEsc) {
+        } else if (closeOnEsc) {
             this.el.focus();
         }
 
-        if (event.target === this.el) {
-            const { onAnimationEnd } = this.props;
-            onAnimationEnd && onAnimationEnd();
+        if (event.target === this.el && onAnimationEnd) {
+          onAnimationEnd();
         }
     }
 
     render() {
-        const { props, state } = this;
-        const onClick = props.closeMaskOnClick ? props.onClose : null;
-        const mask = props.showMask ? <div className="rodal-mask" style={props.customMaskStyles} onClick={onClick} /> : null;
+        const {
+          closeMaskOnClick,
+          onClose,
+          customMaskStyles,
+          showMask,
+          duration,
+          className,
+          children
+        } = this.props;
+        const { isShow, animationType } = this.state;
+        const mask = showMask
+          ? (
+            <div
+              className="rodal-mask"
+              style={customMaskStyles}
+              onClick={closeMaskOnClick ? onClose : void 0}
+            />
+          )
+          : null;
         const style = {
-            display: state.isShow ? '' : 'none',
-            animationDuration: props.duration + 'ms',
-            WebkitAnimationDuration: props.duration + 'ms'
+            display: isShow ? '' : 'none',
+            animationDuration: duration + 'ms',
+            WebkitAnimationDuration: duration + 'ms'
         };
 
         return (
             <div
                 style={style}
-                className={"rodal rodal-fade-" + state.animationType + ' ' + props.className}
+                className={cx('rodal', `rodal-fade-${animationType}`, className)}
                 onAnimationEnd={this.animationEnd}
                 tabIndex="-1"
                 ref={el => { this.el = el; }}
                 onKeyUp={this.onKeyUp}
             >
                 {mask}
-                <Dialog {...props} animationType={state.animationType}>
-                    {props.children}
+                <Dialog {...this.props} animationType={animationType}>
+                    {children}
                 </Dialog>
             </div>
         )
