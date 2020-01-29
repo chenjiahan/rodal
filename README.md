@@ -34,12 +34,18 @@ class App extends React.Component {
         this.setState({ visible: false });
     }
 
+    onKeyboardKeyPress = (event) => {
+        if (event.which === 13) { // Closing on only clicking on Enter
+            this.hide();
+        }
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.show.bind(this)}>show</button>
 
-                <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
+                <Rodal visible={this.state.visible} onClose={this.hide.bind(this)} onCloseKeyPress={this.onKeyboardKeyPress}>
                     <div>Content</div>
                 </Rodal>
             </div>
@@ -56,6 +62,7 @@ width|number|400|width of dialog
 height|number|240|height of dialog
 measure|string|px|measure of width and height
 onClose|func|/|handler called onClose of modal
+onCloseKeyPress|func|/|handler for keyboard event on close button
 onAnimationEnd|func|/|handler called onEnd of animation
 visible|bool|false|whether to show dialog
 showMask|bool|true|whether to show mask

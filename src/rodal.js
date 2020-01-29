@@ -14,7 +14,11 @@ const IS_IE_9 = UA && UA.indexOf('msie 9.0') > 0;
 const Dialog = props => {
     const animation = (props.animationType === 'enter' ? props.enterAnimation : props.leaveAnimation) || props.animation;
     const className = `rodal-dialog rodal-${animation}-${props.animationType}`;
-    const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} tabIndex={0} /> : null;
+    const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} onKeyPress={(event) => {
+        if (props.onCloseKeyPress) {
+            props.onCloseKeyPress(event);
+        }
+    }} tabIndex={0} /> : null;
     const { width, height, measure, duration, customStyles } = props;
     const style = {
         width: width + measure,
@@ -51,6 +55,7 @@ class Rodal extends React.Component {
         customStyles     : PropTypes.object,
         customMaskStyles : PropTypes.object,
         onClose          : PropTypes.func.isRequired,
+        onCloseKeyPress  : PropTypes.func,
         onAnimationEnd   : PropTypes.func
     };
 
