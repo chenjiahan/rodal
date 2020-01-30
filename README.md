@@ -62,7 +62,6 @@ width|number|400|width of dialog
 height|number|240|height of dialog
 measure|string|px|measure of width and height
 onClose|func|/|handler called onClose of modal
-onCloseKeyPress|func|/|handler for keyboard event on close button
 onAnimationEnd|func|/|handler called onEnd of animation
 visible|bool|false|whether to show dialog
 showMask|bool|true|whether to show mask

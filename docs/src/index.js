@@ -56,7 +56,6 @@ class App extends React.Component {
                 </div>
                 <Rodal visible={visible}
                        onClose={this.hide}
-                       onCloseKeyPress={this.onKeyPressHide}
                        animation={animation}
                        closeOnEsc
                 >
