@@ -26,6 +26,12 @@ class App extends React.Component {
         this.setState({ visible: false });
     }
 
+    onKeyPressHide = (event) => {
+        if (event.which === 13) {
+            this.hide();
+        }
+    }
+
     render () {
         const { visible, animation } = this.state;
         const types = ['zoom', 'fade', 'flip', 'door', 'rotate', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'];

@@ -34,12 +34,18 @@ class App extends React.Component {
         this.setState({ visible: false });
     }
 
+    onKeyboardKeyPress = (event) => {
+        if (event.which === 13) {
+            this.hide();
+        }
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.show.bind(this)}>show</button>
 
-                <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
+                <Rodal visible={this.state.visible} onClose={this.hide.bind(this)} onCloseKeyPress={this.onKeyboardKeyPress}>
                     <div>Content</div>
                 </Rodal>
             </div>
