@@ -3,6 +3,7 @@
   "version": "1.7.0",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
+  "module": "lib/rodal.esm.js",
   "dependencies": {
     "classnames": "^2.2.6"
   },
@@ -30,7 +31,7 @@
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server",
     "build": "webpack -p --hide-modules",
-    "lib": "babel src/rodal.js --out-file lib/rodal.js && cp src/rodal.css lib",
+    "lib": "babel src/rodal.js --out-file lib/rodal.js && BABEL_MODULE=es babel src/rodal.js --out-file lib/rodal.esm.js && cp src/rodal.css lib",
     "test": "npm run lib",
     "release": "npm run build && npm run lib && npm publish"
   },
