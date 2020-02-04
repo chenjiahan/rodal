@@ -35,7 +35,7 @@ class App extends React.Component {
     }
 
     onKeyboardKeyPress = (event) => {
-        if (event.which === 13) { // Closing on only clicking on Enter
+        if (event.which === 13) {
             this.hide();
         }
     }
