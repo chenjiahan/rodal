@@ -25,7 +25,7 @@ const Dialog = props => {
       onClick={props.onClose}
       onKeyPress={event => {
         if (props.onClose && event.which === 13) {
-          props.onClose();
+          props.onClose(event);
         }
       }}
       tabIndex={0}
@@ -124,7 +124,7 @@ class Rodal extends React.Component {
       return;
     }
 
-    this.props.onClose();
+    this.props.onClose(event);
   };
 
   animationEnd = event => {
