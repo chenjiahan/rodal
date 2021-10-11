@@ -35,12 +35,13 @@ const Dialog = props => {
   const { width, height, measure, duration, customStyles } = props;
 
   const style = {
-    width: width + measure,
-    height: height + measure,
     animationDuration: duration + 'ms',
     WebkitAnimationDuration: duration + 'ms'
   };
-
+  if(width)
+    style.width =  width + measure,
+  if(height)
+    style.height = height + measure
   const mergedStyles = { ...style, ...customStyles };
 
   return (
@@ -73,8 +74,6 @@ class Rodal extends React.Component {
   };
 
   static defaultProps = {
-    width: 400,
-    height: 240,
     measure: 'px',
     visible: false,
     showMask: true,
