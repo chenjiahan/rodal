@@ -67,6 +67,7 @@ class App extends React.Component {
 | className        | string | /       | className for the container                          |
 | customStyles     | object | /       | custom styles                                        |
 | customMaskStyles | object | /       | custom mask styles                                   |
+| id               | string | /       | id for dialog                                        |
 
 ## Animation Types
 

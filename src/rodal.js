@@ -32,7 +32,7 @@ const Dialog = props => {
     />
   ) : null;
 
-  const { width, height, measure, duration, customStyles } = props;
+  const { width, height, measure, duration, customStyles, id } = props;
 
   const style = {
     width: width + measure,
@@ -44,7 +44,7 @@ const Dialog = props => {
   const mergedStyles = { ...style, ...customStyles };
 
   return (
-    <div style={mergedStyles} className={className}>
+    <div style={mergedStyles} className={className} id={id}>
       {props.children}
       {CloseButton}
     </div>
@@ -69,7 +69,8 @@ class Rodal extends React.Component {
     customStyles: PropTypes.object,
     customMaskStyles: PropTypes.object,
     onClose: PropTypes.func.isRequired,
-    onAnimationEnd: PropTypes.func
+    onAnimationEnd: PropTypes.func,
+    id:PropTypes.string
   };
 
   static defaultProps = {
