@@ -1,5 +1,5 @@
 /* ===============================
- * Rodal v1.7.0 https://chenjiahan.github.com/rodal
+ * Rodal v1.8.2 https://chenjiahan.github.com/rodal
  * =============================== */
 
 import React from 'react';
