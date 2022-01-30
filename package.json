@@ -26,7 +26,7 @@
   },
   "peerDependencies": {
     "prop-types": "^15.6.0",
-    "react": "^16.0.0"
+    "react": ">= ^16.0.0"
   },
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server",
