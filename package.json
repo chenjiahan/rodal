@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "module": "lib/rodal.esm.js",
