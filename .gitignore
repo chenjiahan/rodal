@@ -2,5 +2,4 @@
 node_modules
 example/dist
 .DS_Store
-yarn.lock
 *.log
