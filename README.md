@@ -6,7 +6,11 @@ A React modal with animations.
 ## Installation
 
 ```bash
+# React 17 or 18
 npm i rodal --save
+
+# React 15 or 16, install rodal v1
+npm i rodal@1 --save
 ```
 
 ## Usage
