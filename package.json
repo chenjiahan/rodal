@@ -1,6 +1,6 @@
 {
   "name": "rodal",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "module": "lib/rodal.esm.js",
@@ -27,6 +27,9 @@
   },
   "peerDependencies": {
     "react": ">= ^17.0.0 || >= ^18.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server",
