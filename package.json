@@ -1,34 +1,10 @@
 {
   "name": "rodal",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "module": "lib/rodal.esm.js",
   "types": "./index.d.ts",
-  "dependencies": {
-    "prop-types": "^15.6.0",
-    "classnames": "^2.2.6"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.4.2",
-    "postcss-loader": "^3.0.0",
-    "prop-types": "^15.7.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "style-loader": "^1.1.3",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.2"
-  },
-  "peerDependencies": {
-    "react": ">= ^17.0.0 || >= ^18.0.0"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -55,5 +31,29 @@
   "bugs": {
     "url": "https://github.com/chenjiahan/rodal/issues"
   },
-  "homepage": "https://github.com/chenjiahan/rodal#readme"
+  "homepage": "https://github.com/chenjiahan/rodal#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.2",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
+  },
+  "peerDependencies": {
+    "react": ">= ^17.0.0 || >= ^18.0.0"
+  }
 }
