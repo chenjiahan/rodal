@@ -4,6 +4,7 @@
   "description": "A React modal with animations.",
   "main": "lib/rodal.js",
   "module": "lib/rodal.esm.js",
+  "types": "./index.d.ts",
   "dependencies": {
     "prop-types": "^15.6.0",
     "classnames": "^2.2.6"
