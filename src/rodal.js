@@ -11,15 +11,13 @@ const IN_BROWSER = typeof window !== 'undefined';
 const UA = IN_BROWSER && window.navigator.userAgent.toLowerCase();
 const IS_IE_9 = UA && UA.indexOf('msie 9.0') > 0;
 
-const Dialog = props => {
-  const animation =
-    (props.animationType === 'enter'
-      ? props.enterAnimation
-      : props.leaveAnimation) || props.animation;
+const CloseButton = props => {
 
-  const className = `rodal-dialog rodal-${animation}-${props.animationType}`;
+  if (props.close) {
+    return props.close;
+  }
 
-  const CloseButton = props.showCloseButton ? (
+  return props.showCloseButton ? (
     <span
       className="rodal-close"
       onClick={props.onClose}
@@ -31,6 +29,15 @@ const Dialog = props => {
       tabIndex={0}
     />
   ) : null;
+};
+
+const Dialog = props => {
+  const animation =
+    (props.animationType === 'enter'
+      ? props.enterAnimation
+      : props.leaveAnimation) || props.animation;
+
+  const className = `rodal-dialog rodal-${animation}-${props.animationType}`;
 
   const { width, height, measure, duration, customStyles, id } = props;
 
@@ -46,7 +53,7 @@ const Dialog = props => {
   return (
     <div style={mergedStyles} className={className} id={id}>
       {props.children}
-      {CloseButton}
+      <CloseButton {...props} />
     </div>
   );
 };
@@ -58,6 +65,7 @@ class Rodal extends React.Component {
     measure: PropTypes.string,
     visible: PropTypes.bool,
     showMask: PropTypes.bool,
+    close: PropTypes.elementType,
     closeOnEsc: PropTypes.bool,
     closeMaskOnClick: PropTypes.bool,
     showCloseButton: PropTypes.bool,
@@ -79,6 +87,7 @@ class Rodal extends React.Component {
     measure: 'px',
     visible: false,
     showMask: true,
+    close: null,
     closeOnEsc: false,
     closeMaskOnClick: true,
     showCloseButton: true,
