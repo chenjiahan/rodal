@@ -52,26 +52,27 @@ class App extends React.Component {
 
 ## Props
 
-| Property         | Type   | Default | Description                                          |
-| ---------------- | ------ | ------- | ---------------------------------------------------- |
-| width            | number | 400     | width of dialog                                      |
-| height           | number | 240     | height of dialog                                     |
-| measure          | string | px      | measure of width and height                          |
-| onClose          | func   | /       | handler called onClose of modal                      |
-| onAnimationEnd   | func   | /       | handler called onEnd of animation                    |
-| visible          | bool   | false   | whether to show dialog                               |
-| showMask         | bool   | true    | whether to show mask                                 |
-| closeOnEsc       | bool   | false   | whether close dialog when esc pressed                |
-| closeMaskOnClick | bool   | true    | whether close dialog when mask clicked               |
-| showCloseButton  | bool   | true    | whether to show close button                         |
-| animation        | string | zoom    | animation type                                       |
-| enterAnimation   | string | /       | enter animation type (higher order than 'animation') |
-| leaveAnimation   | string |         | leave animation type (higher order than 'animation') |
-| duration         | number | 300     | animation duration                                   |
-| className        | string | /       | className for the container                          |
-| customStyles     | object | /       | custom styles                                        |
-| customMaskStyles | object | /       | custom mask styles                                   |
-| id               | string | /       | id for dialog                                        |
+| Property         | Type       | Default | Description                                          |
+| ---------------- | ---------  | ------- | ---------------------------------------------------- |
+| width            | number     | 400     | width of dialog                                      |
+| height           | number     | 240     | height of dialog                                     |
+| measure          | string     | px      | measure of width and height                          |
+| onClose          | func       | /       | handler called onClose of modal                      |
+| onAnimationEnd   | func       | /       | handler called onEnd of animation                    |
+| visible          | bool       | false   | whether to show dialog                               |
+| showMask         | bool       | true    | whether to show mask                                 |
+| closeIcon        | React.Node | /       | custom close icon component 
+| closeOnEsc       | bool       | false   | whether close dialog when esc pressed                |
+| closeMaskOnClick | bool       | true    | whether close dialog when mask clicked               |
+| showCloseButton  | bool       | true    | whether to show close button                         |
+| animation        | string     | zoom    | animation type                                       |
+| enterAnimation   | string     | /       | enter animation type (higher order than 'animation') |
+| leaveAnimation   | string     |         | leave animation type (higher order than 'animation') |
+| duration         | number     | 300     | animation duration                                   |
+| className        | string     | /       | className for the container                          |
+| customStyles     | object     | /       | custom styles                                        |
+| customMaskStyles | object     | /       | custom mask styles                                   |
+| id               | string     | /       | id for dialog                                        |
 
 ## Animation Types
 

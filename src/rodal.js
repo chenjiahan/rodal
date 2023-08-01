@@ -13,8 +13,8 @@ const IS_IE_9 = UA && UA.indexOf('msie 9.0') > 0;
 
 const CloseButton = props => {
 
-  if (props.close) {
-    return props.close;
+  if (props.closeIcon) {
+    return props.closeIcon;
   }
 
   return props.showCloseButton ? (
@@ -65,7 +65,7 @@ class Rodal extends React.Component {
     measure: PropTypes.string,
     visible: PropTypes.bool,
     showMask: PropTypes.bool,
-    close: PropTypes.elementType,
+    closeIcon: PropTypes.elementType,
     closeOnEsc: PropTypes.bool,
     closeMaskOnClick: PropTypes.bool,
     showCloseButton: PropTypes.bool,
@@ -87,7 +87,7 @@ class Rodal extends React.Component {
     measure: 'px',
     visible: false,
     showMask: true,
-    close: null,
+    closeIcon: null,
     closeOnEsc: false,
     closeMaskOnClick: true,
     showCloseButton: true,
